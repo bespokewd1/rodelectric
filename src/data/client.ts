@@ -1,6 +1,6 @@
 // ===== SITE CONSTANTS =====
 export const SITE = {
-	title: "Code Stitch Web Designs",
+	title: "Andiamo Electric",
 	tagline: "Professional Web Design Services",
 	description: "Code Stitch Web Designs offers top-tier web design and development services to meet all your project needs. Start exploring and contact our team for superior quality and reliability.",
 	url: "https://www.yourwebsite.com",
@@ -11,19 +11,20 @@ export const SITE = {
 // ===== BUSINESS INFO =====
 export const BUSINESS = {
 	name: SITE.title,
-	email: "help@codestitch.app",
-	phoneForTel: "555-779-4407",
-	phoneFormatted: "(555) 779-4407",
+	email: "info@andiamoelectric.com",
+	phoneForTel: "7804883600",
+	phoneFormatted: "780-488-3600",
 	logo: "/assets/favicons/favicon.svg",
 	address: {
-		lineOne: "First Address Line",
-		lineTwo: "Second Address Line",
-		city: "Denver",
-		state: "CO",
-		zip: "80206",
-		mapLink: "https://goo.gl/maps/UAQn4vuGDiwv7DV39",
+		lineOne: "15614 112 Ave NW",
+		lineTwo: "",
+		city: "Edmonton",
+		state: "AB",
+		zip: "",
+		mapLink: "https://maps.google.com/?q=15614+112+Ave+NW+Edmonton+AB",
 	},
 	socials: {
+		linkedin: "https://www.linkedin.com/",
 		facebook: "https://www.facebook.com/",
 		instagram: "https://www.instagram.com/",
 	},

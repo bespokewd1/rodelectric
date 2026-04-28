@@ -1,34 +1,31 @@
 ---
+import { Image } from "astro:assets";
+import processImg from "@/assets/images/projects/port6.jpg";
+
 const processSteps = [
   {
-    title: "Inspection & Quote",
+    title: "Contact Us",
     description:
-      "We visit your home to inspect the damage, measure the glass, and provide a clear, written estimate.",
+      "Call us at (587) 399-3722 or fill out our online form. Describe your electrical needs and schedule a convenient time.",
     descriptionClass: "max-w-[30ch]",
   },
   {
-    title: "Glass Fabrication",
+    title: "Free Assessment & Quote",
     description:
-      "We order or fabricate glass to your exact specs-single-pane, tempered safety glass, or energy-efficient double-pane (IGU) units with the right Low-E and thickness.",
+      "We assess your electrical situation, discuss your needs, and provide a clear, honest quote with no hidden fees.",
     descriptionClass: "max-w-[31ch]",
   },
   {
-    title: "Professional Installation",
+    title: "Safe & Professional Work",
     description:
-      "We carefully remove the old glass, clean the frame, install the new unit, and seal it against the weather.",
-    descriptionClass: "max-w-[30ch]",
-  },
-  {
-    title: "Final Walkthrough",
-    description:
-      "We ensure the window opens and closes correctly and that the glass is spotless before we leave.",
+      "Our licensed electrician completes the work safely, efficiently, and to code. You get peace of mind and quality results.",
     descriptionClass: "max-w-[30ch]",
   },
 ];
 ---
 
 <section
-  class="bg-primary/10 relative isolate overflow-hidden px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+  class="bg-primary/10 py-section relative isolate overflow-hidden px-5 font-sans sm:px-6 lg:px-8"
 >
   <div
     class="bg-secondary/12 pointer-events-none absolute top-8 -left-14 h-40 w-40 rounded-full blur-3xl"
@@ -47,21 +44,21 @@ const processSteps = [
       <p
         class="text-section-body text-copy-muted m-0 mx-auto mt-5 max-w-[46rem]"
       >
-        From the first phone call to the final polish, we make glass replacement
-        easy.
+        Getting professional electrical service is simple. Here’s our
+        straightforward 3-step process:
       </p>
     </div>
-
+    <!-- lg:grid-cols-[minmax(0,1fr)_minmax(24rem,1fr)] -->
     <div
-      class="mt-10 flex flex-col gap-8 sm:mt-12 sm:gap-10 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(24rem,0.95fr)] lg:items-start"
+      class="mt-10 flex flex-col gap-8 sm:mt-12 sm:gap-10 lg:grid lg:grid-cols-[auto_minmax(24rem,1fr)] lg:items-center"
     >
       <ol
-        class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:gap-6"
+        class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:max-w-140 lg:grid-cols-1 lg:gap-6"
       >
         {
           processSteps.map((step, index) => (
             <li class="h-full">
-              <article class="shadow-card flex min-h-[15.5rem] flex-col rounded-[1.5rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]">
+              <article class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-66 sm:p-7 lg:min-h-70">
                 <p class="text-process text-accent/50 m-0">
                   {String(index + 1).padStart(2, "0")}
                 </p>
@@ -71,7 +68,7 @@ const processSteps = [
                 <p
                   class:list={[
                     "text-content-body text-copy m-0 mt-4",
-                    step.descriptionClass,
+                    // step.descriptionClass,
                   ]}
                 >
                   {step.description}
@@ -94,19 +91,11 @@ const processSteps = [
             aria-hidden="true"
           >
           </div>
-          <picture
-            class="relative block overflow-hidden rounded-[1.75rem] border border-white/75 bg-white shadow-[0_24px_56px_rgba(14,53,94,0.2)]"
-          >
-            <img
-              class="block h-auto w-full max-w-full object-cover lg:h-[39rem]"
-              src="https://glassma.us/wp-content/uploads/2026/04/residential-window-glass-replacement.webp"
-              alt="Glassma technician replacing residential window glass at a Seattle home"
-              width="960"
-              height="1280"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
+          <Image
+            src={processImg}
+            alt="our process img"
+            class={"relative block overflow-hidden rounded-[1.75rem] border border-white/75 bg-white shadow-[0_24px_56px_rgba(14,53,94,0.2)]"}
+          />
         </div>
       </div>
     </div>

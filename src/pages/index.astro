@@ -17,6 +17,8 @@ import CTASimple from "@/components/CTA/CTASimple.astro";
 import heroImage from "@/assets/images/hero/hero.jpg";
 import ServiceGrid from "@/components/Services/ServiceGrid.astro";
 import OurProcess from "@/components/Process/OurProcess.astro";
+import TrustSBS from "@/components/SideBySide/trustSBS.astro";
+import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
 ---
 
@@ -28,11 +30,13 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
   <Hero image={optimizedHeroImage} />
   <ServiceGrid />
   <OurProcess />
+  <TrustSBS />
   <!-- <Services /> -->
   <!-- <SideBySide /> -->
-  <SideBySideReverse />
+  <!-- <SideBySideReverse /> -->
   <Gallery />
-  <Testimonials />
+  <!-- <Testimonials /> -->
   <FAQ />
+  <!-- <SimpleFAQ /> -->
   <CTASimple />
 </BaseLayout>

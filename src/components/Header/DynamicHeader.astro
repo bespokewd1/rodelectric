@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
 import headerLogo from "@/assets/images/header-icon.png";
+import { BUSINESS } from "@/data/client";
 import navData from "@/data/navData.json";
 import { getDropdownId, isCurrentPage } from "@/js/utils.js";
 
@@ -10,39 +11,39 @@ const pathname = Astro.url.pathname;
 
 const contactItems = [
   {
-    href: "tel:7804883600",
-    label: "780-488-3600",
+    href: `tel:${BUSINESS.phoneForTel}`,
+    label: BUSINESS.phoneFormatted,
     icon: "tabler:phone",
   },
   {
-    href: "mailto:info@andiamoelectric.com",
-    label: "info@andiamoelectric.com",
+    href: `mailto:${BUSINESS.email}`,
+    label: BUSINESS.email,
     icon: "tabler:mail",
   },
   {
-    href: "https://maps.google.com/?q=15614+112+Ave+NW+Edmonton+AB",
-    label: "15614 112 Ave NW",
+    href: BUSINESS.address.mapLink,
+    label: BUSINESS.address.lineOne,
     icon: "tabler:map-pin",
   },
 ];
 
 const socialItems = [
   {
-    href: "https://www.linkedin.com/",
+    href: BUSINESS.socials.linkedin,
     label: "LinkedIn",
     icon: "tabler:brand-linkedin",
   },
   {
-    href: "https://www.facebook.com/",
+    href: BUSINESS.socials.facebook,
     label: "Facebook",
     icon: "tabler:brand-facebook",
   },
   {
-    href: "https://www.instagram.com/",
+    href: BUSINESS.socials.instagram,
     label: "Instagram",
     icon: "tabler:brand-instagram",
   },
-];
+].filter((item) => item.href);
 
 const isEntryActive = (entry) =>
   pathname === entry.url ||

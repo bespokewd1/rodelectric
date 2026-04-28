@@ -8,6 +8,8 @@ import { BUSINESS } from "@/data/client";
 import navData from "@/data/navData.json";
 
 const currentYear = getCurrentYear();
+const addressLines = [BUSINESS.address.lineOne, BUSINESS.address.lineTwo].filter(Boolean);
+const cityStateZip = [BUSINESS.address.city, BUSINESS.address.state, BUSINESS.address.zip].filter(Boolean).join(" ");
 ---
 
 <footer id="footer">
@@ -47,11 +49,13 @@ const currentYear = getCurrentYear();
 					</li>
 					<li>
 						<a href="/contact/">
-							{BUSINESS.address.lineOne}<br />
-							{BUSINESS.address.lineTwo}<br />
-							{BUSINESS.address.city}
-							{BUSINESS.address.state}
-							{BUSINESS.address.zip}
+							{addressLines.map((line) => (
+								<>
+									{line}
+									<br />
+								</>
+							))}
+							{cityStateZip}
 						</a>
 					</li>
 					<li>

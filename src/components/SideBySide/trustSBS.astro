@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import trustImg from "@/assets/images/projects/port7.jpg";
+
+const trustItems = [
+  {
+    title: "Experienced & Licensed",
+    description:
+      "Fully licensed electrician with years of expertise in residential and commercial electrical work.",
+  },
+  {
+    title: "Clear Pricing & Honest Advice",
+    description:
+      "No hidden fees or surprises. We provide upfront quotes and transparent pricing for every job.",
+  },
+  {
+    title: "Safety Compliant Work",
+    description:
+      "Every project meets or exceeds electrical codes and safety standards for your protection.",
+  },
+  {
+    title: " On Time & Reliable",
+    description:
+      "We respect your time. Count on us to arrive when scheduled and complete work efficiently.",
+  },
+
+  {
+    title: "Serving Edmonton & Area",
+    description:
+      "Locally owned and operated, we’re your trusted neighbors for all electrical needs.",
+  },
+];
+---
+
+<section
+  class="overflow-hidden bg-white px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-18"
+  aria-labelledby="gm-window-glass-replacement-fit-title"
+>
+  <div
+    class="mx-auto grid max-w-312 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] lg:items-center"
+  >
+    <div>
+      <p class="text-topper text-accent m-0 uppercase">Why Trust Us</p>
+      <h2
+        id="gm-window-glass-replacement-fit-title"
+        class="text-section-title m-0 mt-3 text-balance uppercase"
+      >
+        Why Choose Rod's Electrical Services
+      </h2>
+      <p class="text-section-body text-copy-muted m-0 mt-5 max-w-3xl">
+        When it comes to electrical work, experience and reliability matter.
+        Here’s why Edmonton homeowners and businesses trust us:
+      </p>
+
+      <ul class="m-0 mt-8 grid list-none gap-4 p-0">
+        {
+          trustItems.map((item) => (
+            <li class="border-border bg-surface/70 shadow-service-panel flex gap-4 rounded-3xl border p-5 sm:p-6">
+              <span
+                class:list={[
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white",
+                  "bg-accent",
+                ]}
+                aria-hidden="true"
+              >
+                <Icon name="tabler:check" class="size-4.5" aria-hidden="true" />
+              </span>
+              <div>
+                <h3 class="text-card-heading text-primary m-0 tracking-normal">
+                  {item.title}
+                </h3>
+                <p class="text-content-body text-copy m-0 mt-2">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div
+        class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap"
+      >
+        <button
+          class="min-h-cta-button text-button text-inverse focus-visible:shadow-button-accent-hover inline-flex items-center justify-center rounded-full border border-white/40 bg-[linear-gradient(180deg,rgba(48,79,109,0.92)_0%,rgba(15,39,62,0.95)_100%)] px-8 py-3 text-center no-underline backdrop-blur-md transition-all duration-300 ease-out hover:bg-white/15 focus-visible:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none"
+          type="button"
+          data-pop-form-trigger
+        >
+          Get Free Quote
+        </button>
+        <a
+          class="min-h-cta-button border-accent-bright/40 from-accent-bright to-secondary text-button text-inverse shadow-button-accent hover:from-secondary hover:to-accent-bright hover:shadow-button-accent-hover focus-visible:outline-secondary inline-flex items-center justify-center gap-1.5 rounded-full border bg-linear-to-br px-8 py-3 text-center no-underline transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          href="+1234567890"
+          aria-label="Call Glassma at +1234567890"
+        >
+          <span class="block h-5 w-5 shrink-0" aria-hidden="true">
+            <Icon name="tabler:phone" class="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span>+1234567890</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="grid gap-4">
+      <article
+        class="border-border shadow-card overflow-hidden rounded-[1.75rem] border bg-white"
+      >
+        <div class="relative min-h-[24rem] sm:min-h-[30rem] lg:min-h-[42rem]">
+          <Image
+            src={trustImg}
+            alt={"why trust us"}
+            class={"block h-full w-full max-w-full object-cover"}
+          />
+          <div
+            class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,18,34,0.02)_38%,rgba(4,18,34,0.78)_100%)]"
+            aria-hidden="true"
+          >
+          </div>
+          <p
+            class="text-card-heading absolute right-4 bottom-4 left-4 m-0 text-white sm:right-5 sm:bottom-5 sm:left-5"
+          >
+            14+ Years Of Experience
+          </p>
+        </div>
+      </article>
+    </aside>
+  </div>
+</section>

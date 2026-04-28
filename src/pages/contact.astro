@@ -13,6 +13,8 @@ import { BUSINESS } from "@/data/client";
 import landingImage from "@/assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import skyscraperImage from "@/assets/images/gallery/skyscraper.jpg";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
+const addressLines = [BUSINESS.address.lineOne, BUSINESS.address.lineTwo].filter(Boolean);
+const cityStateZip = [BUSINESS.address.city, BUSINESS.address.state, BUSINESS.address.zip].filter(Boolean).join(" ");
 ---
 
 <BaseLayout title="Contact" description="Meta description for the page" heroImage={optimizedImage}>
@@ -58,15 +60,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 				<!--Address-->
 				<span class="cs-header">Address</span>
 				<a class="cs-link" href={BUSINESS.address.mapLink}>
-					{BUSINESS.address.lineOne},
-					<br />
-					{BUSINESS.address.lineTwo},
-					<br />
-					<span class="cs-block">
-						{BUSINESS.address.city}
-						{BUSINESS.address.state}
-						{BUSINESS.address.zip}
-					</span>
+					{addressLines.map((line) => (
+						<>
+							{line},
+							<br />
+						</>
+					))}
+					<span class="cs-block">{cityStateZip}</span>
 				</a>
 
 				<!-- Background Image-->
