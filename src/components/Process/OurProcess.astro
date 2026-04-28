@@ -1,5 +1,34 @@
+---
+const processSteps = [
+  {
+    title: "Inspection & Quote",
+    description:
+      "We visit your home to inspect the damage, measure the glass, and provide a clear, written estimate.",
+    descriptionClass: "max-w-[30ch]",
+  },
+  {
+    title: "Glass Fabrication",
+    description:
+      "We order or fabricate glass to your exact specs-single-pane, tempered safety glass, or energy-efficient double-pane (IGU) units with the right Low-E and thickness.",
+    descriptionClass: "max-w-[31ch]",
+  },
+  {
+    title: "Professional Installation",
+    description:
+      "We carefully remove the old glass, clean the frame, install the new unit, and seal it against the weather.",
+    descriptionClass: "max-w-[30ch]",
+  },
+  {
+    title: "Final Walkthrough",
+    description:
+      "We ensure the window opens and closes correctly and that the glass is spotless before we leave.",
+    descriptionClass: "max-w-[30ch]",
+  },
+];
+---
+
 <section
-  class="relative isolate overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(0,124,239,0.14)_0%,rgba(0,124,239,0.04)_24%,transparent_52%),linear-gradient(180deg,#ffffff_0%,#edf4fb_100%)] px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+  class="bg-primary/10 relative isolate overflow-hidden px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-20"
 >
   <div
     class="bg-secondary/12 pointer-events-none absolute top-8 -left-14 h-40 w-40 rounded-full blur-3xl"
@@ -29,68 +58,28 @@
       <ol
         class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:gap-6"
       >
-        <li class="h-full">
-          <article
-            class="shadow-card flex min-h-[15.5rem] flex-col rounded-[1.5rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]"
-          >
-            <p class="text-process text-accent/50 m-0">01</p>
-            <h3
-              class="text-card-heading text-primary m-0 mt-4 [text-wrap:balance]"
-            >
-              Inspection &amp; Quote
-            </h3>
-            <p class="text-content-body text-copy m-0 mt-4 max-w-[30ch]">
-              We visit your home to inspect the damage, measure the glass, and
-              provide a clear, written estimate.
-            </p>
-          </article>
-        </li>
-
-        <li class="h-full">
-          <article
-            class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]"
-          >
-            <p class="text-process text-accent/50 m-0">02</p>
-            <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
-              Glass Fabrication
-            </h3>
-            <p class="text-content-body m-0 mt-4 max-w-[31ch]">
-              We order or fabricate glass to your exact specs&mdash;single-pane,
-              tempered safety glass, or energy-efficient double-pane (IGU) units
-              with the right Low-E and thickness.
-            </p>
-          </article>
-        </li>
-
-        <li class="h-full">
-          <article
-            class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]"
-          >
-            <p class="text-process text-accent/50 m-0">03</p>
-            <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
-              Professional Installation
-            </h3>
-            <p class="text-content-body text-copy m-0 mt-4 max-w-[30ch]">
-              We carefully remove the old glass, clean the frame, install the
-              new unit, and seal it against the weather.
-            </p>
-          </article>
-        </li>
-
-        <li class="h-full">
-          <article
-            class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]"
-          >
-            <p class="text-process text-accent/50 m-0">04</p>
-            <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
-              Final Walkthrough
-            </h3>
-            <p class="text-content-body text-copy m-0 mt-4 max-w-[30ch]">
-              We ensure the window opens and closes correctly and that the glass
-              is spotless before we leave.
-            </p>
-          </article>
-        </li>
+        {
+          processSteps.map((step, index) => (
+            <li class="h-full">
+              <article class="shadow-card flex min-h-[15.5rem] flex-col rounded-[1.5rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-[16.5rem] sm:p-7 lg:min-h-[17.5rem]">
+                <p class="text-process text-accent/50 m-0">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
+                  {step.title}
+                </h3>
+                <p
+                  class:list={[
+                    "text-content-body text-copy m-0 mt-4",
+                    step.descriptionClass,
+                  ]}
+                >
+                  {step.description}
+                </p>
+              </article>
+            </li>
+          ))
+        }
       </ol>
 
       <div class="mx-auto w-full max-w-136 lg:max-w-none">
