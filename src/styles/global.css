@@ -1,1 +1,14 @@
 @import "tailwindcss" important;
+
+@theme {
+  --color-accent: var(--brand-accent);
+  --color-primary: var(--brand-strong);
+  --spacing-section:  var(--sectionPaddingValue);
+
+  /* section title */
+  --text-section-title: clamp(2.5rem,5vw,3.0625rem);
+  --text-section-title--line-height: 1.2;
+  /* --text-section-title--letter-spacing: 0.125rem; */
+  --text-section-title--letter-spacing: 120%;
+  --text-section-title--font-weight: 700;
+}

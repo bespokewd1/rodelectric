@@ -1,0 +1,207 @@
+---
+import svcImg1 from "@/assets/images/projects/port1.jpg";
+import svcImg2 from "@/assets/images/projects/port2.jpg";
+import svcImg3 from "@/assets/images/projects/port3.jpg";
+import svcImg4 from "@/assets/images/projects/port4.jpg";
+import svcImg5 from "@/assets/images/projects/port5.jpg";
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+// Updated ServiceCard type to include new properties
+type ServiceCard = {
+  title: string;
+  description: string;
+  href?: string;
+  img: ImageMetadata;
+  alt: string;
+  gridArea: string; // for css grid placement
+  titleColor?: string; // for special title color
+};
+
+// 1. Updated data to match the new design
+const serviceCards: ServiceCard[] = [
+  {
+    title: "Residential Electrical",
+    description:
+      "Complete home electrical services including wiring, outlets, lighting, and upgrades for safe, modern living.",
+    alt: "Residential Electrical",
+    href: "#",
+    img: svcImg3,
+    gridArea: "streamline",
+  },
+  {
+    title: "Commercial Electrical",
+    description:
+      "Reliable electrical solutions for businesses including installations, maintenance, and code compliance.",
+    alt: "Commercial Electrical",
+    href: "#",
+    img: svcImg4,
+    gridArea: "optimize",
+  },
+  {
+    title: "Repairs & Troubleshooting",
+    description:
+      "Fast diagnosis and repair of electrical problems to keep your home or business running smoothly and safely.",
+    alt: "Repairs & Troubleshooting",
+    href: "#",
+    img: svcImg1, // Man in hoodie
+    gridArea: "build",
+  },
+  {
+    title: "Lighting Installation",
+    description:
+      "Professional lighting design and installation for enhanced ambiance, security, and energy efficiency.",
+    alt: "Lighting Installation",
+    href: "#",
+    img: svcImg2, // Woman in blazer
+    gridArea: "protect",
+  },
+  {
+    title: "Panel Upgrades & Inspections",
+    description:
+      "Upgrade your electrical panel for modern demands and ensure safety with thorough inspections.",
+    alt: "Panel Upgrades & Inspections",
+    href: "#",
+    img: svcImg5, // Man with glasses
+    gridArea: "delegate",
+    titleColor: "text-accent", // Special color
+  },
+];
+---
+
+<section id="use-case-section" class="py-section relative px-4">
+  <div
+    class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 lg:flex-row lg:items-start lg:justify-between"
+  >
+    <!-- Left content -->
+    <div
+      class="flex w-full max-w-md flex-col items-center text-left lg:absolute lg:items-start xl:mt-50"
+    >
+      <span
+        class="text-accent mb-6.25 block text-base leading-[120%] font-bold tracking-widest uppercase"
+      >
+        Our Services
+      </span>
+
+      <!-- 3. Header with text gradient -->
+      <!-- leading-[120%]  -->
+      <h2
+        class="text-section-title m-0 mb-12 text-center tracking-normal text-neutral-950 md:text-nowrap lg:text-left"
+      >
+        Professional Electrical
+        <br class="hidden md:inline" />
+        Services
+        <!-- the rest so you can focus
+        <br class="hidden md:inline" />
+        on what truly matters. -->
+      </h2>
+
+      <!-- <HireBtn /> -->
+    </div>
+
+    <!-- Right cards grid -->
+    <ul
+      id="use-case-grid"
+      class="m-0 grid w-full max-w-xl p-0 lg:w-auto lg:max-w-none lg:flex-1"
+    >
+      {
+        serviceCards.map((card) => (
+          <li
+            class="group flex list-none flex-col overflow-hidden rounded-2xl bg-gray-50/80 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            data-card={card.gridArea}
+            style={{ gridArea: card.gridArea }}
+          >
+            <a
+              href={card.href ?? "#"}
+              aria-label={`View service: ${card.title}`}
+              class="block h-full no-underline"
+            >
+              <div class="overflow-hidden">
+                <Picture
+                  class="h-120 w-full object-cover transition-transform duration-300 group-hover:scale-110 lg:h-full lg:min-h-full lg:w-full"
+                  src={card.img}
+                  alt={card.alt}
+                />
+              </div>
+              <div class="p-6">
+                <h3
+                  class:list={[
+                    "text-primary m-0 mb-3 text-xl font-bold",
+                    card.titleColor ?? "",
+                  ]}
+                >
+                  {card.title}
+                </h3>
+                <p class="text-secondary m-0 text-base leading-relaxed">
+                  {card.description}
+                </p>
+                <div class="group-hover:border-accent/30 group-hover:text-accent mt-5 inline-flex items-center gap-2 bg-white text-[0.72rem] font-bold tracking-[0.16em] text-neutral-950 uppercase transition-colors duration-300">
+                  <span>View Service</span>
+                  <Icon
+                    name="tabler:arrow-right"
+                    class="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1023px) {
+    #use-case-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "streamline"
+        "optimize"
+        "build"
+        "protect"
+        "delegate";
+      gap: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    #use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 19.06rem);
+      grid-template-rows: auto 1fr 200px 1fr;
+      grid-template-areas:
+        "streamline optimize build"
+        "streamline optimize build"
+        "streamline optimize protect"
+        "streamline delegate .";
+      gap: 1.25rem;
+      align-items: start;
+      justify-content: end;
+    }
+
+    [data-card="streamline"] {
+      place-self: center;
+    }
+
+    [data-card="optimize"] {
+      align-self: end;
+    }
+
+    [data-card="build"] {
+      align-self: end;
+    }
+    [data-card="build"] img {
+      min-height: 321px;
+    }
+
+    [data-card="delegate"] {
+    }
+
+    [data-card="protect"] img {
+      min-height: 396px;
+    }
+  }
+
+  /* box-shadow: 0px 4px 100px 10px rgba(120, 43, 99, 0.39); */
+</style>

@@ -129,7 +129,7 @@ const isEntryActive = (entry) =>
             >
               <ul
                 id="cs-expanded"
-                class="cs-ul flex flex-col gap-1 lg:flex-row lg:items-center lg:justify-center lg:gap-0"
+                class="cs-ul flex flex-col items-start gap-1 lg:flex-row lg:items-center lg:justify-center lg:gap-0"
               >
                 {
                   navData.map((entry) => {
@@ -138,7 +138,7 @@ const isEntryActive = (entry) =>
                     return (
                       <li
                         class:list={[
-                          "cs-li group relative",
+                          "cs-li group relative w-full lg:w-auto",
                           entry.children?.length > 0 &&
                             "cs-dropdown [&.cs-active_.cs-drop-icon]:rotate-180 [&.cs-active_.cs-drop-ul]:mt-3 [&.cs-active_.cs-drop-ul]:max-h-[24rem] [&.cs-active_.cs-drop-ul]:opacity-100",
                         ]}
@@ -151,7 +151,7 @@ const isEntryActive = (entry) =>
                               aria-expanded="false"
                               aria-haspopup="menu"
                               class:list={[
-                                "cs-dropdown-toggle relative flex w-full items-center justify-between gap-3 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition hover:bg-[var(--brand-accent)] hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:justify-start lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all lg:hover:bg-transparent",
+                                "cs-dropdown-toggle relative flex w-full items-center justify-between gap-3 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:justify-start lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                                 entryActive &&
                                   "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                               ]}
@@ -164,15 +164,15 @@ const isEntryActive = (entry) =>
                             </button>
 
                             <ul
-                              class="cs-drop-ul max-h-0 overflow-hidden opacity-0 transition-all duration-300 lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-30 lg:mt-6 lg:max-h-none lg:min-w-[15rem] lg:translate-y-3 lg:overflow-visible lg:rounded-sm lg:border lg:border-slate-200 lg:bg-white lg:p-3 lg:opacity-0 lg:shadow-[0_24px_40px_rgba(15,23,42,0.14)] lg:transition-all lg:group-focus-within:visible lg:group-focus-within:mt-4 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:visible lg:group-hover:mt-4 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
+                              class="cs-drop-ul flex max-h-0 w-full flex-col items-start overflow-hidden opacity-0 transition-all duration-300 lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-30 lg:mt-6 lg:max-h-none lg:min-w-[15rem] lg:translate-y-3 lg:overflow-visible lg:rounded-sm lg:border lg:border-slate-200 lg:bg-white lg:p-3 lg:opacity-0 lg:shadow-[0_24px_40px_rgba(15,23,42,0.14)] lg:transition-all lg:group-focus-within:visible lg:group-focus-within:mt-4 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:visible lg:group-hover:mt-4 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
                               aria-labelledby={getDropdownId(entry.key)}
                             >
                               {entry.children.map((child) => (
-                                <li class="cs-drop-li">
+                                <li class="cs-drop-li w-full">
                                   <a
                                     href={child.url}
                                     class:list={[
-                                      "cs-li-link cs-drop-link block rounded-[0.35rem] border-l border-slate-200 px-4 py-2.5 text-sm text-slate-700 transition hover:border-[var(--brand-accent)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-[0.2rem] lg:border-l-0 lg:px-3",
+                                      "cs-li-link cs-drop-link block w-full rounded-[0.35rem] border-l border-slate-200 px-4 py-2.5 text-left text-sm text-slate-700 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-[0.2rem] lg:border-l-0 lg:px-3",
                                       pathname === child.url &&
                                         "border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-strong)]",
                                     ]}
@@ -191,7 +191,7 @@ const isEntryActive = (entry) =>
                           <a
                             href={entry.url}
                             class:list={[
-                              "cs-li-link relative block rounded-[0.35rem] px-3 py-3 text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition hover:bg-[var(--brand-accent)] hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all lg:hover:bg-transparent",
+                              "cs-li-link relative block w-full rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                               pathname === entry.url &&
                                 "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                             ]}
