@@ -16,6 +16,7 @@ import CTASimple from "@/components/CTA/CTASimple.astro";
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
 import heroImage from "@/assets/images/hero/hero.jpg";
 import ServiceGrid from "@/components/Services/ServiceGrid.astro";
+import OurProcess from "@/components/Process/OurProcess.astro";
 const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
 ---
 
@@ -26,8 +27,9 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
 >
   <Hero image={optimizedHeroImage} />
   <ServiceGrid />
+  <OurProcess />
   <!-- <Services /> -->
-  <SideBySide />
+  <!-- <SideBySide /> -->
   <SideBySideReverse />
   <Gallery />
   <Testimonials />
