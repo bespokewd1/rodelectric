@@ -1,4 +1,4 @@
-import { SITE, BUSINESS } from "@data/client";
+import { SITE, BUSINESS } from "@/data/client";
 
 export function getLocalBusinessSchema(origin) {
 	const sameAs = [];

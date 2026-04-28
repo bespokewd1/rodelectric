@@ -3,15 +3,15 @@
 import { Picture, getImage } from "astro:assets";
 
 // Components
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Banner from "@components/Banner/Banner.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Banner from "@/components/Banner/Banner.astro";
 
 // Data
-import { BUSINESS } from "@data/client";
+import { BUSINESS } from "@/data/client";
 
 // Images
-import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import skyscraperImage from "@assets/images/gallery/skyscraper.jpg";
+import landingImage from "@/assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import skyscraperImage from "@/assets/images/gallery/skyscraper.jpg";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 ---
 

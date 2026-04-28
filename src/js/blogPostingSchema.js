@@ -1,4 +1,4 @@
-import { SITE, BUSINESS } from "@data/client";
+import { SITE, BUSINESS } from "@/data/client";
 
 export function getBlogPostingSchema(data, origin) {
 	return {

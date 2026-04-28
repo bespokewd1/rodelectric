@@ -277,7 +277,7 @@ async function main() {
   updateFile('src/layouts/BaseLayout.astro', [
     {
       name: 'Remove dark.less import',
-      pattern: /import\s+["']@styles\/dark\.less["'];\n?/g,
+      pattern: /import\s+["']@\/styles\/dark\.less["'];\n?/g,
       replacement: '',
     },
     {
@@ -292,7 +292,7 @@ async function main() {
   const headerReplacements = [
     {
       name: 'Remove DarkModeToggle import',
-      pattern: /import\s+DarkModeToggle\s+from\s+["']@components\/DarkModeToggle\/DarkModeToggle\.astro["'];\n?/g,
+      pattern: /import\s+DarkModeToggle\s+from\s+["']@\/components\/DarkModeToggle\/DarkModeToggle\.astro["'];\n?/g,
       replacement: '',
     },
     {

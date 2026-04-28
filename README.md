@@ -372,7 +372,7 @@ An Astro configuration file. It's already set up for you, but you can extend it 
 
 #### `tsconfig.json`
 
-A TypeScript configuration file. Optional. Includes TypeScript configuration options for your Astro project. Some features (like imports aliases `@assets/`) aren't fully supported in the editor without a tsconfig.json file.
+A TypeScript configuration file. Optional. Includes TypeScript configuration options for your Astro project. Some features (like imports aliases `@/assets/`) aren't fully supported in the editor without a tsconfig.json file.
 
 <a name="customizingYourSite"></a>
 
@@ -412,8 +412,8 @@ Components are used throughout your pages by importing and including them:
 
 ```astro
 ---
-import Hero from '@components/Hero/Hero.astro';
-import Services from '@components/Services/Services.astro';
+import Hero from '@/components/Hero/Hero.astro';
+import Services from '@/components/Services/Services.astro';
 ---
 
 <Hero />
@@ -451,8 +451,8 @@ Adding new pages is straightforward:
 ```astro
 ---
 // Import components you need
-import BaseLayout from '@layouts/BaseLayout.astro';
-import Hero from '@components/Hero/Hero.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero/Hero.astro';
 ---
 
 <BaseLayout
@@ -582,8 +582,8 @@ If you want your custom CodeStitch header to use data-driven navigation, replace
 Don't forget to import the helper functions in your component's frontmatter:
 
 ```javascript
-import { isCurrentPage, getDropdownId } from "@js/utils.js";
-import navData from "@data/navData.json";
+import { isCurrentPage, getDropdownId } from "@/js/utils.js";
+import navData from "@/data/navData.json";
 ```
 
 #### Manual Active State Management
@@ -758,7 +758,7 @@ interface Props {
 
 ```astro
 ---
-import heroImage from "@assets/images/hero.jpg";
+import heroImage from "@/assets/images/hero.jpg";
 import { getImage } from "astro:assets";
 const optimizedImage = await getImage({ src: heroImage, format: "webp" });
 ---
@@ -813,7 +813,7 @@ For schemas used across multiple pages, create helper functions following the ex
 
 ```javascript
 // src/js/faqSchema.js
-import { SITE } from "@data/client";
+import { SITE } from "@/data/client";
 
 export function getFAQSchema(faqs) {
 	return {
@@ -835,7 +835,7 @@ Usage in page:
 
 ```astro
 ---
-import { getFAQSchema } from "@js/faqSchema";
+import { getFAQSchema } from "@/js/faqSchema";
 const faqSchema = getFAQSchema(faqData);
 ---
 
@@ -898,7 +898,7 @@ This template is configured in `astro.config.mjs` with `layout: 'constrained'` a
 ```astro
 ---
 import { Picture } from "astro:assets";
-import heroImage from "@assets/images/hero.jpg";
+import heroImage from "@/assets/images/hero.jpg";
 ---
 
 <Picture
@@ -928,7 +928,7 @@ When you pass a `heroImage` to BaseLayout, it's automatically:
 
 ```astro
 ---
-import heroImage from "@assets/images/hero.jpg";
+import heroImage from "@/assets/images/hero.jpg";
 import { getImage } from "astro:assets";
 const optimizedImage = await getImage({ src: heroImage, format: "webp" });
 ---
@@ -960,7 +960,7 @@ In your page:
 
 ```astro
 ---
-import heroImage from "@assets/images/hero.jpg";
+import heroImage from "@/assets/images/hero.jpg";
 import { getImage } from "astro:assets";
 const optimizedImage = await getImage({ src: heroImage, format: "webp" });
 ---
@@ -1017,10 +1017,10 @@ It uses <a href="https://docs.astro.build/en/recipes/build-custom-img-component/
 
 ---
 // Import the component and all the images you want to use with it
-import CSPicture from "@components/TemplateComponents/CSPicture.astro";
-import mobileImage from "@assets/images/construction-m.jpg"
-import desktopImage from "@assets/images/cabinets2.jpg"
-import fallbackImage from "@assets/images/cabinets2.jpg"
+import CSPicture from "@/components/TemplateComponents/CSPicture.astro";
+import mobileImage from "@/assets/images/construction-m.jpg"
+import desktopImage from "@/assets/images/cabinets2.jpg"
+import fallbackImage from "@/assets/images/cabinets2.jpg"
 ---
 
   <CSPicture
@@ -1140,7 +1140,7 @@ Astro will build, optimize, and add these scripts to the page for you.
 
 For example, `nav.js` lives in `src/` and is used in `Baselayout.astro` like so:
 
-`<script src="@js/nav.js"></script>`
+`<script src="@/js/nav.js"></script>`
 
 2. Scoped to the component
 

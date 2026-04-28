@@ -255,8 +255,8 @@ async function removeComponentUsageFromPages() {
 
 		let content = await fs.readFile(indexPath, "utf-8");
 
-		content = content.replace(/import\s+CTASimple\s+from\s+["']@components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
-		content = content.replace(/import\s+CTAArtDirection\s+from\s+["']@components\/CTA\/CTAArtDirection\.astro["'];?\n?/g, "");
+		content = content.replace(/import\s+CTASimple\s+from\s+["']@\/components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
+		content = content.replace(/import\s+CTAArtDirection\s+from\s+["']@\/components\/CTA\/CTAArtDirection\.astro["'];?\n?/g, "");
 		content = content.replace(/<CTASimple\s*\/>/g, "");
 		content = content.replace(/<!--\s*<CTAArtDirection\s*\/>\s*-->/g, "");
 
@@ -274,7 +274,7 @@ async function removeComponentUsageFromPages() {
 		await fs.access(blogPostLayoutPath);
 
 		let content = await fs.readFile(blogPostLayoutPath, "utf-8");
-		content = content.replace(/import\s+CTA\s+from\s+["']@components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
+		content = content.replace(/import\s+CTA\s+from\s+["']@\/components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
 		content = content.replace(/<CTA\s*\/>/g, "");
 
 		await fs.writeFile(blogPostLayoutPath, content, "utf-8");
@@ -291,8 +291,8 @@ async function removeComponentUsageFromPages() {
 		await fs.access(blogIndexPath);
 		let content = await fs.readFile(blogIndexPath, "utf-8");
 
-		content = content.replace(/import\s+Banner\s+from\s+["']@components\/Banner\/Banner\.astro["'];?\n?/g, "");
-		content = content.replace(/import\s+CTA\s+from\s+["']@components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
+		content = content.replace(/import\s+Banner\s+from\s+["']@\/components\/Banner\/Banner\.astro["'];?\n?/g, "");
+		content = content.replace(/import\s+CTA\s+from\s+["']@\/components\/CTA\/CTASimple\.astro["'];?\n?/g, "");
 		content = content.replace(/<Banner\s+title="Blog"\s+image=\{placeholderOptimizedImage\}\s*\/>/g, "");
 		content = content.replace(/<CTA\s*\/>/g, "");
 
@@ -341,10 +341,10 @@ async function simplifyIndexPage() {
 import { getImage } from "astro:assets";
 
 // Components
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // Images
-import placeholderImg from "@assets/images/placeholder.jpg";
+import placeholderImg from "@/assets/images/placeholder.jpg";
 
 const optimizedPlaceholder = await getImage({ src: placeholderImg, format: "webp" });
 ---

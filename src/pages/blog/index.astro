@@ -6,16 +6,16 @@
 // Utils
 import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
-import "@styles/sidebar.less";
+import "@/styles/sidebar.less";
 
 // Components
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Banner from "@components/Banner/Banner.astro";
-import BlogRecentArticlesWithSidebar from "@layouts/BlogRecentArticlesWithSidebar.astro";
-import CTA from "@components/CTA/CTASimple.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Banner from "@/components/Banner/Banner.astro";
+import BlogRecentArticlesWithSidebar from "@/layouts/BlogRecentArticlesWithSidebar.astro";
+import CTA from "@/components/CTA/CTASimple.astro";
 
 // Images
-import placeholderImage from "@assets/images/placeholder.jpg";
+import placeholderImage from "@/assets/images/placeholder.jpg";
 const placeholderOptimizedImage = await getImage({ src: placeholderImage, format: "webp" });
 
 const posts = await getCollection("blog");
