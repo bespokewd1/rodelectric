@@ -85,11 +85,15 @@ h6 {
 
 @media only screen and (min-width: 0em) {
 	:root {
+		// Reusable brand colors from site logo
+		--brand-accent: #ffcc01;
+		--brand-strong: #00284f;
+
 		// Website colors
-		--primary: #aff425;
-		--primaryLight: #7aa329;
-		--secondary: #001f3f;
-		--secondaryLight: #001f3f;
+		--primary: var(--brand-accent);
+		--primaryLight: #e3b700;
+		--secondary: var(--brand-strong);
+		--secondaryLight: var(--brand-strong);
 		--headerColor: #1a1a1a;
 		--bodyTextColor: #4e4b66;
 		--bodyTextColorWhite: #fafbfc;

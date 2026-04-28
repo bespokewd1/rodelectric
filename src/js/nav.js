@@ -98,6 +98,7 @@ document.addEventListener("astro:page-load", () => {
 
 				[elements.hamburger, elements.navigation].forEach((el) => el.classList.toggle(CONFIG.CLASSES.active));
 				elements.body.classList.toggle(CONFIG.CLASSES.menuOpen);
+				elements.body.style.overflow = isClosing ? "" : "hidden";
 				toggleAttribute(elements.hamburger, "aria-expanded");
 
 				// Only manage inert state on mobile devices
@@ -206,11 +207,12 @@ document.addEventListener("astro:page-load", () => {
 				// On desktop, menu is always visible, so set inert=false
 				elements.menuWrapper.inert = isMobile();
 
-				// Initialize dropdown menus - they start closed, so inert=true on all devices
+				// On mobile, dropdown menus start closed and inert.
+				// On desktop, keep them keyboard reachable.
 				if (elements.navigation) {
 					const dropdownMenus = elements.navigation.querySelectorAll(CONFIG.SELECTORS.dropdownMenu);
 					dropdownMenus.forEach((dropdown) => {
-						dropdown.inert = true;
+						dropdown.inert = isMobile();
 					});
 				}
 			},
