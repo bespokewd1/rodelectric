@@ -1,61 +1,65 @@
 ---
+import { Icon } from "astro-icon/components";
 import { homeFaqItems } from "@/data/homeFaq";
 ---
 
 <section
-  class="gm-home-section gm-home-faq overflow-hidden bg-surface bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.78)_0,rgba(237,244,251,1)_56%)] px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-16 xl:py-20"
+  class="gm-home-section gm-home-faq bg-surface overflow-hidden bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.78)_0,rgba(237,244,251,1)_56%)] px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-16 xl:py-20"
 >
   <div class="mx-auto max-w-[72rem]">
-    <div class="mx-auto max-w-[56rem] text-center">
-      <h2 class="m-0 text-section-heading uppercase text-primary">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-topper text-accent m-0 uppercase">FAQ</p>
+      <h2
+        class="text-section-title text-primary m-0 mt-3 text-balance uppercase"
+      >
         Frequently Asked Questions
       </h2>
+      <p class="text-section-body text-copy-muted m-0 mx-auto mt-5 max-w-3xl">
+        Find quick answers about our electrical services, emergency support,
+        quotes, and service areas across Edmonton and nearby communities.
+      </p>
     </div>
 
     <div class="mx-auto mt-8 flex max-w-[72rem] flex-col gap-4 sm:mt-10">
       {
         homeFaqItems.map((item, index) => (
           <details
-            class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
+            class="gm-home-faq__item border-border overflow-hidden rounded-[0.5rem] border bg-white"
             open={index === 0}
           >
-            <summary
-              class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-            >
+            <summary class="gm-home-faq__summary text-heading m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] leading-[1.45] font-semibold sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]">
               <span class="block flex-1">{item.question}</span>
               <span
                 class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
                 aria-hidden="true"
               >
-                <span
-                  class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-                ></span>
-                <span
-                  class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-                ></span>
+                <Icon
+                  name="tabler:plus"
+                  class="gm-home-faq__icon-symbol gm-home-faq__icon-symbol--plus size-3.5"
+                  aria-hidden="true"
+                />
+                <Icon
+                  name="tabler:minus"
+                  class="gm-home-faq__icon-symbol gm-home-faq__icon-symbol--minus size-3.5"
+                  aria-hidden="true"
+                />
               </span>
             </summary>
-            <div
-              class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-            >
+            <div class="gm-home-faq__panel border-border border-t bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6">
               {item.answer && (
-                <p class="m-0 text-content-body text-copy-muted">
+                <p class="text-content-body text-copy-muted m-0">
                   {item.answer}
                 </p>
               )}
 
               {item.items && (
-                <ul
-                  class="m-0 mt-4 grid list-none grid-cols-1 gap-x-10 gap-y-3 p-0 lg:grid-cols-2"
-                >
+                <ul class="m-0 mt-4 grid list-none grid-cols-1 gap-x-10 gap-y-3 p-0 lg:grid-cols-2">
                   {item.items.map((service) => (
-                    <li
-                      class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-                    >
+                    <li class="text-content-body text-copy-muted m-0 flex items-start gap-3">
                       <span
-                        class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
+                        class="bg-primary/60 mt-[0.6rem] h-2 w-2 shrink-0 rounded-full"
                         aria-hidden="true"
-                      ></span>
+                      />
                       <span>{service}</span>
                     </li>
                   ))}
@@ -68,3 +72,27 @@ import { homeFaqItems } from "@/data/homeFaq";
     </div>
   </div>
 </section>
+
+<style>
+  .gm-home-faq__icon-symbol {
+    position: absolute;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .gm-home-faq__icon-symbol--minus {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+
+  .gm-home-faq__item[open] .gm-home-faq__icon-symbol--plus {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+
+  .gm-home-faq__item[open] .gm-home-faq__icon-symbol--minus {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>

@@ -3,6 +3,7 @@
 
 // Utils
 import { Picture } from "astro:assets";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
 // Images
 import port1 from "@/assets/images/projects/port1.jpg";
@@ -18,10 +19,16 @@ import port9 from "@/assets/images/projects/port9.jpg";
 
 <section id="gallery">
   <div class="cs-container">
-    <span class="cs-topper">Our Portfolio</span>
-    <h2 class="cs-title">
-      Et orci volutpat, back up generator installations
-    </h2>
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-topper text-accent m-0 uppercase">Our Portfolio</p>
+      <h2 class="text-section-title m-0 mt-3 text-balance uppercase">
+        Recent Electrical Projects
+      </h2>
+      <p class="text-section-body text-copy-muted m-0 mx-auto mt-5 max-w-3xl">
+        Browse recent residential and commercial electrical work completed by
+        Rod&apos;s Electrical across Edmonton and surrounding areas.
+      </p>
+    </div>
     <div class="cs-image-group">
       <!-- Row 1-->
       <div class="cs-row cs-row-1">
@@ -31,7 +38,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new hallway"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture1" }}
         />
         <Picture
@@ -39,7 +46,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new home construction"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture2" }}
         />
         <Picture
@@ -47,7 +54,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="building a new wall"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture3" }}
         />
       </div>
@@ -59,7 +66,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new kitchen"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture1" }}
         />
         <Picture
@@ -67,7 +74,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="apartment addition"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture2" }}
         />
         <Picture
@@ -75,7 +82,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new kitchen cabinets"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture3" }}
         />
       </div>
@@ -87,7 +94,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new kitchen"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture1" }}
         />
         <Picture
@@ -95,7 +102,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="apartment addition"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture2" }}
         />
         <Picture
@@ -103,12 +110,19 @@ import port9 from "@/assets/images/projects/port9.jpg";
           alt="new kitchen cabinets"
           width={400}
           height={560}
-          formats={['avif', 'webp']}
+          formats={["avif", "webp"]}
           pictureAttributes={{ class: "cs-picture cs-picture3" }}
         />
       </div>
     </div>
-    <a href="/projects/" class="cs-button-solid">View all projects</a>
+    <div class="flex justify-center">
+      <CtaPillButton
+        href="/projects/"
+        label="View All Projects"
+        icon="tabler:arrow-right"
+        width="13rem"
+      />
+    </div>
   </div>
 </section>
 
@@ -148,7 +162,7 @@ import port9 from "@/assets/images/projects/port9.jpg";
         font-size: ~"min(1.1vw, 1em)";
         width: 100%;
         max-width: (1322/16em);
-        margin: 0 auto (60/16rem);
+        margin: clamp(2.5rem, 5vw, 3.75rem) auto (60/16rem);
         padding: 0;
         display: flex;
         justify-content: center;
