@@ -38,7 +38,7 @@ import { serviceHubItems } from "@/data/services";
               <div
                 class="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,27,52,0.04)_0%,rgba(8,27,52,0.12)_100%)]"
                 aria-hidden="true"
-              ></div>
+              />
             </div>
           );
 
@@ -81,8 +81,9 @@ import { serviceHubItems } from "@/data/services";
           return (
             <article
               id={service.id}
+              data-service-section
               class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_22px_48px_rgba(15,23,42,0.08)]"
-              style="scroll-margin-top: 8rem;"
+              style="scroll-margin-top: calc(var(--services-sticky-top) + var(--services-nav-height) + 1rem);"
             >
               <div class="grid lg:grid-cols-2 lg:items-stretch">
                 {index % 2 === 0 ? (

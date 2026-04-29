@@ -6,7 +6,7 @@ import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 import Gallery from "@/components/Gallery/Gallery.astro";
 import OurProcess from "@/components/Process/OurProcess.astro";
 import ServiceDetailRows from "@/components/Services/ServiceDetailRows.astro";
-import ServiceGrid from "@/components/Services/ServiceGrid.astro";
+import ServiceStickyNav from "@/components/Services/ServiceStickyNav.astro";
 import ServicesHero from "@/components/Services/ServicesHero.astro";
 import TrustSBS from "@/components/SideBySide/trustSBS.astro";
 import { getHomeFaqSchema } from "@/data/homeFaq";
@@ -30,11 +30,15 @@ const homeFaqSchema = getHomeFaqSchema();
     set:html={JSON.stringify(homeFaqSchema)}
   />
   <ServicesHero image={optimizedHeroImage} />
-  <ServiceGrid ctaPrefix="#" />
-  <ServiceDetailRows />
-  <TrustSBS />
+  <section
+    data-services-nav-zone
+    class="bg-white"
+    style="--services-sticky-top: 8rem; --services-nav-height: 4.25rem;"
+  >
+    <ServiceStickyNav />
+    <ServiceDetailRows />
+  </section>
   <OurProcess />
-  <Gallery />
   <SimpleFAQ />
   <ServicesClosingCta />
 </BaseLayout>

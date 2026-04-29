@@ -1,0 +1,221 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { serviceHubItems } from "@/data/services";
+---
+
+<nav
+  id="service-nav"
+  class="sticky z-40 border-y border-slate-200/80 bg-white/96 shadow-[0_18px_34px_rgba(15,23,42,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/88"
+  style="top: var(--services-sticky-top);"
+  aria-label="Service section navigation"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div
+      class="service-nav-track flex gap-2 overflow-x-auto py-3 sm:justify-center"
+      style="min-height: var(--services-nav-height);"
+    >
+      {
+        serviceHubItems.map((service) => (
+          <a
+            href={`#${service.id}`}
+            class="service-nav-link group flex shrink-0 items-center gap-2 rounded-full border border-transparent px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-slate-700/85 transition duration-300 hover:bg-[rgba(255,204,1,0.14)] hover:text-[var(--brand-strong)] focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)]/50 focus-visible:outline-none"
+            data-section={service.id}
+          >
+            <Icon
+              name={service.icon}
+              class="service-nav-icon size-4 shrink-0 text-[var(--brand-accent)] transition-colors duration-300"
+              aria-hidden="true"
+            />
+            <span class="hidden sm:inline">{service.navLabel}</span>
+            <span class="sm:hidden">{service.shortNavLabel}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<style>
+  .service-nav-track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .service-nav-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-nav-link.is-active {
+    border-color: rgba(255, 204, 1, 0.18);
+    background: rgba(255, 204, 1, 0.22);
+    color: var(--brand-strong);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+  }
+
+  .service-nav-link.is-active .service-nav-icon {
+    color: var(--brand-strong);
+  }
+</style>
+
+<script is:inline>
+  const SERVICE_NAV_READY_KEY = "__rodelectricServiceNavRegistered";
+
+  function initServiceNav() {
+    const nav = document.querySelector("#service-nav");
+    if (
+      !(nav instanceof HTMLElement) ||
+      nav.dataset.serviceNavReady === "true"
+    ) {
+      return;
+    }
+
+    const links = Array.from(nav.querySelectorAll(".service-nav-link"));
+    const sections = Array.from(
+      document.querySelectorAll("[data-service-section]"),
+    );
+
+    if (!links.length || !sections.length) {
+      return;
+    }
+
+    nav.dataset.serviceNavReady = "true";
+
+    const sectionIds = new Set(sections.map((section) => section.id));
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const scrollBehavior = prefersReducedMotion ? "auto" : "smooth";
+    const activeIds = new Set();
+
+    function setActiveLink(sectionId, shouldAlign = true) {
+      if (!sectionIds.has(sectionId)) {
+        return;
+      }
+
+      let activeLink = null;
+
+      links.forEach((link) => {
+        const isActive =
+          link instanceof HTMLElement && link.dataset.section === sectionId;
+        link.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+          activeLink = link;
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      if (shouldAlign && activeLink instanceof HTMLElement) {
+        const track = activeLink.parentElement;
+
+        if (
+          track instanceof HTMLElement &&
+          track.scrollWidth > track.clientWidth
+        ) {
+          activeLink.scrollIntoView({
+            behavior: scrollBehavior,
+            inline: "center",
+            block: "nearest",
+          });
+        }
+      }
+    }
+
+    function syncFromObserver() {
+      const activeSection = sections.find(
+        (section) =>
+          section instanceof HTMLElement && activeIds.has(section.id),
+      );
+
+      if (activeSection instanceof HTMLElement) {
+        setActiveLink(activeSection.id);
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!(entry.target instanceof HTMLElement)) {
+            return;
+          }
+
+          if (entry.isIntersecting) {
+            activeIds.add(entry.target.id);
+          } else {
+            activeIds.delete(entry.target.id);
+          }
+        });
+
+        syncFromObserver();
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    function handleClick(event) {
+      event.preventDefault();
+
+      const link = event.currentTarget;
+      if (!(link instanceof HTMLAnchorElement)) {
+        return;
+      }
+
+      const sectionId = link.dataset.section;
+      if (!sectionId) {
+        return;
+      }
+
+      const target = document.getElementById(sectionId);
+      if (!(target instanceof HTMLElement)) {
+        return;
+      }
+
+      setActiveLink(sectionId);
+      target.scrollIntoView({
+        behavior: scrollBehavior,
+        block: "start",
+      });
+
+      const nextHash = `#${sectionId}`;
+      if (window.location.hash !== nextHash) {
+        history.pushState(null, "", nextHash);
+      }
+    }
+
+    links.forEach((link) => link.addEventListener("click", handleClick));
+
+    const initialHash = window.location.hash.replace("#", "");
+    const initialSectionId = sectionIds.has(initialHash)
+      ? initialHash
+      : sections[0].id;
+
+    setActiveLink(initialSectionId, false);
+
+    if (sectionIds.has(initialHash)) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const target = document.getElementById(initialHash);
+
+          if (target instanceof HTMLElement) {
+            target.scrollIntoView({ block: "start" });
+          }
+        });
+      });
+    }
+  }
+
+  if (!window[SERVICE_NAV_READY_KEY]) {
+    document.addEventListener("astro:page-load", initServiceNav);
+    window[SERVICE_NAV_READY_KEY] = true;
+  }
+
+  initServiceNav();
+</script>

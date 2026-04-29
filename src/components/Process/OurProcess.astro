@@ -1,5 +1,7 @@
 ---
 import { Image } from "astro:assets";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import { BUSINESS } from "@/data/client";
 import processImg from "@/assets/images/projects/port6.jpg";
 
 const processSteps = [
@@ -55,45 +57,66 @@ const processSteps = [
     <div
       class="mt-10 flex flex-col gap-8 sm:mt-12 sm:gap-10 lg:grid lg:grid-cols-[auto_minmax(24rem,1fr)] lg:items-center"
     >
-      <ol
-        class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:max-w-140 lg:grid-cols-1 lg:gap-6"
-      >
-        {
-          processSteps.map((step, index) => (
-            <li class="h-full">
-              <article class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-66 sm:p-7 lg:min-h-70">
-                <p class="text-process text-accent/50 m-0">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
-                  {step.title}
-                </h3>
-                <p
-                  class:list={[
-                    "text-content-body text-copy m-0 mt-4",
-                    // step.descriptionClass,
-                  ]}
-                >
-                  {step.description}
-                </p>
-              </article>
-            </li>
-          ))
-        }
-      </ol>
+      <div class="lg:max-w-140">
+        <ol
+          class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 lg:gap-6"
+        >
+          {
+            processSteps.map((step, index) => (
+              <li class="h-full">
+                <article class="shadow-card flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 backdrop-blur-sm sm:min-h-66 sm:p-7 lg:min-h-70">
+                  <p class="text-process text-accent/50 m-0">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
+                    {step.title}
+                  </h3>
+                  <p
+                    class:list={[
+                      "text-content-body text-copy m-0 mt-4",
+                      // step.descriptionClass,
+                    ]}
+                  >
+                    {step.description}
+                  </p>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+
+        <div
+          class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap"
+        >
+          <CtaPillButton
+            href="/contact/"
+            label="Get Free Quote"
+            icon="tabler:file-invoice"
+            ariaLabel="Get a free quote from Rod's Electrical"
+            width="14rem"
+          />
+          <CtaPillButton
+            href={`tel:${BUSINESS.phoneForTel}`}
+            label={BUSINESS.phoneFormatted}
+            icon="tabler:phone"
+            ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+            width="14rem"
+          />
+        </div>
+      </div>
 
       <div class="mx-auto w-full max-w-136 lg:max-w-none">
         <div class="relative">
-          <div
-            class="bg-secondary/18 pointer-events-none absolute -top-5 -right-5 h-28 w-28 rounded-full blur-3xl sm:-top-6 sm:-right-6 sm:h-32 sm:w-32"
+          <!-- <div
+            class="bg-primary/18 pointer-events-none absolute -top-5 -right-5 h-28 w-28 rounded-full blur-3xl sm:-top-6 sm:-right-6 sm:h-32 sm:w-32"
             aria-hidden="true"
           >
           </div>
           <div
-            class="bg-accent-bright/16 pointer-events-none absolute -bottom-6 -left-6 h-36 w-36 rounded-full blur-3xl"
+            class="bg-accent/16 pointer-events-none absolute -bottom-6 -left-6 h-36 w-36 rounded-full blur-3xl"
             aria-hidden="true"
           >
-          </div>
+          </div> -->
           <Image
             src={processImg}
             alt="our process img"

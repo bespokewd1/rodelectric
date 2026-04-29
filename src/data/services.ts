@@ -14,6 +14,8 @@ import residentialDetailImage from "@/assets/images/projects/port4.jpg";
 export type ServiceHubItem = {
   id: string;
   navLabel: string;
+  shortNavLabel: string;
+  icon: string;
   title: string;
   shortDescription: string;
   detailHeading: string;
@@ -28,6 +30,8 @@ export const serviceHubItems: ServiceHubItem[] = [
   {
     id: "residential-electrical",
     navLabel: "Residential Electrical",
+    shortNavLabel: "Residential",
+    icon: "tabler:home-2",
     title: "Residential Electrical",
     shortDescription:
       "Complete home electrical services including wiring, outlets, lighting, and upgrades for safe, modern living.",
@@ -48,6 +52,8 @@ export const serviceHubItems: ServiceHubItem[] = [
   {
     id: "commercial-electrical",
     navLabel: "Commercial Electrical",
+    shortNavLabel: "Commercial",
+    icon: "tabler:building",
     title: "Commercial Electrical",
     shortDescription:
       "Reliable electrical solutions for businesses including installations, maintenance, and code compliance.",
@@ -68,6 +74,8 @@ export const serviceHubItems: ServiceHubItem[] = [
   {
     id: "repairs-troubleshooting",
     navLabel: "Repairs & Troubleshooting",
+    shortNavLabel: "Repairs",
+    icon: "tabler:tool",
     title: "Repairs & Troubleshooting",
     shortDescription:
       "Fast diagnosis and repair of electrical problems to keep your home or business running smoothly and safely.",
@@ -88,6 +96,8 @@ export const serviceHubItems: ServiceHubItem[] = [
   {
     id: "lighting-installation",
     navLabel: "Lighting Installation",
+    shortNavLabel: "Lighting",
+    icon: "tabler:bulb",
     title: "Lighting Installation",
     shortDescription:
       "Professional lighting design and installation for enhanced ambiance, security, and energy efficiency.",
@@ -108,6 +118,8 @@ export const serviceHubItems: ServiceHubItem[] = [
   {
     id: "panel-upgrades-inspections",
     navLabel: "Panel Upgrades",
+    shortNavLabel: "Panels",
+    icon: "tabler:bolt",
     title: "Panel Upgrades & Inspections",
     shortDescription:
       "Upgrade your electrical panel for modern demands and ensure safety with thorough inspections.",
