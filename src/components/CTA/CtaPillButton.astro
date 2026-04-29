@@ -1,0 +1,129 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  label: string;
+  icon: string;
+  ariaLabel?: string;
+  width?: string;
+}
+
+const {
+  href,
+  label,
+  icon,
+  ariaLabel = label,
+  width = "11rem",
+} = Astro.props as Props;
+---
+
+<a
+  href={href}
+  aria-label={ariaLabel}
+  class="cta-pill-button"
+  style={`--cta-pill-width: ${width};`}
+>
+  <span class="cta-pill-button__icon-wrap" aria-hidden="true">
+    <Icon name={icon} class="cta-pill-button__icon" aria-hidden="true" />
+  </span>
+  <span class="cta-pill-button__text">{label}</span>
+</a>
+
+<style>
+  .cta-pill-button {
+    --cta-pill-width: 11rem;
+    --cta-pill-height: 3rem;
+    --cta-pill-gap: 0.375rem;
+    --cta-pill-icon-size: calc(var(--cta-pill-height) - 0.625rem);
+    align-items: center;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 40, 79, 0.96) 0%,
+      rgba(0, 24, 48, 0.98) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
+    color: #fff;
+    display: inline-flex;
+    height: var(--cta-pill-height);
+    justify-content: flex-start;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0.3125rem;
+    text-decoration: none;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    width: min(100%, var(--cta-pill-width));
+  }
+
+  .cta-pill-button:hover,
+  .cta-pill-button:focus-visible {
+    box-shadow: 0 20px 40px rgba(0, 40, 79, 0.26);
+    transform: translateY(-1px);
+  }
+
+  .cta-pill-button:focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 3px;
+  }
+
+  .cta-pill-button:active {
+    transform: scale(0.96);
+  }
+
+  .cta-pill-button__icon-wrap {
+    align-items: center;
+    background: linear-gradient(180deg, #ffe174 0%, var(--brand-accent) 100%);
+    border-radius: 999px;
+    color: var(--brand-strong);
+    display: flex;
+    flex: 0 0 auto;
+    height: var(--cta-pill-icon-size);
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    width: var(--cta-pill-icon-size);
+  }
+
+  .cta-pill-button__icon {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .cta-pill-button__text {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    font-size: 0.97rem;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 0.01em;
+    overflow: hidden;
+    padding: 0 0.95rem 0 0.85rem;
+    transition:
+      width 0.3s ease,
+      padding 0.3s ease,
+      opacity 0.2s ease,
+      transform 0.3s ease,
+      font-size 0.3s ease;
+    white-space: nowrap;
+    width: calc(100% - var(--cta-pill-icon-size) - var(--cta-pill-gap));
+  }
+
+  .cta-pill-button:hover .cta-pill-button__icon-wrap,
+  .cta-pill-button:focus-visible .cta-pill-button__icon-wrap {
+    width: calc(100% - 0.125rem);
+  }
+
+  .cta-pill-button:hover .cta-pill-button__text,
+  .cta-pill-button:focus-visible .cta-pill-button__text {
+    font-size: 0;
+    opacity: 0;
+    padding: 0;
+    transform: translateX(0.625rem);
+    width: 0;
+  }
+</style>

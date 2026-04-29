@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import { BUSINESS } from "@/data/client";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
 import trustImg from "@/assets/images/projects/port7.jpg";
 
@@ -84,23 +85,19 @@ const trustItems = [
       <div
         class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap"
       >
-        <button
-          class="min-h-cta-button text-button text-inverse focus-visible:shadow-button-accent-hover inline-flex items-center justify-center rounded-full border border-white/40 bg-[linear-gradient(180deg,rgba(48,79,109,0.92)_0%,rgba(15,39,62,0.95)_100%)] px-8 py-3 text-center no-underline backdrop-blur-md transition-all duration-300 ease-out hover:bg-white/15 focus-visible:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none"
-          type="button"
-          data-pop-form-trigger
-        >
-          Get Free Quote
-        </button>
-        <a
-          class="min-h-cta-button border-accent-bright/40 from-accent-bright to-secondary text-button text-inverse shadow-button-accent hover:from-secondary hover:to-accent-bright hover:shadow-button-accent-hover focus-visible:outline-secondary inline-flex items-center justify-center gap-1.5 rounded-full border bg-linear-to-br px-8 py-3 text-center no-underline transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+        <CtaPillButton
+          href="/contact/"
+          label="Contact Us"
+          icon="tabler:mail"
+          width="11rem"
+        />
+        <CtaPillButton
           href={`tel:${BUSINESS.phoneForTel}`}
+          label={BUSINESS.phoneFormatted}
+          icon="tabler:phone"
           aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
-        >
-          <span class="block h-5 w-5 shrink-0" aria-hidden="true">
-            <Icon name="tabler:phone" class="h-5 w-5" aria-hidden="true" />
-          </span>
-          <span>{BUSINESS.phoneFormatted}</span>
-        </a>
+          width="14rem"
+        />
       </div>
     </div>
 
