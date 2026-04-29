@@ -1,75 +1,32 @@
 ---
-import svcImg1 from "@/assets/images/projects/port1.jpg";
-import svcImg2 from "@/assets/images/projects/port2.jpg";
-import svcImg3 from "@/assets/images/projects/port3.jpg";
-import svcImg4 from "@/assets/images/projects/port4.jpg";
-import svcImg5 from "@/assets/images/projects/port5.jpg";
 import { Picture } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import { serviceHubItems } from "@/data/services";
 
-// Updated ServiceCard type to include new properties
-type ServiceCard = {
-  title: string;
-  description: string;
-  href?: string;
-  img: ImageMetadata;
-  alt: string;
-  gridArea: string; // for css grid placement
-  titleColor?: string; // for special title color
-};
+interface Props {
+  ctaPrefix?: string;
+  sectionId?: string;
+}
 
-// 1. Updated data to match the new design
-const serviceCards: ServiceCard[] = [
-  {
-    title: "Residential Electrical",
-    description:
-      "Complete home electrical services including wiring, outlets, lighting, and upgrades for safe, modern living.",
-    alt: "Residential Electrical",
-    href: "#",
-    img: svcImg3,
-    gridArea: "streamline",
-  },
-  {
-    title: "Commercial Electrical",
-    description:
-      "Reliable electrical solutions for businesses including installations, maintenance, and code compliance.",
-    alt: "Commercial Electrical",
-    href: "#",
-    img: svcImg4,
-    gridArea: "optimize",
-  },
-  {
-    title: "Repairs & Troubleshooting",
-    description:
-      "Fast diagnosis and repair of electrical problems to keep your home or business running smoothly and safely.",
-    alt: "Repairs & Troubleshooting",
-    href: "#",
-    img: svcImg1, // Man in hoodie
-    gridArea: "build",
-  },
-  {
-    title: "Lighting Installation",
-    description:
-      "Professional lighting design and installation for enhanced ambiance, security, and energy efficiency.",
-    alt: "Lighting Installation",
-    href: "#",
-    img: svcImg2, // Woman in blazer
-    gridArea: "protect",
-  },
-  {
-    title: "Panel Upgrades & Inspections",
-    description:
-      "Upgrade your electrical panel for modern demands and ensure safety with thorough inspections.",
-    alt: "Panel Upgrades & Inspections",
-    href: "#",
-    img: svcImg5, // Man with glasses
-    gridArea: "delegate",
-    titleColor: "text-accent", // Special color
-  },
-];
+const { ctaPrefix = "/services/#", sectionId = "services-grid" } =
+  Astro.props as Props;
+
+const gridAreas = ["streamline", "optimize", "build", "protect", "delegate"];
+const accentTitleId = "panel-upgrades-inspections";
+
+const serviceCards = serviceHubItems.map((service, index) => ({
+  ...service,
+  href: `${ctaPrefix}${service.id}`,
+  gridArea: gridAreas[index] ?? `service-${index + 1}`,
+  titleColor: service.id === accentTitleId ? "text-accent" : "",
+}));
 ---
 
-<section id="use-case-section" class="py-section relative px-4">
+<section
+  id={sectionId}
+  class="py-section relative px-4"
+  aria-labelledby="services-grid-title"
+>
   <div
     class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 lg:flex-row lg:items-start lg:justify-between"
   >
@@ -84,6 +41,7 @@ const serviceCards: ServiceCard[] = [
       <!-- 3. Header with text gradient -->
       <!-- leading-[120%]  -->
       <h2
+        id="services-grid-title"
         class="text-section-title m-0 mb-12 text-center tracking-normal text-neutral-950 md:text-nowrap lg:text-left"
       >
         Professional Electrical
@@ -117,7 +75,7 @@ const serviceCards: ServiceCard[] = [
               <div class="overflow-hidden">
                 <Picture
                   class="h-120 w-full object-cover transition-transform duration-300 group-hover:scale-110 lg:h-full lg:min-h-full lg:w-full"
-                  src={card.img}
+                  src={card.cardImage}
                   alt={card.alt}
                 />
               </div>
@@ -130,8 +88,8 @@ const serviceCards: ServiceCard[] = [
                 >
                   {card.title}
                 </h3>
-                <p class="text-secondary m-0 text-base leading-relaxed">
-                  {card.description}
+                <p class="m-0 text-base leading-relaxed text-slate-600">
+                  {card.shortDescription}
                 </p>
                 <div class="group-hover:border-accent/30 group-hover:text-accent mt-5 inline-flex items-center gap-2 bg-white text-[0.72rem] font-bold tracking-[0.16em] text-neutral-950 uppercase transition-colors duration-300">
                   <span>View Service</span>

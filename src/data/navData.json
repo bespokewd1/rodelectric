@@ -10,6 +10,33 @@
     "children": []
   },
   {
+    "key": "Services",
+    "url": "/services/",
+    "clickableParent": true,
+    "children": [
+      {
+        "key": "Residential Electrical",
+        "url": "/services/#residential-electrical"
+      },
+      {
+        "key": "Commercial Electrical",
+        "url": "/services/#commercial-electrical"
+      },
+      {
+        "key": "Repairs & Troubleshooting",
+        "url": "/services/#repairs-troubleshooting"
+      },
+      {
+        "key": "Lighting Installation",
+        "url": "/services/#lighting-installation"
+      },
+      {
+        "key": "Panel Upgrades",
+        "url": "/services/#panel-upgrades-inspections"
+      }
+    ]
+  },
+  {
     "key": "Projects",
     "url": "/projects/",
     "children": [
@@ -31,6 +58,6 @@
   {
     "key": "Blog",
     "url": "/blog/",
-    "children": []     
+    "children": []
   }
 ]

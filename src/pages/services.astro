@@ -1,0 +1,40 @@
+---
+import { getImage } from "astro:assets";
+
+import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
+import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
+import Gallery from "@/components/Gallery/Gallery.astro";
+import OurProcess from "@/components/Process/OurProcess.astro";
+import ServiceDetailRows from "@/components/Services/ServiceDetailRows.astro";
+import ServiceGrid from "@/components/Services/ServiceGrid.astro";
+import ServicesHero from "@/components/Services/ServicesHero.astro";
+import TrustSBS from "@/components/SideBySide/trustSBS.astro";
+import { getHomeFaqSchema } from "@/data/homeFaq";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import heroImage from "@/assets/images/hero/hero.jpg";
+
+const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
+const homeFaqSchema = getHomeFaqSchema();
+---
+
+<BaseLayout
+  title="Electrical Services"
+  description="Explore residential electrical, commercial work, repairs, lighting installation, panel upgrades, inspections, and emergency support from Rod's Electrical in Edmonton."
+  heroImage={optimizedHeroImage}
+>
+  <script
+    slot="schema"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(homeFaqSchema)}
+  />
+  <ServicesHero image={optimizedHeroImage} />
+  <ServiceGrid ctaPrefix="#" />
+  <ServiceDetailRows />
+  <TrustSBS />
+  <OurProcess />
+  <Gallery />
+  <SimpleFAQ />
+  <ServicesClosingCta />
+</BaseLayout>

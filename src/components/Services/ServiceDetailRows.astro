@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import { serviceHubItems } from "@/data/services";
+---
+
+<section
+  id="service-details"
+  class="bg-white px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-18"
+  aria-labelledby="service-details-title"
+>
+  <div class="mx-auto max-w-312">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-topper text-accent m-0 uppercase">Service Details</p>
+      <h2
+        id="service-details-title"
+        class="text-section-title text-primary m-0 mt-3 uppercase"
+      >
+        Electrical Support Matched To The Work
+      </h2>
+      <p class="mt-5 text-[1rem] leading-8 text-slate-600 sm:text-[1.08rem]">
+        Jump into the service you need now, then contact us for clear pricing,
+        scheduling, and dependable electrical work across Edmonton.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:mt-12 lg:gap-8">
+      {
+        serviceHubItems.map((service, index) => {
+          const imageBlock = (
+            <div class="relative min-h-[18rem] overflow-hidden bg-slate-100 sm:min-h-[24rem] lg:min-h-full">
+              <Image
+                src={service.detailImage}
+                alt={service.alt}
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,27,52,0.04)_0%,rgba(8,27,52,0.12)_100%)]"
+                aria-hidden="true"
+              ></div>
+            </div>
+          );
+
+          const contentBlock = (
+            <div class="flex flex-col justify-center px-6 py-7 sm:px-8 sm:py-9 lg:px-10">
+              <p class="text-topper text-accent m-0 uppercase">
+                {service.title}
+              </p>
+              <h3 class="text-primary mt-4 text-[clamp(1.85rem,2.6vw,2.85rem)] leading-[1.08] font-bold text-balance">
+                {service.detailHeading}
+              </h3>
+              <p class="mt-4 text-[1rem] leading-8 text-slate-600">
+                {service.detailBody}
+              </p>
+
+              <ul class="m-0 mt-6 grid list-none gap-3 p-0">
+                {service.bullets.map((bullet) => (
+                  <li class="flex items-start gap-3 text-[0.98rem] leading-7 text-slate-700">
+                    <span
+                      class="bg-accent mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full"
+                      aria-hidden="true"
+                    />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-8 flex flex-wrap gap-4">
+                <CtaPillButton
+                  href="/contact/"
+                  label="Request Service"
+                  icon="tabler:arrow-right"
+                  ariaLabel={`Request ${service.title} from Rod's Electrical`}
+                  width="13rem"
+                />
+              </div>
+            </div>
+          );
+
+          return (
+            <article
+              id={service.id}
+              class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_22px_48px_rgba(15,23,42,0.08)]"
+              style="scroll-margin-top: 8rem;"
+            >
+              <div class="grid lg:grid-cols-2 lg:items-stretch">
+                {index % 2 === 0 ? (
+                  <>
+                    {contentBlock}
+                    {imageBlock}
+                  </>
+                ) : (
+                  <>
+                    {imageBlock}
+                    {contentBlock}
+                  </>
+                )}
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

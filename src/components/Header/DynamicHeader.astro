@@ -6,6 +6,7 @@ import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 import headerLogo from "@/assets/images/header-icon.png";
 import { BUSINESS } from "@/data/client";
 import navData from "@/data/navData.json";
+import { serviceNavChildren } from "@/data/services";
 import { getDropdownId, isCurrentPage } from "@/js/utils.js";
 
 type NavChild = {
@@ -17,10 +18,18 @@ type NavEntry = {
   key: string;
   url: string;
   children: NavChild[];
+  clickableParent?: boolean;
 };
 
 const pathname = Astro.url.pathname;
-const navigationItems = navData as NavEntry[];
+const navigationItems = (navData as NavEntry[]).map((entry) =>
+  entry.url === "/services/"
+    ? {
+        ...entry,
+        children: serviceNavChildren,
+      }
+    : entry,
+);
 
 const contactItems = [
   {
@@ -161,23 +170,58 @@ const isEntryActive = (entry: NavEntry) =>
                       >
                         {entry.children?.length > 0 ? (
                           <>
-                            <button
-                              id={getDropdownId(entry.key)}
-                              type="button"
-                              aria-expanded="false"
-                              aria-haspopup="menu"
-                              class:list={[
-                                "cs-dropdown-toggle relative flex w-full items-center justify-start rounded-[0.35rem] px-3 py-3 pr-11 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:w-auto lg:gap-2 lg:rounded-none lg:px-4 lg:py-7 lg:pr-4 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
-                                entryActive &&
-                                  "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
-                              ]}
-                            >
-                              <span>{entry.key}</span>
-                              <Icon
-                                name="tabler:chevron-down"
-                                class="cs-drop-icon absolute top-1/2 right-3 size-4 shrink-0 -translate-y-1/2 transition-transform duration-300 lg:static lg:mt-px lg:translate-y-0"
-                              />
-                            </button>
+                            {entry.clickableParent ? (
+                              <div class="flex w-full items-center justify-between lg:w-auto lg:justify-start">
+                                <a
+                                  href={entry.url}
+                                  class:list={[
+                                    "cs-li-link relative block flex-1 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:flex-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                                    entryActive &&
+                                      "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
+                                  ]}
+                                  aria-current={isCurrentPage(
+                                    pathname,
+                                    entry.url,
+                                  )}
+                                >
+                                  {entry.key}
+                                </a>
+                                <button
+                                  id={getDropdownId(entry.key)}
+                                  type="button"
+                                  aria-expanded="false"
+                                  aria-haspopup="menu"
+                                  aria-label={`Toggle ${entry.key} submenu`}
+                                  class:list={[
+                                    "cs-dropdown-toggle relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.35rem] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:h-auto lg:w-auto lg:rounded-none lg:px-2 lg:py-7",
+                                    entryActive && "text-[var(--brand-strong)]",
+                                  ]}
+                                >
+                                  <Icon
+                                    name="tabler:chevron-down"
+                                    class="cs-drop-icon size-4 shrink-0 transition-transform duration-300"
+                                  />
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                id={getDropdownId(entry.key)}
+                                type="button"
+                                aria-expanded="false"
+                                aria-haspopup="menu"
+                                class:list={[
+                                  "cs-dropdown-toggle relative flex w-full items-center justify-start rounded-[0.35rem] px-3 py-3 pr-11 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:w-auto lg:gap-2 lg:rounded-none lg:px-4 lg:py-7 lg:pr-4 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                                  entryActive &&
+                                    "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
+                                ]}
+                              >
+                                <span>{entry.key}</span>
+                                <Icon
+                                  name="tabler:chevron-down"
+                                  class="cs-drop-icon absolute top-1/2 right-3 size-4 shrink-0 -translate-y-1/2 transition-transform duration-300 lg:static lg:mt-px lg:translate-y-0"
+                                />
+                              </button>
+                            )}
 
                             <ul
                               class="cs-drop-ul flex max-h-0 w-full flex-col items-start overflow-hidden opacity-0 transition-all duration-300 lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-30 lg:mt-6 lg:max-h-none lg:min-w-[15rem] lg:translate-y-3 lg:overflow-visible lg:rounded-sm lg:border lg:border-slate-200 lg:bg-white lg:p-3 lg:opacity-0 lg:shadow-[0_24px_40px_rgba(15,23,42,0.14)] lg:transition-all lg:group-focus-within:visible lg:group-focus-within:mt-4 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:visible lg:group-hover:mt-4 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
