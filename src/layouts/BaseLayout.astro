@@ -9,6 +9,7 @@ import "@/styles/global.css";
 
 // Components
 import DynamicHeader from "@/components/Header/DynamicHeader.astro";
+import MobileStickyCta from "@/components/CTA/MobileStickyCta.astro";
 import Footer from "@/components/Footer/Footer.astro";
 import Meta from "@/components/Meta/Meta.astro";
 
@@ -45,6 +46,7 @@ const { description, title, heroImage } = Astro.props as Props;
 
     <!-- Sitewide Scripts -->
     <script src="@/js/nav.js"></script>
+    <script src="@/js/mobileStickyCta.js"></script>
   </head>
   <body>
     <!-- Screen reader skip main nav -->
@@ -56,6 +58,7 @@ const { description, title, heroImage } = Astro.props as Props;
     <main id="main">
       <slot />
     </main>
+    <MobileStickyCta />
     <Footer />
   </body>
 </html>

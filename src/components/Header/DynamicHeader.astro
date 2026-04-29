@@ -94,15 +94,17 @@ const isEntryActive = (entry) =>
     <div
       class="relative mx-auto flex min-h-[4.9rem] max-w-390 items-center justify-between gap-3 px-4 sm:px-6 lg:min-h-20 lg:px-8 lg:pl-60"
     >
-      <CtaPillButton
-        href="/contact/"
-        label="Contact Us"
-        icon="tabler:mail"
-        ariaLabel="Contact Us"
-        width="9.5rem"
-        compactOnMobile={true}
-        className="order-1 lg:order-3"
-      />
+      <div class="order-1 hidden md:block lg:order-3">
+        <CtaPillButton
+          href="/contact/"
+          label="Contact Us"
+          icon="tabler:mail"
+          ariaLabel="Contact Us"
+          width="9.5rem"
+          compactOnMobile={true}
+          className="order-1 lg:order-3"
+        />
+      </div>
       <a
         href="/"
         aria-label="Return to home page"
