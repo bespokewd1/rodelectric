@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { GetImageResult } from "astro";
 
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
@@ -11,9 +12,18 @@ interface Props {
 const { image } = Astro.props as Props;
 
 const supportItems = [
-  "Residential and commercial service",
-  "Emergency troubleshooting available",
-  "Clear quotes and code-compliant work",
+  {
+    label: "Residential and commercial service",
+    icon: "tabler:building",
+  },
+  {
+    label: "Emergency troubleshooting available",
+    icon: "tabler:bolt",
+  },
+  {
+    label: "Clear quotes and code-compliant work",
+    icon: "tabler:shield-check",
+  },
 ];
 ---
 
@@ -79,16 +89,18 @@ const supportItems = [
             />
           </div>
 
-          <ul class="mt-8 grid list-none gap-3 p-0 sm:grid-cols-3">
+          <ul class="mt-8 flex flex-wrap gap-3 p-0">
             {
-              supportItems.map((item) => (
-                <li class="rounded-full border border-white/80 bg-white/88 px-4 py-3 text-sm font-medium text-slate-700 shadow-[0_12px_26px_rgba(15,23,42,0.06)] backdrop-blur">
+              supportItems.map(({ label, icon }) => (
+                <li class="min-w-0 flex-[1_1_16rem] rounded-full border border-white/80 bg-white/88 px-4 py-3 text-sm font-medium text-slate-700 shadow-[0_12px_26px_rgba(15,23,42,0.06)] backdrop-blur">
                   <span class="flex items-center gap-3">
                     <span
-                      class="bg-accent h-2.5 w-2.5 rounded-full"
+                      class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(255,204,1,0.18)] text-[var(--brand-strong)]"
                       aria-hidden="true"
-                    />
-                    <span>{item}</span>
+                    >
+                      <Icon name={icon} class="size-4" aria-hidden="true" />
+                    </span>
+                    <span class="min-w-0 text-balance">{label}</span>
                   </span>
                 </li>
               ))
