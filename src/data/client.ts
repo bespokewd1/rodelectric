@@ -24,9 +24,9 @@ export const BUSINESS = {
 		mapLink: "https://maps.google.com/?q=11902+70+St+NW+Edmonton+AB+T5B+1T9",
 	},
 	socials: {
-		linkedin: "",
-		facebook: "",
-		instagram: "",
+		linkedin: "https://www.linkedin.com/",
+		facebook: "https://www.facebook.com/",
+		instagram: "https://www.instagram.com/",
 	},
 };
 

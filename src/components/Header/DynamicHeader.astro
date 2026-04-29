@@ -8,7 +8,19 @@ import { BUSINESS } from "@/data/client";
 import navData from "@/data/navData.json";
 import { getDropdownId, isCurrentPage } from "@/js/utils.js";
 
+type NavChild = {
+  key: string;
+  url: string;
+};
+
+type NavEntry = {
+  key: string;
+  url: string;
+  children: NavChild[];
+};
+
 const pathname = Astro.url.pathname;
+const navigationItems = navData as NavEntry[];
 
 const contactItems = [
   {
@@ -46,15 +58,15 @@ const socialItems = [
   },
 ].filter((item) => item.href);
 
-const isEntryActive = (entry) =>
+const isEntryActive = (entry: NavEntry) =>
   pathname === entry.url ||
   (entry.url !== "/" && pathname.startsWith(entry.url)) ||
-  entry.children?.some((child) => pathname === child.url);
+  entry.children.some((child: NavChild) => pathname === child.url);
 ---
 
 <header
   id="cs-navigation"
-  class="fixed inset-x-0 top-0 z-[10000] border-b border-black/5 bg-white/90 shadow-[0_18px_48px_rgba(15,23,42,0.10)] backdrop-blur supports-[backdrop-filter]:bg-white/88 [&.cs-active_.cs-ul-wrapper]:visible [&.cs-active_.cs-ul-wrapper]:translate-y-0 [&.cs-active_.cs-ul-wrapper]:opacity-100"
+  class="sticky inset-x-0 top-0 z-[10000] border-b border-black/5 bg-white/90 shadow-[0_18px_48px_rgba(15,23,42,0.10)] backdrop-blur supports-[backdrop-filter]:bg-white/88 [&.cs-active_.cs-ul-wrapper]:visible [&.cs-active_.cs-ul-wrapper]:translate-y-0 [&.cs-active_.cs-ul-wrapper]:opacity-100"
 >
   <div class="bg-[var(--brand-accent)] text-[var(--brand-strong)]">
     <div
@@ -74,19 +86,21 @@ const isEntryActive = (entry) =>
         }
       </div>
 
-      <div class="ml-auto flex items-center gap-4">
-        {
-          socialItems.map((item) => (
-            <a
-              href={item.href}
-              aria-label={item.label}
-              class="inline-flex items-center justify-center text-(--brand-strong) transition hover:opacity-75"
-            >
-              <Icon name={item.icon} class="size-5" />
-            </a>
-          ))
-        }
-      </div>
+      {
+        socialItems.length > 0 && (
+          <div class="ml-auto flex items-center gap-4">
+            {socialItems.map((item) => (
+              <a
+                href={item.href}
+                aria-label={item.label}
+                class="inline-flex items-center justify-center text-[var(--brand-strong)] transition hover:opacity-75"
+              >
+                <Icon name={item.icon} class="size-5" />
+              </a>
+            ))}
+          </div>
+        )
+      }
     </div>
   </div>
 
@@ -94,7 +108,7 @@ const isEntryActive = (entry) =>
     <div
       class="relative mx-auto flex min-h-[4.9rem] max-w-390 items-center justify-between gap-3 px-4 sm:px-6 lg:min-h-20 lg:px-8 lg:pl-60"
     >
-      <div class="order-1 hidden md:block lg:order-3">
+      <div class="order-1 hidden shrink-0 md:block lg:order-3">
         <CtaPillButton
           href="/contact/"
           label="Contact Us"
@@ -134,7 +148,7 @@ const isEntryActive = (entry) =>
                 class="cs-ul flex flex-col items-start gap-1 lg:flex-row lg:items-center lg:justify-center lg:gap-0"
               >
                 {
-                  navData.map((entry) => {
+                  navigationItems.map((entry) => {
                     const entryActive = isEntryActive(entry);
 
                     return (
@@ -153,7 +167,7 @@ const isEntryActive = (entry) =>
                               aria-expanded="false"
                               aria-haspopup="menu"
                               class:list={[
-                                "cs-dropdown-toggle relative flex w-full items-center justify-between gap-3 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:justify-start lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                                "cs-dropdown-toggle relative flex w-full items-center justify-start rounded-[0.35rem] px-3 py-3 pr-11 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:w-auto lg:gap-2 lg:rounded-none lg:px-4 lg:py-7 lg:pr-4 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                                 entryActive &&
                                   "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                               ]}
@@ -161,7 +175,7 @@ const isEntryActive = (entry) =>
                               <span>{entry.key}</span>
                               <Icon
                                 name="tabler:chevron-down"
-                                class="cs-drop-icon size-4 shrink-0 transition-transform duration-300 lg:mt-px"
+                                class="cs-drop-icon absolute top-1/2 right-3 size-4 shrink-0 -translate-y-1/2 transition-transform duration-300 lg:static lg:mt-px lg:translate-y-0"
                               />
                             </button>
 

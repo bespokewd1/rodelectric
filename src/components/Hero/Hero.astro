@@ -1,19 +1,13 @@
 ---
-import { Icon } from "astro-icon/components";
 import type { GetImageResult } from "astro";
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import { BUSINESS } from "@/data/client";
 
 interface Props {
   image: GetImageResult;
 }
 
 const { image } = Astro.props as Props;
-
-const trustItems = [
-  "Licensed electrician",
-  "Safety-first work",
-  "Local Edmonton service",
-];
 
 const supportItems = [
   "No obligation quote",
@@ -24,14 +18,17 @@ const supportItems = [
 
 <section
   id="hero"
-  class="overflow-hidden bg-[linear-gradient(180deg,#f9f3e8_0%,#fffaf2_100%)] pt-32 sm:pt-36 lg:pt-40"
+  class="bg-bg-primary overflow-hidden pt-0"
   aria-labelledby="hero-title"
 >
-  <div class="mx-auto max-w-400">
+  <div class="mx-auto">
+    <!-- lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)]  -->
     <div
-      class="grid gap-8 px-4 pb-12 sm:px-6 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-stretch lg:gap-0 lg:px-8 lg:pb-0"
+      class="grid gap-8 px-0 pt-10 pb-12 lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:pt-0 lg:pb-0"
     >
-      <div class="relative flex items-center lg:py-14 xl:py-18">
+      <div
+        class="relative flex items-center px-[min(2rem,5vw)] lg:py-14 lg:pr-0 lg:pl-[min(20rem,5vw)] xl:py-18"
+      >
         <div
           class="pointer-events-none absolute top-4 left-0 hidden h-36 w-36 rounded-full bg-[rgba(255,204,1,0.24)] blur-3xl lg:block"
           aria-hidden="true"
@@ -46,27 +43,9 @@ const supportItems = [
         <div
           class="relative z-10 w-full rounded-4xl border border-white/70 bg-white/55 px-6 py-8 shadow-[0_24px_60px_rgba(111,84,42,0.10)] backdrop-blur-[2px] sm:px-8 sm:py-10 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
         >
-          <p
-            class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-medium tracking-[0.01em] text-slate-600 sm:text-base"
-          >
-            <span
-              class="text-primary inline-flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(255,204,1,0.2)]"
-              aria-hidden="true"
-            >
-              <Icon name="tabler:star-filled" class="size-4.5" />
-            </span>
-            <span class="text-primary">Edmonton Electrician</span>
-            <span class="hidden text-slate-400 sm:inline" aria-hidden="true">
-              /
-            </span>
-            <span class="text-slate-600">
-              {trustItems.join(" / ")}
-            </span>
-          </p>
-
           <h1
             id="hero-title"
-            class="text-primary mt-6 max-w-[12ch] text-[clamp(3.15rem,7vw,5.9rem)] leading-[0.93] font-black tracking-tighter text-balance"
+            class="text-primary max-w-[12ch] text-[clamp(3.15rem,7vw,5.9rem)] leading-[0.93] font-black tracking-tighter text-balance"
           >
             Electrical work that
             <span class="text-accent">shows up on time</span>
@@ -81,7 +60,7 @@ const supportItems = [
             to panel upgrades, inspections, and emergency calls.
           </p>
 
-          <div class="mt-8">
+          <div class="mt-8 flex flex-wrap gap-4">
             <CtaPillButton
               href="/contact/"
               label="Request Free Quote"
@@ -89,9 +68,17 @@ const supportItems = [
               ariaLabel="Request a free quote from Rod's Electrical"
               width="14rem"
             />
+
+            <CtaPillButton
+              href={`tel:${BUSINESS.phoneForTel}`}
+              label={BUSINESS.phoneFormatted}
+              icon="tabler:phone"
+              aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+              width="14rem"
+            />
           </div>
 
-          <ul class="mt-8 grid list-none gap-3 p-0 sm:grid-cols-3">
+          <!-- <ul class="mt-8 grid list-none gap-3 p-0 sm:grid-cols-3">
             {
               supportItems.map((item) => (
                 <li class="rounded-full border border-white/80 bg-white/88 px-4 py-3 text-sm font-medium text-slate-700 shadow-[0_12px_26px_rgba(15,23,42,0.06)] backdrop-blur">
@@ -105,13 +92,18 @@ const supportItems = [
                 </li>
               ))
             }
-          </ul>
+          </ul> -->
         </div>
       </div>
 
-      <div class="relative lg:min-h-168 xl:min-h-184">
+      <div
+        class="relative px-[min(2rem,5vw)] lg:min-h-168 lg:px-0 xl:min-h-184"
+      >
         <div
-          class="relative min-h-72 overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5 sm:min-h-96 md:min-h-120 lg:h-full lg:min-h-full lg:rounded-none lg:rounded-l-[3.5rem]"
+          class:list={[
+            "relative min-h-72 overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5",
+            "sm:min-h-96 md:min-h-120 lg:h-full lg:min-h-full lg:rounded-none lg:shadow-none lg:ring-0",
+          ]}
         >
           <img
             src={image.src}

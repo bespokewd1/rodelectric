@@ -3,6 +3,7 @@
 @theme {
   --color-accent: var(--brand-accent);
   --color-primary: var(--brand-strong);
+  --color-bg-primary: #f9f3e8;
 
   /* --color-bg: var(--color-primary) */
   --spacing-section:  var(--sectionPaddingValue);
