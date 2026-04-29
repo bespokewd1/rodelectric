@@ -2,41 +2,79 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  href: string;
+  href?: string;
   label: string;
   icon: string;
   ariaLabel?: string;
   width?: string;
   className?: string;
   compactOnMobile?: boolean;
+  as?: "a" | "button";
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const {
   href,
   label,
   icon,
-  ariaLabel = label,
+  ariaLabel,
   width = "11rem",
   className = "",
   compactOnMobile = false,
-} = Astro.props as Props;
+  as,
+  type = "button",
+  disabled = false,
+  "aria-label": ariaLabelAttr,
+  ...rest
+} = Astro.props as Props & { "aria-label"?: string };
+
+const resolvedAriaLabel = ariaLabel ?? ariaLabelAttr ?? label;
+const tag = as ?? (href ? "a" : "button");
 ---
 
-<a
-  href={href}
-  aria-label={ariaLabel}
-  class:list={[
-    "cta-pill-button",
-    compactOnMobile && "cta-pill-button--compact-mobile",
-    className,
-  ]}
-  style={`--cta-pill-width: ${width};`}
->
-  <span class="cta-pill-button__icon-wrap" aria-hidden="true">
-    <Icon name={icon} class="cta-pill-button__icon" aria-hidden="true" />
-  </span>
-  <span class="cta-pill-button__text">{label}</span>
-</a>
+{
+  tag === "a" ? (
+    <a
+      href={href}
+      aria-label={resolvedAriaLabel}
+      class:list={[
+        "cta-pill-button",
+        compactOnMobile && "cta-pill-button--compact-mobile",
+        className,
+      ]}
+      style={`--cta-pill-width: ${width};`}
+      {...rest}
+    >
+      <span class="cta-pill-button__icon-wrap" aria-hidden="true">
+        <Icon name={icon} class="cta-pill-button__icon" aria-hidden="true" />
+      </span>
+      <span class="cta-pill-button__text" data-cta-pill-text>
+        {label}
+      </span>
+    </a>
+  ) : (
+    <button
+      type={type}
+      aria-label={resolvedAriaLabel}
+      disabled={disabled}
+      class:list={[
+        "cta-pill-button",
+        compactOnMobile && "cta-pill-button--compact-mobile",
+        className,
+      ]}
+      style={`--cta-pill-width: ${width};`}
+      {...rest}
+    >
+      <span class="cta-pill-button__icon-wrap" aria-hidden="true">
+        <Icon name={icon} class="cta-pill-button__icon" aria-hidden="true" />
+      </span>
+      <span class="cta-pill-button__text" data-cta-pill-text>
+        {label}
+      </span>
+    </button>
+  )
+}
 
 <style>
   .cta-pill-button {
@@ -81,6 +119,18 @@ const {
 
   .cta-pill-button:active {
     transform: scale(0.96);
+  }
+
+  .cta-pill-button:disabled {
+    cursor: wait;
+    opacity: 0.76;
+    transform: none;
+  }
+
+  .cta-pill-button:disabled:hover,
+  .cta-pill-button:disabled:focus-visible {
+    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
+    transform: none;
   }
 
   .cta-pill-button__icon-wrap {
@@ -134,6 +184,18 @@ const {
     padding: 0;
     transform: translateX(0.625rem);
     width: 0;
+  }
+
+  .cta-pill-button:disabled .cta-pill-button__icon-wrap {
+    width: var(--cta-pill-icon-size);
+  }
+
+  .cta-pill-button:disabled .cta-pill-button__text {
+    font-size: 0.97rem;
+    opacity: 1;
+    padding: 0 0.95rem 0 0.85rem;
+    transform: none;
+    width: calc(100% - var(--cta-pill-icon-size) - var(--cta-pill-gap));
   }
 
   @media only screen and (max-width: 39.99em) {

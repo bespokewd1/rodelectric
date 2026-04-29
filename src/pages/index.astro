@@ -4,13 +4,13 @@ import { getImage } from "astro:assets";
 
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import CTASimple from "@/components/CTA/CTASimple.astro";
 import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 import Gallery from "@/components/Gallery/Gallery.astro";
 import Hero from "@/components/Hero/Hero.astro";
 import OurProcess from "@/components/Process/OurProcess.astro";
 import ServiceGrid from "@/components/Services/ServiceGrid.astro";
 import TrustSBS from "@/components/SideBySide/trustSBS.astro";
+import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
 import heroImage from "@/assets/images/hero/hero.jpg";
@@ -37,5 +37,5 @@ const homeFaqSchema = getHomeFaqSchema();
   <OurProcess />
   <Gallery />
   <SimpleFAQ />
-  <CTASimple />
+  <ServicesClosingCta />
 </BaseLayout>

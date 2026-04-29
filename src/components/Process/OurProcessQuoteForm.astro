@@ -1,0 +1,407 @@
+---
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import { BUSINESS } from "@/data/client";
+import {
+  QUOTE_REQUEST_FORM_NAME,
+  QUOTE_REQUEST_SERVICE_OPTIONS,
+} from "@/data/quoteRequestForm";
+---
+
+<!-- shadow-[0_24px_56px_rgba(14,53,94,0.18)] -->
+<div
+  class="relative overflow-hidden rounded-[1.75rem] border border-white/75 bg-[linear-gradient(145deg,rgba(255,255,255,0.97)_0%,rgba(246,249,253,0.94)_52%,rgba(237,244,251,0.92)_100%)]"
+>
+  <div
+    class="bg-secondary/12 pointer-events-none absolute top-0 right-0 h-44 w-44 translate-x-1/4 -translate-y-1/4 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="bg-accent/18 pointer-events-none absolute bottom-0 left-0 h-40 w-40 -translate-x-1/4 translate-y-1/4 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative px-6 py-8 sm:px-8 sm:py-9 lg:px-9 lg:py-10">
+    <p class="text-topper text-accent m-0 uppercase">Get in Touch</p>
+    <h3 class="text-section-title text-primary m-0 mt-3 uppercase">
+      Get Your Free Quote
+    </h3>
+    <p class="text-content-body text-copy-muted m-0 mt-4 max-w-[55ch]">
+      We&apos;re here to help! Reach out with any questions or to learn more
+      about our services.
+    </p>
+
+    <form
+      name={QUOTE_REQUEST_FORM_NAME}
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      data-process-quote-form
+      data-phone-formatted={BUSINESS.phoneFormatted}
+      class="mt-8"
+    >
+      <input type="hidden" name="form-name" value={QUOTE_REQUEST_FORM_NAME} />
+      <div class="sr-only" aria-hidden="true">
+        <label for="process-quote-bot-field">Do not fill this out</label>
+        <input id="process-quote-bot-field" name="bot-field" type="text" />
+      </div>
+
+      <div class="grid gap-5">
+        <label class="process-quote-form__field" for="process-quote-full-name">
+          <span class="process-quote-form__label">
+            Full Name
+            <span aria-hidden="true">*</span>
+          </span>
+          <input
+            id="process-quote-full-name"
+            name="full-name"
+            type="text"
+            autocomplete="name"
+            placeholder="John Smith"
+            required
+            class="process-quote-form__control"
+          />
+        </label>
+
+        <label
+          class="process-quote-form__field"
+          for="process-quote-phone-number"
+        >
+          <span class="process-quote-form__label">
+            Phone Number
+            <span aria-hidden="true">*</span>
+          </span>
+          <input
+            id="process-quote-phone-number"
+            name="phone-number"
+            type="tel"
+            autocomplete="tel"
+            placeholder="(587) 399-3722"
+            required
+            class="process-quote-form__control"
+          />
+        </label>
+
+        <label
+          class="process-quote-form__field"
+          for="process-quote-email-address"
+        >
+          <span class="process-quote-form__label">
+            Email Address
+            <span aria-hidden="true">*</span>
+          </span>
+          <input
+            id="process-quote-email-address"
+            name="email-address"
+            type="email"
+            autocomplete="email"
+            placeholder="john@example.com"
+            required
+            class="process-quote-form__control"
+          />
+        </label>
+
+        <label
+          class="process-quote-form__field"
+          for="process-quote-service-needed"
+        >
+          <span class="process-quote-form__label">
+            Service Needed
+            <span aria-hidden="true">*</span>
+          </span>
+          <select
+            id="process-quote-service-needed"
+            name="service-needed"
+            required
+            class="process-quote-form__control process-quote-form__control--select"
+          >
+            <option value="">Select a service</option>
+            {
+              QUOTE_REQUEST_SERVICE_OPTIONS.map((option) => (
+                <option value={option}>{option}</option>
+              ))
+            }
+          </select>
+        </label>
+
+        <label
+          class="process-quote-form__field"
+          for="process-quote-project-details"
+        >
+          <span class="process-quote-form__label">
+            Project Details
+            <span aria-hidden="true">*</span>
+          </span>
+          <textarea
+            id="process-quote-project-details"
+            name="project-details"
+            placeholder="Tell us about your electrical needs..."
+            required
+            class="process-quote-form__control process-quote-form__control--textarea"
+          ></textarea>
+        </label>
+      </div>
+
+      <div class="mt-7">
+        <CtaPillButton
+          as="button"
+          type="submit"
+          label="Request Free Quote"
+          icon="tabler:arrow-right"
+          ariaLabel="Submit quote request form"
+          width="100%"
+          className="process-quote-form__submit"
+          data-process-quote-submit
+          data-default-label="Request Free Quote"
+        />
+        <p class="text-copy-muted mt-4 text-center text-sm leading-6">
+          We&apos;ll respond within 24 hours or less.
+        </p>
+        <div
+          class="process-quote-form__status mt-4 hidden"
+          data-process-quote-status
+          aria-live="polite"
+          aria-atomic="true"
+          role="status"
+        >
+          <p
+            class="process-quote-form__status-title"
+            data-process-quote-status-title
+          >
+          </p>
+          <p
+            class="process-quote-form__status-body"
+            data-process-quote-status-body
+          >
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script is:inline>
+  function encodeProcessQuoteForm(data) {
+    return new URLSearchParams(data).toString();
+  }
+
+  function bindProcessQuoteForm(form) {
+    if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") {
+      return;
+    }
+
+    form.dataset.bound = "true";
+
+    const submitButton = form.querySelector("[data-process-quote-submit]");
+    const status = form.querySelector("[data-process-quote-status]");
+    const statusTitle = form.querySelector("[data-process-quote-status-title]");
+    const statusBody = form.querySelector("[data-process-quote-status-body]");
+
+    if (
+      !(submitButton instanceof HTMLButtonElement) ||
+      !(status instanceof HTMLElement) ||
+      !(statusTitle instanceof HTMLElement) ||
+      !(statusBody instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const defaultLabel =
+      submitButton.dataset.defaultLabel || submitButton.textContent || "Submit";
+    const submitButtonText =
+      submitButton.querySelector("[data-cta-pill-text]") || submitButton;
+    const phoneFormatted = form.dataset.phoneFormatted || "(587) 399-3722";
+
+    const clearStatus = () => {
+      status.hidden = true;
+      status.classList.add("hidden");
+      status.classList.remove(
+        "process-quote-form__status--success",
+        "process-quote-form__status--error",
+      );
+      statusTitle.textContent = "";
+      statusBody.textContent = "";
+    };
+
+    const setStatus = (type, title, message) => {
+      status.hidden = false;
+      status.classList.remove("hidden");
+      status.classList.remove(
+        "process-quote-form__status--success",
+        "process-quote-form__status--error",
+      );
+      status.classList.add(`process-quote-form__status--${type}`);
+      statusTitle.textContent = title;
+      statusBody.textContent = message;
+    };
+
+    clearStatus();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      clearStatus();
+      submitButton.disabled = true;
+      submitButtonText.textContent = "Sending...";
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(window.location.pathname, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: encodeProcessQuoteForm(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Quote request failed with ${response.status}`);
+        }
+
+        form.reset();
+        setStatus(
+          "success",
+          "Request received",
+          "Thanks. Your quote request was sent successfully. We'll respond within 24 hours or less.",
+        );
+      } catch (error) {
+        console.error(error);
+        setStatus(
+          "error",
+          "Request not sent",
+          `Something went wrong while sending your request. Please try again, or call ${phoneFormatted}.`,
+        );
+      } finally {
+        submitButton.disabled = false;
+        submitButtonText.textContent = defaultLabel;
+      }
+    });
+  }
+
+  function initProcessQuoteForms() {
+    document
+      .querySelectorAll("[data-process-quote-form]")
+      .forEach(bindProcessQuoteForm);
+  }
+
+  if (!window.__processQuoteFormsListenersBound) {
+    window.__processQuoteFormsListenersBound = true;
+    document.addEventListener("astro:page-load", initProcessQuoteForms);
+    document.addEventListener("astro:after-swap", initProcessQuoteForms);
+  }
+
+  initProcessQuoteForms();
+</script>
+
+<style>
+  .process-quote-form__field {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .process-quote-form__label {
+    color: rgb(0 40 79 / 0.92);
+    font-size: 0.97rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .process-quote-form__label span {
+    color: var(--brand-accent);
+  }
+
+  .process-quote-form__control {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 40, 79, 0.16);
+    border-radius: 1rem;
+    color: rgb(15 23 42 / 0.92);
+    min-height: 3.5rem;
+    outline: none;
+    padding: 0.95rem 1rem;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+    width: 100%;
+  }
+
+  .process-quote-form__control::placeholder {
+    color: rgb(100 116 139 / 0.88);
+  }
+
+  .process-quote-form__control:hover {
+    border-color: rgba(0, 40, 79, 0.26);
+  }
+
+  .process-quote-form__control:focus,
+  .process-quote-form__control:focus-visible {
+    border-color: rgba(255, 204, 1, 0.92);
+    box-shadow:
+      0 0 0 4px rgba(255, 204, 1, 0.18),
+      0 14px 30px rgba(0, 40, 79, 0.08);
+  }
+
+  .process-quote-form__control--select {
+    background-image:
+      linear-gradient(45deg, transparent 50%, rgba(0, 40, 79, 0.82) 50%),
+      linear-gradient(135deg, rgba(0, 40, 79, 0.82) 50%, transparent 50%);
+    background-position:
+      calc(100% - 1.2rem) calc(50% - 0.125rem),
+      calc(100% - 0.9rem) calc(50% - 0.125rem);
+    background-repeat: no-repeat;
+    background-size:
+      0.4rem 0.4rem,
+      0.4rem 0.4rem;
+    padding-right: 3rem;
+  }
+
+  .process-quote-form__control--textarea {
+    min-height: 12rem;
+    padding-top: 1rem;
+    resize: vertical;
+  }
+
+  .process-quote-form__submit {
+    --cta-pill-height: 3.6rem;
+  }
+
+  .process-quote-form__submit :global(.cta-pill-button__text) {
+    font-size: 1rem;
+  }
+
+  .process-quote-form__status {
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    padding: 1rem 1rem 0.95rem;
+  }
+
+  .process-quote-form__status--success {
+    background: rgba(236, 253, 245, 0.88);
+    border-color: rgba(16, 185, 129, 0.26);
+  }
+
+  .process-quote-form__status--error {
+    background: rgba(254, 242, 242, 0.94);
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+
+  .process-quote-form__status-title {
+    color: rgb(0 40 79 / 0.94);
+    font-size: 0.96rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .process-quote-form__status-body {
+    color: rgb(71 85 105 / 0.96);
+    font-size: 0.93rem;
+    line-height: 1.65;
+    margin-top: 0.3rem;
+  }
+</style>
