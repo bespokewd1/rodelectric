@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
 import headerLogo from "@/assets/images/header-icon.png";
 import { BUSINESS } from "@/data/client";
@@ -93,17 +94,15 @@ const isEntryActive = (entry) =>
     <div
       class="relative mx-auto flex min-h-[4.9rem] max-w-390 items-center justify-between gap-3 px-4 sm:px-6 lg:min-h-20 lg:px-8 lg:pl-60"
     >
-      <a
+      <CtaPillButton
         href="/contact/"
-        class="cs-nav-button order-1 inline-flex min-h-11 items-center justify-center bg-(--brand-strong) px-5 py-3 text-sm font-semibold tracking-[0.02em] text-white transition hover:brightness-110 sm:px-6 lg:order-3"
-      >
-        <span class="lg:hidden">Contact</span>
-        <span class="hidden lg:inline">Contact Us</span>
-        <Icon
-          name="tabler:arrow-right"
-          class="ml-2 hidden size-4 lg:inline-block"
-        />
-      </a>
+        label="Contact Us"
+        icon="tabler:mail"
+        ariaLabel="Contact Us"
+        width="9.5rem"
+        compactOnMobile={true}
+        className="order-1 lg:order-3"
+      />
       <a
         href="/"
         aria-label="Return to home page"

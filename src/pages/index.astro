@@ -7,7 +7,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import CTASimple from "@/components/CTA/CTASimple.astro";
 import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 import Gallery from "@/components/Gallery/Gallery.astro";
-import Hero from "@/components/Hero/Hero.astro";
+import ModernHero from "@/components/Hero/ModernHero.astro";
 import OurProcess from "@/components/Process/OurProcess.astro";
 import ServiceGrid from "@/components/Services/ServiceGrid.astro";
 import TrustSBS from "@/components/SideBySide/trustSBS.astro";
@@ -31,7 +31,7 @@ const homeFaqSchema = getHomeFaqSchema();
     type="application/ld+json"
     set:html={JSON.stringify(homeFaqSchema)}
   />
-  <Hero image={optimizedHeroImage} />
+  <ModernHero image={optimizedHeroImage} />
   <ServiceGrid />
   <TrustSBS />
   <OurProcess />

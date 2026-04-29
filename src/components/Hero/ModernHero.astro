@@ -1,0 +1,227 @@
+---
+import { Icon } from "astro-icon/components";
+import type { GetImageResult } from "astro";
+import { BUSINESS } from "@/data/client";
+
+interface Props {
+  image: GetImageResult;
+}
+
+const { image } = Astro.props as Props;
+
+const trustItems = [
+  "Licensed electrician",
+  "Safety-first work",
+  "Local Edmonton service",
+];
+
+const serviceItems = [
+  "Residential wiring and upgrades",
+  "Commercial electrical work",
+  "Lighting installation",
+  "Panel upgrades and inspections",
+];
+
+const supportItems = [
+  "No obligation quote",
+  "Same-day service available",
+  "24/7 emergency support",
+];
+---
+
+<section
+  class="relative isolate overflow-hidden bg-[linear-gradient(180deg,#f7fafc_0%,#ffffff_48%,#f5f8fb_100%)] px-4 pt-38 pb-14 sm:px-6 sm:pt-42 sm:pb-16 lg:px-8 lg:pt-50 lg:pb-20"
+>
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(0,40,79,0.08)_0%,rgba(0,40,79,0)_100%)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute top-18 right-0 h-64 w-64 rounded-full bg-[rgba(255,204,1,0.18)] blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[rgba(0,40,79,0.08)] blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto max-w-[82rem]">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.06fr)_minmax(24rem,0.94fr)] lg:items-end lg:gap-12">
+      <div>
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-[rgba(0,40,79,0.12)] bg-white/90 px-4 py-2 text-[0.72rem] font-semibold tracking-[0.18em] text-[var(--brand-strong)] uppercase shadow-[0_14px_36px_rgba(15,23,42,0.06)]"
+        >
+          <span
+            class="h-2 w-2 rounded-full bg-[var(--brand-accent)]"
+            aria-hidden="true"
+          ></span>
+          Edmonton Electrician
+        </div>
+
+        <h1
+          class="mt-6 max-w-[13ch] text-[clamp(3rem,6vw,5.8rem)] leading-[0.95] font-black tracking-[-0.05em] text-[var(--brand-strong)]"
+        >
+          Electrical work that
+          <span class="text-[var(--brand-accent)]">shows up on time</span>
+          and gets done to code.
+        </h1>
+
+        <p
+          class="mt-6 max-w-2xl text-[1rem] leading-7 text-slate-600 sm:text-[1.08rem] sm:leading-8"
+        >
+          Rod&apos;s Electrical provides residential and commercial electrical
+          service across Edmonton, from troubleshooting and lighting installs to
+          panel upgrades, inspections, and emergency calls.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a
+            href="/contact/"
+            class="inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[var(--brand-strong)] px-6 text-sm font-semibold tracking-[0.03em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_35px_rgba(0,40,79,0.22)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2"
+          >
+            Request Free Quote
+            <Icon name="tabler:arrow-right" class="size-4" aria-hidden="true" />
+          </a>
+          <a
+            href={`tel:${BUSINESS.phoneForTel}`}
+            class="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[rgba(0,40,79,0.14)] bg-white px-6 text-sm font-semibold tracking-[0.03em] text-[var(--brand-strong)] transition hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:shadow-[0_14px_30px_rgba(15,23,42,0.08)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2"
+            aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+          >
+            <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
+            {BUSINESS.phoneFormatted}
+          </a>
+        </div>
+
+        <ul class="mt-8 grid list-none gap-3 p-0 sm:grid-cols-3">
+          {
+            trustItems.map((item) => (
+              <li class="rounded-[1.25rem] border border-white/70 bg-white/88 px-4 py-4 text-sm font-medium text-slate-700 shadow-[0_12px_28px_rgba(15,23,42,0.06)] backdrop-blur">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(255,204,1,0.18)] text-[var(--brand-strong)]"
+                    aria-hidden="true"
+                  >
+                    <Icon name="tabler:bolt" class="size-4.5" />
+                  </span>
+                  <span>{item}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative">
+        <div
+          class="absolute top-10 -left-3 hidden w-52 rounded-[1.5rem] bg-[var(--brand-accent)] p-5 text-[var(--brand-strong)] shadow-[0_24px_40px_rgba(255,204,1,0.22)] lg:block"
+        >
+          <p class="text-[0.72rem] font-bold tracking-[0.18em] uppercase">
+            Need Help Fast?
+          </p>
+          <p class="mt-2 text-lg leading-6 font-semibold">
+            24/7 emergency electrical support.
+          </p>
+          <a
+            href={`tel:${BUSINESS.phoneForTel}`}
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline decoration-[rgba(0,40,79,0.35)] underline-offset-4"
+          >
+            Call {BUSINESS.phoneFormatted}
+            <Icon name="tabler:arrow-up-right" class="size-4" aria-hidden="true" />
+          </a>
+        </div>
+
+        <div
+          class="overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-[0_30px_70px_rgba(0,40,79,0.16)]"
+        >
+          <div class="grid xl:grid-cols-[minmax(0,1fr)_15rem]">
+            <div class="relative min-h-[25rem] sm:min-h-[32rem] xl:min-h-[38rem]">
+              <img
+                src={image.src}
+                alt="Rod's Electrical providing professional electrician services in Edmonton"
+                width={image.attributes.width}
+                height={image.attributes.height}
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="eager"
+                fetchpriority="high"
+              />
+              <div
+                class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,40,79,0.02)_18%,rgba(0,40,79,0.18)_52%,rgba(0,40,79,0.9)_100%)]"
+                aria-hidden="true"
+              ></div>
+
+              <div class="absolute right-4 bottom-4 left-4 sm:right-6 sm:bottom-6 sm:left-6">
+                <div
+                  class="rounded-[1.5rem] border border-white/15 bg-white/92 p-5 shadow-[0_20px_50px_rgba(2,8,23,0.18)] backdrop-blur"
+                >
+                  <p
+                    class="text-[0.72rem] font-bold tracking-[0.18em] text-[var(--brand-accent)] uppercase"
+                  >
+                    Reliable Electrical Services In Edmonton
+                  </p>
+                  <p class="mt-3 text-lg leading-7 font-semibold text-slate-900">
+                    Clean work, clear pricing, and practical solutions for homes
+                    and businesses.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="border-t border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fc_100%)] p-6 xl:border-t-0 xl:border-l"
+            >
+              <p
+                class="text-[0.72rem] font-bold tracking-[0.18em] text-[var(--brand-strong)] uppercase"
+              >
+                Core Services
+              </p>
+
+              <ul class="mt-5 grid list-none gap-3 p-0">
+                {
+                  serviceItems.map((item) => (
+                    <li class="flex items-start gap-3 text-sm leading-6 text-slate-700">
+                      <span
+                        class="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(0,40,79,0.08)] text-[var(--brand-strong)]"
+                        aria-hidden="true"
+                      >
+                        <Icon name="tabler:check" class="size-4" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+
+              <div
+                class="mt-6 rounded-[1.25rem] bg-[var(--brand-strong)] p-4 text-white"
+              >
+                <p class="text-[0.72rem] font-bold tracking-[0.18em] uppercase">
+                  Service Window
+                </p>
+                <p class="mt-2 text-sm leading-6 text-white/80">
+                  Mon to Fri 8AM to 6PM. Saturday 9AM to 4PM. Emergency calls on
+                  Sunday.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-8 grid gap-3 border-t border-slate-200/80 pt-6 text-sm text-slate-600 md:grid-cols-3"
+    >
+      {
+        supportItems.map((item) => (
+          <div class="flex items-center gap-3 rounded-full bg-white/80 px-4 py-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
+            <span
+              class="h-2.5 w-2.5 rounded-full bg-[var(--brand-accent)]"
+              aria-hidden="true"
+            ></span>
+            <span>{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

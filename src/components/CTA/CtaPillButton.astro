@@ -7,6 +7,8 @@ interface Props {
   icon: string;
   ariaLabel?: string;
   width?: string;
+  className?: string;
+  compactOnMobile?: boolean;
 }
 
 const {
@@ -15,13 +17,19 @@ const {
   icon,
   ariaLabel = label,
   width = "11rem",
+  className = "",
+  compactOnMobile = false,
 } = Astro.props as Props;
 ---
 
 <a
   href={href}
   aria-label={ariaLabel}
-  class="cta-pill-button"
+  class:list={[
+    "cta-pill-button",
+    compactOnMobile && "cta-pill-button--compact-mobile",
+    className,
+  ]}
   style={`--cta-pill-width: ${width};`}
 >
   <span class="cta-pill-button__icon-wrap" aria-hidden="true">
@@ -125,5 +133,22 @@ const {
     padding: 0;
     transform: translateX(0.625rem);
     width: 0;
+  }
+
+  @media only screen and (max-width: 39.99em) {
+    .cta-pill-button--compact-mobile {
+      width: 3rem;
+    }
+
+    .cta-pill-button--compact-mobile .cta-pill-button__icon-wrap {
+      width: calc(100% - 0.125rem);
+    }
+
+    .cta-pill-button--compact-mobile .cta-pill-button__text {
+      font-size: 0;
+      opacity: 0;
+      padding: 0;
+      width: 0;
+    }
   }
 </style>
