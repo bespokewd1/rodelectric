@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import { BUSINESS } from "@/data/client";
 
 import trustImg from "@/assets/images/projects/port7.jpg";
 
@@ -92,13 +93,13 @@ const trustItems = [
         </button>
         <a
           class="min-h-cta-button border-accent-bright/40 from-accent-bright to-secondary text-button text-inverse shadow-button-accent hover:from-secondary hover:to-accent-bright hover:shadow-button-accent-hover focus-visible:outline-secondary inline-flex items-center justify-center gap-1.5 rounded-full border bg-linear-to-br px-8 py-3 text-center no-underline transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-          href="+1234567890"
-          aria-label="Call Glassma at +1234567890"
+          href={`tel:${BUSINESS.phoneForTel}`}
+          aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
         >
           <span class="block h-5 w-5 shrink-0" aria-hidden="true">
             <Icon name="tabler:phone" class="h-5 w-5" aria-hidden="true" />
           </span>
-          <span>+1234567890</span>
+          <span>{BUSINESS.phoneFormatted}</span>
         </a>
       </div>
     </div>

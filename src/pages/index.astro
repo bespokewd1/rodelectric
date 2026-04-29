@@ -4,39 +4,38 @@ import { getImage } from "astro:assets";
 
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Hero from "@/components/Hero/Hero.astro";
-import Services from "@/components/Services/Services.astro";
-import SideBySide from "@/components/SideBySide/SideBySide.astro";
-import SideBySideReverse from "@/components/SideBySideReverse/SideBySideReverse.astro";
-import Gallery from "@/components/Gallery/Gallery.astro";
-import Testimonials from "@/components/Testimonials/Testimonials.astro";
-import FAQ from "@/components/FAQ/FAQ.astro";
 import CTASimple from "@/components/CTA/CTASimple.astro";
+import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
+import Gallery from "@/components/Gallery/Gallery.astro";
+import Hero from "@/components/Hero/Hero.astro";
+import OurProcess from "@/components/Process/OurProcess.astro";
+import ServiceGrid from "@/components/Services/ServiceGrid.astro";
+import TrustSBS from "@/components/SideBySide/trustSBS.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
 import heroImage from "@/assets/images/hero/hero.jpg";
-import ServiceGrid from "@/components/Services/ServiceGrid.astro";
-import OurProcess from "@/components/Process/OurProcess.astro";
-import TrustSBS from "@/components/SideBySide/trustSBS.astro";
-import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
+import { getHomeFaqSchema } from "@/data/homeFaq";
+
 const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
+const homeFaqSchema = getHomeFaqSchema();
 ---
 
 <BaseLayout
-  title="Pixel Perfect Websites"
-  description="Meta description for the page"
+  title="Edmonton Electrician"
+  description="Rod's Electrical provides residential and commercial electrical services, repairs, lighting installation, panel upgrades, inspections, and 24/7 emergency support in Edmonton and area."
   heroImage={optimizedHeroImage}
 >
+  <script
+    slot="schema"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(homeFaqSchema)}
+  />
   <Hero image={optimizedHeroImage} />
   <ServiceGrid />
-  <OurProcess />
   <TrustSBS />
-  <!-- <Services /> -->
-  <!-- <SideBySide /> -->
-  <!-- <SideBySideReverse /> -->
+  <OurProcess />
   <Gallery />
-  <!-- <Testimonials /> -->
-  <FAQ />
-  <!-- <SimpleFAQ /> -->
+  <SimpleFAQ />
   <CTASimple />
 </BaseLayout>

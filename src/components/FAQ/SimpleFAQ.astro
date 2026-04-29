@@ -1,3 +1,7 @@
+---
+import { homeFaqItems } from "@/data/homeFaq";
+---
+
 <section
   class="gm-home-section gm-home-faq overflow-hidden bg-surface bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.78)_0,rgba(237,244,251,1)_56%)] px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-16 xl:py-20"
 >
@@ -8,240 +12,59 @@
       </h2>
     </div>
 
-    <div
-      class="mx-auto mt-8 flex max-w-[72rem] flex-col gap-4 sm:mt-10"
-    >
-      <details
-        class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
-        open
-      >
-        <summary
-          class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-        >
-          <span class="block flex-1"
-            >What services does your glass company offer?</span
+    <div class="mx-auto mt-8 flex max-w-[72rem] flex-col gap-4 sm:mt-10">
+      {
+        homeFaqItems.map((item, index) => (
+          <details
+            class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
+            open={index === 0}
           >
-          <span
-            class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
-            aria-hidden="true"
-          >
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-            ></span>
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-            ></span>
-          </span>
-        </summary>
-        <div
-          class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-        >
-          <p class="m-0 text-content-body text-copy-muted">
-            Our glass company offers a wide range of residential and commercial
-            glass services, including:
-          </p>
-          <ul
-            class="list-none m-0 mt-4 grid grid-cols-1 gap-x-10 gap-y-3 p-0 lg:grid-cols-2"
-          >
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
+            <summary
+              class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
             >
+              <span class="block flex-1">{item.question}</span>
               <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Window glass replacement and repair</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span
-                >Door glass replacement (entry doors, patio doors, storefront
-                doors)</span
+                class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
+                aria-hidden="true"
               >
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
+                <span
+                  class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
+                ></span>
+                <span
+                  class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
+                ></span>
+              </span>
+            </summary>
+            <div
+              class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
             >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Insulated / double-pane glass replacement</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Storefront glass and aluminum framing</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Custom-cut glass for various applications</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Safety glass (tempered and laminated glass)</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Emergency board-up services</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span>Mirror installation</span>
-            </li>
-            <li
-              class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
-            >
-              <span
-                class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
-                aria-hidden="true"></span>
-              <span
-                >Glass upgrades for energy efficiency and noise reduction</span
-              >
-            </li>
-          </ul>
-        </div>
-      </details>
+              {item.answer && (
+                <p class="m-0 text-content-body text-copy-muted">
+                  {item.answer}
+                </p>
+              )}
 
-      <details
-        class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
-      >
-        <summary
-          class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-        >
-          <span class="block flex-1"
-            >Does Free 1-Year Installation Warranty Applies to all services?</span
-          >
-          <span
-            class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
-            aria-hidden="true"
-          >
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-            ></span>
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-            ></span>
-          </span>
-        </summary>
-        <div
-          class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-        >
-          <p class="m-0 text-content-body text-copy-muted">
-            Yes, from repairs to full replacements.
-          </p>
-        </div>
-      </details>
-
-      <details
-        class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
-      >
-        <summary
-          class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-        >
-          <span class="block flex-1">Where are you located?</span>
-          <span
-            class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
-            aria-hidden="true"
-          >
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-            ></span>
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-            ></span>
-          </span>
-        </summary>
-        <div
-          class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-        >
-          <p class="m-0 text-content-body text-copy-muted">
-            Office Locations: We have offices in Seattle, Tukwila, and Lynnwood.
-          </p>
-        </div>
-      </details>
-
-      <details
-        class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
-      >
-        <summary
-          class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-        >
-          <span class="block flex-1"
-            >What is the refund method for 30-Day Price Match Guarantee ?</span
-          >
-          <span
-            class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
-            aria-hidden="true"
-          >
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-            ></span>
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-            ></span>
-          </span>
-        </summary>
-        <div
-          class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-        >
-          <p class="m-0 text-content-body text-copy-muted">
-            Direct to your payment source or credit.
-          </p>
-        </div>
-      </details>
-
-      <details
-        class="gm-home-faq__item overflow-hidden rounded-[0.5rem] border border-border bg-white"
-      >
-        <summary
-          class="gm-home-faq__summary m-0 flex cursor-pointer items-center justify-between gap-4 bg-white/92 px-4 py-4 text-left text-[1rem] font-semibold leading-[1.45] text-heading sm:px-5 sm:py-[1.125rem] sm:text-[1.0625rem] lg:px-6 lg:text-[1.125rem]"
-        >
-          <span class="block flex-1"
-            >How to Claim the Free 2-Year Glass Breakage Warranty</span
-          >
-          <span
-            class="gm-home-faq__icon relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current/20"
-            aria-hidden="true"
-          >
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--horizontal"
-            ></span>
-            <span
-              class="gm-home-faq__icon-line gm-home-faq__icon-line--vertical"
-            ></span>
-          </span>
-        </summary>
-        <div
-          class="gm-home-faq__panel border-t border-border bg-white px-4 py-4 sm:px-5 sm:py-5 lg:px-6"
-        >
-          <p class="m-0 text-content-body text-copy-muted">
-            Call or email with details; processing in 72 hours for 2-year glass
-            breakage warranty Seattle.
-          </p>
-        </div>
-      </details>
+              {item.items && (
+                <ul
+                  class="m-0 mt-4 grid list-none grid-cols-1 gap-x-10 gap-y-3 p-0 lg:grid-cols-2"
+                >
+                  {item.items.map((service) => (
+                    <li
+                      class="m-0 flex items-start gap-3 text-content-body text-copy-muted"
+                    >
+                      <span
+                        class="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-primary/60"
+                        aria-hidden="true"
+                      ></span>
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </details>
+        ))
+      }
     </div>
   </div>
 </section>
