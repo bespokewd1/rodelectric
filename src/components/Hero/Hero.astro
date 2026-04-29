@@ -1,291 +1,152 @@
 ---
-/**
- * * The hero component used on the homepage
- * * Takes an image as a prop
- */
-
-// Utils
 import { Icon } from "astro-icon/components";
-import { Picture } from "astro:assets";
 import type { GetImageResult } from "astro";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
 interface Props {
-  image: GetImageResult; // pre-optimized image from getImage()
+  image: GetImageResult;
 }
 
 const { image } = Astro.props as Props;
+
+const trustItems = [
+  "Licensed electrician",
+  "Safety-first work",
+  "Local Edmonton service",
+];
+
+const supportItems = [
+  "No obligation quote",
+  "Same-day service available",
+  "24/7 emergency support",
+];
 ---
 
-<section id="hero">
-  <div class="cs-container">
-    <div class="cs-flex-group">
-      <span class="cs-topper">Intermediate Kit</span>
-      <h1 class="cs-title">
-        Intermediate Astro v6 <br /> Decap CMS
-      </h1>
-      <p class="cs-text">
-        This intermediate kit includes a pre-configured Astro environment, which
-        allows for repeated components, centralized data and greater room to
-        scale as your clients grow. Decap CMS has been integrated to run a blog.
-      </p>
-      <a href="/about/" class="cs-button-solid">Explore More</a>
-      <a href="/contact/" class="cs-button-transparent">
-        <Icon name="play" class="cs-img" />
-        Get in Touch
-      </a>
+<section
+  id="hero"
+  class="overflow-hidden bg-[linear-gradient(180deg,#f9f3e8_0%,#fffaf2_100%)] pt-32 sm:pt-36 lg:pt-40"
+  aria-labelledby="hero-title"
+>
+  <div class="mx-auto max-w-400">
+    <div
+      class="grid gap-8 px-4 pb-12 sm:px-6 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-stretch lg:gap-0 lg:px-8 lg:pb-0"
+    >
+      <div class="relative flex items-center lg:py-14 xl:py-18">
+        <div
+          class="pointer-events-none absolute top-4 left-0 hidden h-36 w-36 rounded-full bg-[rgba(255,204,1,0.24)] blur-3xl lg:block"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="pointer-events-none absolute right-8 bottom-0 hidden h-48 w-48 rounded-full bg-[rgba(255,255,255,0.75)] blur-3xl lg:block"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div
+          class="relative z-10 w-full rounded-4xl border border-white/70 bg-white/55 px-6 py-8 shadow-[0_24px_60px_rgba(111,84,42,0.10)] backdrop-blur-[2px] sm:px-8 sm:py-10 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
+        >
+          <p
+            class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-medium tracking-[0.01em] text-slate-600 sm:text-base"
+          >
+            <span
+              class="text-primary inline-flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(255,204,1,0.2)]"
+              aria-hidden="true"
+            >
+              <Icon name="tabler:star-filled" class="size-4.5" />
+            </span>
+            <span class="text-primary">Edmonton Electrician</span>
+            <span class="hidden text-slate-400 sm:inline" aria-hidden="true">
+              /
+            </span>
+            <span class="text-slate-600">
+              {trustItems.join(" / ")}
+            </span>
+          </p>
+
+          <h1
+            id="hero-title"
+            class="text-primary mt-6 max-w-[12ch] text-[clamp(3.15rem,7vw,5.9rem)] leading-[0.93] font-black tracking-tighter text-balance"
+          >
+            Electrical work that
+            <span class="text-accent">shows up on time</span>
+            and gets done to code.
+          </h1>
+
+          <p
+            class="mt-6 max-w-2xl text-[1rem] leading-8 text-slate-600 sm:text-[1.08rem]"
+          >
+            Rod&apos;s Electrical provides residential and commercial electrical
+            service across Edmonton, from troubleshooting and lighting installs
+            to panel upgrades, inspections, and emergency calls.
+          </p>
+
+          <div class="mt-8">
+            <CtaPillButton
+              href="/contact/"
+              label="Request Free Quote"
+              icon="tabler:arrow-right"
+              ariaLabel="Request a free quote from Rod's Electrical"
+              width="14rem"
+            />
+          </div>
+
+          <ul class="mt-8 grid list-none gap-3 p-0 sm:grid-cols-3">
+            {
+              supportItems.map((item) => (
+                <li class="rounded-full border border-white/80 bg-white/88 px-4 py-3 text-sm font-medium text-slate-700 shadow-[0_12px_26px_rgba(15,23,42,0.06)] backdrop-blur">
+                  <span class="flex items-center gap-3">
+                    <span
+                      class="bg-accent h-2.5 w-2.5 rounded-full"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="relative lg:min-h-168 xl:min-h-184">
+        <div
+          class="relative min-h-72 overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5 sm:min-h-96 md:min-h-120 lg:h-full lg:min-h-full lg:rounded-none lg:rounded-l-[3.5rem]"
+        >
+          <img
+            src={image.src}
+            alt="Rod's Electrical providing professional electrician services in Edmonton"
+            width={image.attributes.width}
+            height={image.attributes.height}
+            class="absolute inset-0 h-full w-full object-cover object-[60%_24%] sm:object-[62%_20%] lg:object-[62%_center]"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <div
+            class="absolute inset-0 bg-[linear-gradient(180deg,rgba(249,243,232,0)_0%,rgba(249,243,232,0.10)_54%,rgba(249,243,232,0.42)_100%)] lg:bg-[linear-gradient(90deg,#f9f3e8_0%,rgba(249,243,232,0.94)_18%,rgba(249,243,232,0.56)_36%,rgba(249,243,232,0)_54%)]"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div
+            class="absolute right-4 bottom-4 left-4 sm:right-6 sm:bottom-6 sm:left-6 lg:hidden"
+          >
+            <div
+              class="rounded-3xl border border-white/65 bg-white/90 p-5 shadow-[0_20px_50px_rgba(76,54,28,0.14)] backdrop-blur"
+            >
+              <p
+                class="text-accent text-[0.72rem] font-bold tracking-[0.18em] uppercase"
+              >
+                Same-Day Support
+              </p>
+              <p class="mt-3 text-lg leading-7 font-semibold text-slate-900">
+                Residential and commercial electrical work across Edmonton,
+                backed by fast response and clear communication.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Using the preloaded image from the props -->
-  <Picture
-    src={image.src}
-    alt="new home"
-    width={image.attributes.width}
-    height={image.attributes.height}
-    formats={["avif", "webp"]}
-    priority
-    pictureAttributes={{ class: "cs-picture" }}
-  />
 </section>
-
-<style lang="less">
-  /*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
-
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0em) {
-    #hero {
-      /* Centers button */
-      text-align: center;
-      /* changes on tablet */
-      padding: 0 (16/16rem);
-      padding-bottom: (100/16rem);
-      position: relative;
-      z-index: 1;
-      /* prevents overflow from the lines extending past the screen width */
-      overflow: hidden;
-
-      .cs-picture {
-        /* Background Image */
-        width: 100%;
-        height: 100%;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -2;
-
-        &:before {
-          /* Black Color Overlay */
-          content: "";
-          width: 100%;
-          height: 100%;
-          background: #000;
-          opacity: 0.7;
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          /* prevents the cursor from interacting with it */
-          pointer-events: none;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          /* Makes image act like a background-image */
-          object-fit: cover;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
-
-      .cs-container {
-        width: 100%;
-        max-width: (1280/16em);
-        margin: auto;
-        /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
-        /* 144px - 280px - leaving extra space for the navigation */
-        /* changes on tablet */
-        padding: clamp(9em, 25.95vw, 17.5em) 0;
-        position: relative;
-
-        &:before {
-          /* Left Line */
-          content: "";
-          width: 1px;
-          height: 100%;
-          background: -moz-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0.5) 0%,
-            rgba(250, 251, 252, 0) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0.5) 0%,
-            rgba(250, 251, 252, 0) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          opacity: 1;
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
-
-      .cs-flex-group {
-        width: 80vw;
-        /* 464px - 562px */
-        max-width: clamp(29em, 60vw, 35.125em);
-        margin: auto;
-        /* 60px - 220px */
-        margin-bottom: clamp(3.75em, 15.5vw, 13.75em);
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-
-      .cs-topper {
-        text-align: center;
-        margin-bottom: (16/16rem);
-        color: var(--primary);
-      }
-
-      .cs-title {
-        text-align: center;
-        width: 100%;
-        color: var(--bodyTextColorWhite);
-      }
-
-      .cs-text {
-        text-align: center;
-        /* 32px - 40px */
-        margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
-        /* 40px - 48px */
-        margin-bottom: clamp(2.5rem, 4vw, 3rem);
-        color: var(--bodyTextColorWhite);
-      }
-
-      .cs-button-solid {
-        line-height: clamp(2.875em, 5.5vw, 3.5em);
-        height: initial;
-        margin-bottom: calc(16 / 16 * 1rem);
-      }
-
-      .cs-button-transparent {
-        font-size: (16/16rem);
-        font-weight: 700;
-        /* 46px - 56px */
-        line-height: clamp(2.875em, 5.5vw, 3.5em);
-        text-decoration: none;
-        width: (180/16rem);
-        /* 46px - 56px */
-        height: clamp(2.875em, 5.5vw, 3.5em);
-        margin: 0 (8/16rem);
-        box-sizing: border-box;
-        padding: 0;
-        color: #fff;
-        background-color: transparent;
-        border: 1px solid var(--bodyTextColorWhite);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-
-        &:before {
-          content: "";
-          background: #000;
-          opacity: 1;
-          display: block;
-          position: absolute;
-          /* so it sits on top of the border */
-          top: -1px;
-          right: -1px;
-          bottom: -1px;
-          left: -1px;
-          z-index: -1;
-          /* this is what creates the grow affect on hover */
-          transform: scaleX(0);
-          transition: transform 0.3s;
-          transform-origin: left;
-        }
-
-        &:hover {
-          &:before {
-            transform: scaleX(1);
-          }
-        }
-
-        .cs-img {
-          margin-right: (12/16rem);
-          display: block;
-        }
-      }
-    }
-  }
-
-  /* Tablet - 768px */
-  @media only screen and (min-width: 48em) {
-    #hero {
-      /* 32px - 40px */
-      padding: 0 clamp(2em, 5vw, 2.5em);
-
-      .cs-container {
-        padding: clamp(7em, 27.95vw, 17.5em) 0 clamp(9em, 30.95vw, 23.5em) 0;
-        &:after {
-          /* Right Line */
-          content: "";
-          width: 1px;
-          height: 100%;
-          background: -moz-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0) 0%,
-            rgba(250, 251, 252, 0.5) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0) 0%,
-            rgba(250, 251, 252, 0.5) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          opacity: 1;
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
-      }
-
-      .cs-button-solid {
-        margin-right: (20/16rem);
-        margin-bottom: 0;
-      }
-    }
-  }
-
-  /* Desktop Parallax Effect - 1300px */
-  /* Note: Parallax effect removed as Picture component handles responsive images */
-  @media only screen and (min-width: 81.25em) {
-    #hero {
-      /* Picture component provides optimized images */
-    }
-  }
-
-  /* Dark Mode */
-  @media only screen and (min-width: 0em) {
-    body.dark-mode {
-      #hero {
-        .cs-background {
-          &:before {
-            opacity: 0.8;
-          }
-        }
-      }
-    }
-  }
-</style>
