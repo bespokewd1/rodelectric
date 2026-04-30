@@ -16,11 +16,17 @@
   --text-topper--letter-spacing: var(--tracking-widest);
   --text-topper--font-weight: 700;
 
+  /*hero title*/
+  --text-hero-title: clamp(3rem, 6.8vw, 5.6rem);
+  --text-hero-title--line-height: 0.93;
+  --text-hero-title--letter-spacing: var(--tracking-tighter);
+  --text-hero-title--font-weight: 900;
+
   /* section title */
   --text-section-title: clamp(2.5rem, 5vw, 3.0625rem);
-  --text-section-title--line-height: 1.2;
-  /* --text-section-title--letter-spacing: 120%; */
-  --text-section-title--font-weight: 700;
+  --text-section-title--line-height: 0.95;
+  --text-section-title--letter-spacing: var(--tracking-tighter);
+  --text-section-title--font-weight: 900;
 
   /* section body */
   --text-section-body: clamp(1rem, 0.5vw + 0.8rem, 1.25rem);

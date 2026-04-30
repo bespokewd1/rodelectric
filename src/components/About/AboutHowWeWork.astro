@@ -1,0 +1,156 @@
+---
+import { Icon } from "astro-icon/components";
+
+const workStandards = [
+  {
+    number: "01",
+    title: "Honest Pricing",
+    description:
+      "Quotes stay straightforward and transparent, with scope explained clearly before work moves ahead.",
+    icon: "tabler:file-invoice",
+  },
+  {
+    number: "02",
+    title: "Clear Communication",
+    description:
+      "Clients get practical updates, direct answers, and a clear sense of what happens next from start to finish.",
+    icon: "tabler:messages",
+  },
+  {
+    number: "03",
+    title: "On-Time Completion",
+    description:
+      "Schedules are respected, timelines are managed carefully, and work keeps moving without unnecessary drag.",
+    icon: "tabler:clock-check",
+  },
+  {
+    number: "04",
+    title: "Clean, Organized Worksites",
+    description:
+      "Homes and businesses are treated with care through orderly setup, controlled mess, and thorough cleanup.",
+    icon: "tabler:sparkles",
+  },
+  {
+    number: "05",
+    title: "Safe, Compliant Installations",
+    description:
+      "Every installation is approached with safety first, completed to code, and built for dependable long-term performance.",
+    icon: "tabler:shield-check",
+  },
+  {
+    number: "06",
+    title: "Long-Term Relationships",
+    description:
+      "Trust matters beyond one visit, so service is built around reliability, follow-through, and customers who come back with confidence.",
+    icon: "tabler:users-group",
+  },
+];
+
+const workMarkers = [
+  "Straight answers before tools come out",
+  "Respect for occupied homes and active businesses",
+  "Standards built for repeat trust, not rushed jobs",
+];
+---
+
+<section
+  id="about-process"
+  class="py-section relative overflow-hidden bg-white"
+  aria-labelledby="about-process-title"
+>
+  <div
+    class="bg-accent/14 pointer-events-none absolute top-10 left-0 h-44 w-44 -translate-x-1/3 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="bg-primary/10 pointer-events-none absolute right-0 bottom-0 h-56 w-56 translate-x-1/4 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <div
+        class="relative overflow-hidden rounded-[2rem] border border-[rgba(0,40,79,0.10)] bg-[linear-gradient(160deg,rgba(0,40,79,0.98)_0%,rgba(8,27,52,0.98)_52%,rgba(26,53,83,0.96)_100%)] px-6 py-8 shadow-[0_30px_80px_rgba(0,40,79,0.16)] sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+      >
+        <div
+          class="bg-accent/28 pointer-events-none absolute top-0 right-0 h-44 w-44 translate-x-1/4 -translate-y-1/4 rounded-full blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative z-10">
+          <p class="text-topper text-accent">How We Work</p>
+          <h2
+            id="about-process-title"
+            class="text-section-title mt-4 text-white"
+          >
+            Clear standards from first quote to final cleanup.
+          </h2>
+
+          <p class="text-section-body mt-6 max-w-2xl text-white/78">
+            Good electrical service should feel steady and predictable. Every
+            project is handled with transparent pricing, real communication, and
+            jobsite discipline clients can see for themselves.
+          </p>
+
+          <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {
+              workMarkers.map((marker) => (
+                <li class="rounded-[1.25rem] border border-white/12 bg-white/8 px-4 py-2 backdrop-blur">
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="bg-accent text-primary mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
+                      aria-hidden="true"
+                    >
+                      <Icon name="tabler:check" class="size-4" />
+                    </span>
+                    <p class="text-content-body text-white/80">{marker}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div
+            class="mt-8 rounded-[1.5rem] border border-white/12 bg-white/10 px-5 py-5 shadow-[0_18px_42px_rgba(2,8,23,0.18)] backdrop-blur sm:px-6"
+          >
+            <p class="text-topper text-white/68">Built For Repeat Trust</p>
+            <p class="mt-3 text-[1.05rem] leading-8 font-semibold text-white">
+              Long-term customer relationships come from jobs finished clearly,
+              safely, and with real respect for property.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <ol class="grid list-none place-content-center gap-4 p-0 md:grid-cols-2">
+        {
+          workStandards.map((item) => (
+            <li class="">
+              <article class="flex h-full flex-col rounded-[1.6rem] border border-[rgba(0,40,79,0.08)] bg-[linear-gradient(145deg,rgba(255,255,255,1)_0%,rgba(249,243,232,0.86)_100%)] px-5 py-5 shadow-[0_18px_38px_rgba(0,40,79,0.06)] sm:px-6 sm:py-6">
+                <div class="flex items-start justify-between gap-4">
+                  <p class="text-process text-primary/12">{item.number}</p>
+                  <span
+                    class="bg-accent/22 text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+                    aria-hidden="true"
+                  >
+                    <Icon name={item.icon} class="size-5" />
+                  </span>
+                </div>
+
+                <h3 class="text-card-heading text-primary -mt-1">
+                  {item.title}
+                </h3>
+                <p class="text-content-body mt-4 text-slate-600">
+                  {item.description}
+                </p>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
