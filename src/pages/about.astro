@@ -5,6 +5,7 @@ import { getImage } from "astro:assets";
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import AboutHero from "@/components/About/AboutHero.astro";
+import AboutStory from "@/components/About/AboutStory.astro";
 
 // Images
 import landingImage from "@/assets/images/landing.jpg";
@@ -190,4 +191,5 @@ const optimizedImage = await getImage({ src: landingImage, format: "webp" });
   }
 
   <AboutHero image={optimizedImage} />
+  <AboutStory variant="editorial" />
 </BaseLayout>

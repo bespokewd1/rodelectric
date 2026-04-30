@@ -5,34 +5,35 @@
   --color-primary: var(--brand-strong);
   --color-bg-primary: #f9f3e8;
 
-  /* --color-bg: var(--color-primary) */
-  --spacing-section:  var(--sectionPaddingValue);
+  --font-roboto: var(--font-primary);
 
-/* topper */
+  /* --color-bg: var(--color-primary) */
+  --spacing-section: var(--sectionPaddingValue);
+
+  /* topper */
   --text-topper: var(--text-base);
   --text-topper--line-height: 1.2;
   --text-topper--letter-spacing: var(--tracking-widest);
   --text-topper--font-weight: 700;
 
   /* section title */
-  --text-section-title: clamp(2.5rem,5vw,3.0625rem);
+  --text-section-title: clamp(2.5rem, 5vw, 3.0625rem);
   --text-section-title--line-height: 1.2;
   /* --text-section-title--letter-spacing: 120%; */
   --text-section-title--font-weight: 700;
 
   /* section body */
-  --text-section-body: clamp(1rem, .5vw + .8rem, 1.25rem);
+  --text-section-body: clamp(1rem, 0.5vw + 0.8rem, 1.25rem);
   --text-section-body--line-height: 1.6;
 
-  --text-process:clamp(2.6rem, 2.1vw + 2rem, 3.6rem);
+  --text-process: clamp(2.6rem, 2.1vw + 2rem, 3.6rem);
   --text-process--line-height: 1;
   --text-process--font-weight: 700;
 
-  --text-card-heading: clamp(1rem, .35vw + .95rem, 1.125rem);
+  --text-card-heading: clamp(1rem, 0.35vw + 0.95rem, 1.125rem);
   --text-card-heading--line-height: 1.15;
   --text-card-heading--font-weight: 700;
 
-  --text-content-body: .95rem;
+  --text-content-body: 0.95rem;
   --text-content-body--line-height: 1.7;
-
 }
