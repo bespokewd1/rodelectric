@@ -4,23 +4,20 @@ import { getImage } from "astro:assets";
 
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Banner from "@/components/Banner/Banner.astro";
-import FAQ from "@/components/FAQ/FAQ.astro";
-import SideBySide from "@/components/SideBySide/SideBySide.astro";
-import CTA from "@/components/CTA/CTASimple.astro";
+import AboutHero from "@/components/About/AboutHero.astro";
 
 // Images
 import landingImage from "@/assets/images/landing.jpg";
-import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 ---
 
 <BaseLayout
   title="About"
-  description="Meta description for the page"
+  description="Learn about Rod's Electrical, a locally owned Edmonton electrical company with 14+ years of residential and commercial experience."
   heroImage={optimizedImage}
 >
-  {/*
+  {
+    /*
     ABOUT PAGE MASTER PLAN
 
     Purpose:
@@ -175,9 +172,11 @@ const optimizedImage = await getImage({ src: landingImage, format: "webp" });
     - Prefer reusable components if repo already has suitable patterns; otherwise build page-specific sections cleanly.
     - Keep mobile layout first-class. No desktop-only composition.
     - Tone should feel professional, trustworthy, and local; not corporate-heavy.
-  */}
+  */
+  }
 
-  {/*
+  {
+    /*
     SECTION PLACEHOLDERS
     Keep order below. Implement progressively.
 
@@ -187,7 +186,8 @@ const optimizedImage = await getImage({ src: landingImage, format: "webp" });
     <section id="about-process">...</section>
     <section id="about-audience">...</section>
     <section id="about-cta">...</section>
-  */}
+  */
+  }
 
-  <SimpleFAQ />
+  <AboutHero image={optimizedImage} />
 </BaseLayout>
