@@ -15,13 +15,55 @@ const cityStateZip = [BUSINESS.address.city, stateZip]
   .filter(Boolean)
   .join(", ");
 
-const contactCards = [
+const hasConfiguredSocialUrl = (href?: string) => {
+  if (!href) return false;
+
+  try {
+    const { pathname } = new URL(href);
+
+    return pathname.replace(/\/+$/, "") !== "";
+  } catch {
+    return false;
+  }
+};
+
+const trustItems = [
+  {
+    title: "Licensed & Insured",
+    description: "Qualified residential and commercial service",
+    icon: "tabler:shield-check",
+  },
+  {
+    title: "Upfront Quotes",
+    description: "Clear pricing with no surprises",
+    icon: "tabler:file-invoice",
+  },
+  {
+    title: "Code-Compliant Work",
+    description: "Safe work done to current standards",
+    icon: "tabler:bolt",
+  },
+  {
+    title: "Edmonton & Area",
+    description: "Local service with fast response",
+    icon: "tabler:map-2",
+  },
+];
+
+const contactItems = [
   {
     title: "Phone",
     lines: [BUSINESS.phoneFormatted],
     href: `tel:${BUSINESS.phoneForTel}`,
     icon: "tabler:phone",
     ariaLabel: `Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`,
+  },
+  {
+    title: "Email",
+    lines: [BUSINESS.email],
+    href: `mailto:${BUSINESS.email}`,
+    icon: "tabler:mail",
+    ariaLabel: `Email ${BUSINESS.name} at ${BUSINESS.email}`,
   },
   {
     title: "Location",
@@ -31,14 +73,25 @@ const contactCards = [
     ariaLabel: `View ${BUSINESS.name} address on map`,
     external: true,
   },
-  {
-    title: "Email us at",
-    lines: [BUSINESS.email],
-    href: `mailto:${BUSINESS.email}`,
-    icon: "tabler:mail",
-    ariaLabel: `Email ${BUSINESS.name} at ${BUSINESS.email}`,
-  },
 ];
+
+const socialItems = [
+  {
+    href: BUSINESS.socials.linkedin,
+    label: "LinkedIn",
+    icon: "tabler:brand-linkedin",
+  },
+  {
+    href: BUSINESS.socials.facebook,
+    label: "Facebook",
+    icon: "tabler:brand-facebook",
+  },
+  {
+    href: BUSINESS.socials.instagram,
+    label: "Instagram",
+    icon: "tabler:brand-instagram",
+  },
+].filter((item) => hasConfiguredSocialUrl(item.href));
 ---
 
 <section
@@ -59,45 +112,126 @@ const contactCards = [
     <div
       class="flex flex-col gap-8 sm:gap-10 lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(22rem,1.08fr)] lg:items-center"
     >
-      <div class="lg:max-w-140">
-        <ul
-          class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 lg:gap-6"
-        >
-          {
-            contactCards.map((card) => (
-              <li class="h-full">
-                <a
-                  href={card.href}
-                  aria-label={card.ariaLabel}
-                  target={card.external ? "_blank" : undefined}
-                  rel={card.external ? "noreferrer" : undefined}
-                  class="group flex h-full min-h-42 items-center rounded-[1.75rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,252,255,0.92)_100%)] px-6 py-6 shadow-[0_18px_40px_rgba(14,53,94,0.14)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-[rgba(255,204,1,0.42)] hover:shadow-[0_24px_56px_rgba(14,53,94,0.18)] focus-visible:-translate-y-1 focus-visible:border-[rgba(255,204,1,0.55)] focus-visible:shadow-[0_24px_56px_rgba(14,53,94,0.18)] focus-visible:outline-none sm:px-7"
-                >
+      <div class="mx-auto w-full max-w-136 lg:mx-0 lg:max-w-140">
+        <div class="grid gap-4 sm:gap-5 lg:gap-6">
+          <div class="rounded-[1.75rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,252,255,0.92)_100%)] px-6 py-7 shadow-[0_18px_40px_rgba(14,53,94,0.14)] backdrop-blur-sm sm:px-7">
+            <p class="text-topper text-accent m-0 uppercase">Get In Touch</p>
+            <h2
+              class="text-section-title text-primary m-0 mt-3 text-balance uppercase"
+            >
+              Talk To A Local Edmonton Electrician
+            </h2>
+            <p class="text-section-body text-copy-muted m-0 mt-4 max-w-2xl">
+              Call, email, or send a quote request for residential,
+              commercial, lighting, panel, troubleshooting, and emergency
+              electrical work.
+            </p>
+          </div>
+
+          <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2">
+            {
+              trustItems.map((item) => (
+                <li class="border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,252,255,0.92)_100%)] shadow-[0_18px_36px_rgba(14,53,94,0.11)] rounded-[1.5rem] px-5 py-5 backdrop-blur-sm sm:px-5">
                   <span
-                    class="text-accent flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[rgba(255,204,1,0.14)] transition duration-300 group-hover:bg-[rgba(255,204,1,0.2)]"
+                    class="text-accent flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(255,204,1,0.14)]"
                     aria-hidden="true"
                   >
-                    <Icon name={card.icon} class="size-7" />
+                    <Icon name={item.icon} class="size-5.5" />
                   </span>
+                  <h3 class="text-card-heading text-primary m-0 mt-4 tracking-normal">
+                    {item.title}
+                  </h3>
+                  <p class="text-content-body text-copy-muted m-0 mt-2 leading-6">
+                    {item.description}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
 
-                  <div class="ml-5">
-                    <h3 class="text-card-heading text-primary m-0">
-                      {card.title}:
-                    </h3>
+          <div class="rounded-[1.75rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,252,255,0.92)_100%)] p-3 shadow-[0_18px_40px_rgba(14,53,94,0.14)] backdrop-blur-sm sm:p-4">
+            <ul class="m-0 list-none p-0">
+              {
+                contactItems.map((item, index) => (
+                  <li class={index > 0 ? "border-t border-slate-200/80" : ""}>
+                    <a
+                      href={item.href}
+                      aria-label={item.ariaLabel}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                      class="group flex items-start gap-4 rounded-[1.15rem] px-3 py-4 transition duration-300 hover:bg-white/65 focus-visible:bg-white/70 focus-visible:outline-none"
+                    >
+                      <span
+                        class="text-accent flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgba(255,204,1,0.14)] transition duration-300 group-hover:bg-[rgba(255,204,1,0.2)] group-focus-visible:bg-[rgba(255,204,1,0.2)]"
+                        aria-hidden="true"
+                      >
+                        <Icon name={item.icon} class="size-6" />
+                      </span>
 
-                    <div class="mt-3 space-y-1">
-                      {card.lines.map((line) => (
-                        <p class="text-content-body text-copy-muted m-0 leading-7">
-                          {line}
-                        </p>
-                      ))}
-                    </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="flex items-start justify-between gap-3">
+                          <h3 class="text-card-heading text-primary m-0 tracking-normal">
+                            {item.title}
+                          </h3>
+                          <Icon
+                            name="tabler:arrow-up-right"
+                            class="text-primary/55 size-4 shrink-0 transition duration-300 group-hover:text-primary group-focus-visible:text-primary"
+                            aria-hidden="true"
+                          />
+                        </div>
+
+                        <div class="mt-2 space-y-1">
+                          {item.lines.map((line) => (
+                            <p class="text-content-body text-copy-muted m-0 break-words leading-6">
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="rounded-[1.5rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(247,251,255,0.9)_100%)] px-5 py-5 shadow-[0_16px_36px_rgba(14,53,94,0.1)] backdrop-blur-sm sm:px-6">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <span class="inline-flex w-fit items-center rounded-full bg-[rgba(255,204,1,0.14)] px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[var(--brand-strong)]">
+                24/7 Emergency Support
+              </span>
+              <p class="text-content-body text-copy-muted m-0 max-w-[30rem] leading-6 sm:text-right">
+                General quote requests get a response within 24 hours or less.
+              </p>
+            </div>
+          </div>
+
+          {
+            socialItems.length > 0 && (
+              <div class="rounded-[1.5rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(247,251,255,0.9)_100%)] px-5 py-4 shadow-[0_16px_36px_rgba(14,53,94,0.1)] backdrop-blur-sm sm:px-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-card-heading text-primary m-0 tracking-normal">
+                    Follow us
+                  </p>
+
+                  <div class="flex flex-wrap items-center gap-3">
+                    {socialItems.map((item) => (
+                      <a
+                        href={item.href}
+                        aria-label={`Follow ${BUSINESS.name} on ${item.label}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="text-primary inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/85 bg-white/80 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,204,1,0.42)] hover:text-[var(--brand-strong)] focus-visible:-translate-y-0.5 focus-visible:border-[rgba(255,204,1,0.55)] focus-visible:text-[var(--brand-strong)] focus-visible:outline-none"
+                      >
+                        <Icon name={item.icon} class="size-5" />
+                      </a>
+                    ))}
                   </div>
-                </a>
-              </li>
-            ))
+                </div>
+              </div>
+            )
           }
-        </ul>
+        </div>
       </div>
 
       <div class="mx-auto w-full max-w-136 lg:max-w-none">
