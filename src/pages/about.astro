@@ -8,6 +8,8 @@ import AboutHero from "@/components/About/AboutHero.astro";
 import AboutStory from "@/components/About/AboutStory.astro";
 import AboutCredentials from "@/components/About/AboutCredentials.astro";
 import AboutHowWeWork from "@/components/About/AboutHowWeWork.astro";
+import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
+import ContactForm from "@/components/Contact/ContactForm.astro";
 
 // Images
 import landingImage from "@/assets/images/landing.jpg";
@@ -19,181 +21,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "webp" });
   description="Learn about Rod's Electrical, a locally owned Edmonton electrical company with 14+ years of residential and commercial experience."
   heroImage={optimizedImage}
 >
-  {
-    /*
-    ABOUT PAGE MASTER PLAN
-
-    Purpose:
-    - Port and redesign https://rodselectrical.ca/about-us/ into Astro.
-    - Build section by section without losing page structure or repeating strategy work.
-    - Future LLMs should treat this comment as source-of-truth for layout order, section scope, and content direction.
-
-    Primary page goal:
-    - Establish trust fast.
-    - Tell company story clearly.
-    - Prove qualifications and work standards.
-    - End with one strong quote/contact CTA.
-
-    Final section order:
-    1. Hero
-    2. Story
-    3. Credentials
-    4. How We Work
-    5. Who We Help
-    6. CTA
-
-    IMPORTANT WORKFLOW RULES FOR FUTURE EDITS
-    - If user asks for one section only, implement only that section and keep rest unchanged.
-    - Do not redesign whole page unless user explicitly asks for full-page pass.
-    - Preserve final section order above even if only one section is being built now.
-    - Avoid repeating same trust message in multiple sections.
-    - Do not clone contact page into this page. CTA should be lighter than full contact page unless user says otherwise.
-    - Prefer real company/founder/jobsite imagery over generic stock if assets become available.
-    - Keep copy grounded in existing site content. Tighten language, but do not invent unsupported claims.
-
-    CONTENT SOURCE FROM CURRENT WORDPRESS ABOUT PAGE
-    Source URL: https://rodselectrical.ca/about-us/
-    Reusable facts already stated on live site:
-    - Locally owned and operated company.
-    - Over 14 years of industry / hands-on field experience.
-    - Serves homeowners and businesses.
-    - Focus on safety, trust, craftsmanship, integrity, code compliance, and quality work that lasts.
-    - Goal is to do job right first time and treat every property like it is their own.
-    - Qualifications listed: Journeyman Certified Electrician, Project Management Certified, CSTS Certified,
-      WHMIS Certified, Fall Protection Trained, Professional Estimation Expertise, Fully Licensed & Insured.
-    - Service approach listed: honest pricing, clear communication, on-time completion, clean organized worksites,
-      safe compliant installations, long-term customer relationships.
-
-    CONTENT HYGIENE
-    - "Mission", "Vision", "Core Values", "Why Choose Us", and "Our Approach" overlap heavily on live page.
-    - In this Astro version, merge overlapping ideas into clearer sections instead of repeating them.
-    - Avoid filler headings like "What We Do" if section is actually values or company philosophy.
-
-    SECTION-BY-SECTION SPEC
-
-    SECTION 1: HERO
-    Goal:
-    - Immediate trust and positioning.
-    Must communicate:
-    - Local Edmonton electrical company.
-    - 14+ years experience.
-    - Licensed / insured / certified.
-    - Residential and commercial support.
-    Suggested content shape:
-    - Eyebrow: "About Rods Electrical" or similar.
-    - H1 focused on trust, not generic "About Us".
-    - One short supporting paragraph.
-    - 3 to 4 proof chips or stat pills.
-    - Primary CTA to quote/contact, secondary CTA to call.
-    - One strong image only.
-    Do not:
-    - Dump full story paragraph here.
-    - Repeat every certification here.
-
-    SECTION 2: STORY
-    Goal:
-    - Explain who company is, what they believe, and how they work.
-    Source content to reshape:
-    - Great electrical work is not just wires and panels; it is about safety, trust, and lasting quality.
-    - Locally owned and operated.
-    - Proudly served homeowners and businesses.
-    - Focus from day one: do job right first time, follow code, treat every property like their own.
-    Suggested content shape:
-    - 2-column layout works well.
-    - One main narrative block.
-    - Optional side callouts for "Locally owned", "Code-first", "Respectful workmanship".
-    Do not:
-    - Turn this into generic mission/vision cards.
-    - Repeat detailed certification checklist here.
-
-    SECTION 3: CREDENTIALS
-    Goal:
-    - Hard proof of competence and safety.
-    Source items:
-    - 14+ years hands-on field experience.
-    - Journeyman Certified Electrician.
-    - Project Management Certified.
-    - CSTS Certified.
-    - WHMIS Certified.
-    - Fall Protection Trained.
-    - Professional Estimation Expertise.
-    - Fully Licensed & Insured Company.
-    Suggested content shape:
-    - Badge grid, checklist, or certification cards.
-    - Could include short intro sentence explaining client is hiring trained, certified, experienced professionals.
-    Do not:
-    - Mix this with soft brand values.
-
-    SECTION 4: HOW WE WORK
-    Goal:
-    - Show practical service standards and client experience.
-    Merge these live-page ideas:
-    - Honest and transparent pricing.
-    - Clear communication from start to finish.
-    - On-time project completion.
-    - Clean, organized worksites.
-    - Safe and compliant installations.
-    - Long-term relationships with customers.
-    Suggested content shape:
-    - 4 to 6 principle cards or checklist with short descriptions.
-    - This section replaces separate "Why Choose Us" and "Our Approach" duplication.
-    Do not:
-    - Reuse same exact bullets from hero proof chips.
-
-    SECTION 5: WHO WE HELP
-    Goal:
-    - Bridge About page into service intent.
-    Must communicate:
-    - Homeowners.
-    - Businesses.
-    - Repairs, upgrades, installations, ongoing electrical needs.
-    Suggested content shape:
-    - 2 to 3 cards max.
-    - Each card can link to service pages if useful.
-    Do not:
-    - Turn this into full services index.
-
-    SECTION 6: CTA
-    Goal:
-    - Give clear next step after trust is established.
-    Suggested content shape:
-    - Short quote/contact block.
-    - Strong CTA button plus phone number.
-    - Optional promise like response time if already used elsewhere in brand.
-    Do not:
-    - Duplicate full contact page form unless user explicitly wants it here.
-
-    IMPLEMENTATION NOTES
-    - Build with semantic sections and stable IDs so later edits are easy.
-    - Good IDs:
-      - about-hero
-      - about-story
-      - about-credentials
-      - about-process
-      - about-audience
-      - about-cta
-    - Prefer reusable components if repo already has suitable patterns; otherwise build page-specific sections cleanly.
-    - Keep mobile layout first-class. No desktop-only composition.
-    - Tone should feel professional, trustworthy, and local; not corporate-heavy.
-  */
-  }
-
-  {
-    /*
-    SECTION PLACEHOLDERS
-    Keep order below. Implement progressively.
-
-    <section id="about-hero">...</section>
-    <section id="about-story">...</section>
-    <section id="about-credentials">...</section>
-    <section id="about-process">...</section>
-    <section id="about-audience">...</section>
-    <section id="about-cta">...</section>
-  */
-  }
-
   <AboutHero image={optimizedImage} />
   <AboutStory variant="editorial" />
   <AboutCredentials />
   <AboutHowWeWork />
+  <ContactForm />
+  <ServicesClosingCta />
 </BaseLayout>
