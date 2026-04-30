@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { GetImageResult } from "astro";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 import { BUSINESS } from "@/data/client";
 
 interface Props {
@@ -15,47 +16,16 @@ const sharedProofItems = [
   "Licensed, insured, and certified",
   "Residential and commercial support",
 ];
-
-const operationalHighlights = [
-  "Code-compliant installations",
-  "Clear communication from start to finish",
-  "Respectful work on every property",
-  "Quality work built to last",
-];
-
-const quickProofItems = [
-  "Locally owned Edmonton company",
-  "Fully licensed and insured",
-  "Serves homeowners and businesses",
-];
 ---
 
 <section
   id="about-hero"
   class="bg-bg-primary py-section"
-  aria-labelledby="about-hero-preview-title"
+  aria-labelledby="about-hero-title"
 >
-  <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
-    <header
-      class="border-primary/10 rounded-[2rem] border bg-white/80 p-6 shadow-[0_24px_60px_rgba(0,40,79,0.08)] backdrop-blur sm:p-8"
-    >
-      <p class="text-topper text-accent">Section 1 Preview</p>
-      <h2
-        id="about-hero-preview-title"
-        class="text-section-title text-primary mt-3"
-      >
-        Three responsive hero directions for About page.
-      </h2>
-      <p class="text-section-body mt-4 max-w-3xl text-slate-600">
-        Each option stays inside master plan: local Edmonton positioning, 14+
-        years of experience, licensed and insured credibility, residential and
-        commercial support, one strong image, and quote plus call actions.
-      </p>
-    </header>
-
-    <article
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div
       class="border-primary/10 overflow-hidden rounded-[2rem] border bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(249,243,232,0.98)_100%)] shadow-[0_30px_80px_rgba(0,40,79,0.10)]"
-      aria-labelledby="about-hero-variant-one-title"
     >
       <div
         class="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-stretch"
@@ -68,10 +38,10 @@ const quickProofItems = [
           </div>
 
           <p class="text-topper text-accent relative z-10">
-            Variant 01 • Editorial Split
+            About Rod&apos;s Electrical
           </p>
           <h1
-            id="about-hero-variant-one-title"
+            id="about-hero-title"
             class="text-primary relative z-10 mt-4 max-w-[10.5ch] text-[clamp(3rem,7vw,5.5rem)] leading-[0.94] font-black tracking-[-0.05em]"
           >
             Trusted Edmonton electrical work, done right first time.
@@ -87,25 +57,21 @@ const quickProofItems = [
           <div
             class="relative z-10 mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
-            <a
+            <CtaPillButton
               href="/contact/"
-              class="bg-primary focus-visible:ring-accent inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold tracking-[0.03em] text-white transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(0,40,79,0.22)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              Request A Quote
-              <Icon
-                name="tabler:arrow-right"
-                class="size-4"
-                aria-hidden="true"
-              />
-            </a>
-            <a
+              label="Request A Quote"
+              icon="tabler:arrow-right"
+              ariaLabel="Request a quote from Rod's Electrical"
+              width="14rem"
+            />
+            <CtaPillButton
               href={`tel:${BUSINESS.phoneForTel}`}
-              aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
-              class="border-primary/15 text-primary hover:border-accent focus-visible:ring-accent inline-flex min-h-13 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold tracking-[0.03em] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,40,79,0.10)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
-              {BUSINESS.phoneFormatted}
-            </a>
+              label={BUSINESS.phoneFormatted}
+              icon="tabler:phone"
+              ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+              width="14rem"
+              variant="light"
+            />
           </div>
 
           <ul
@@ -161,242 +127,6 @@ const quickProofItems = [
           </div>
         </div>
       </div>
-    </article>
-
-    <article
-      class="border-primary/12 overflow-hidden rounded-[2rem] border bg-white shadow-[0_30px_80px_rgba(0,40,79,0.08)]"
-      aria-labelledby="about-hero-variant-two-title"
-    >
-      <div
-        class="grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]"
-      >
-        <div class="px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-          <div class="flex flex-wrap items-center gap-3">
-            <p
-              class="text-topper text-accent border-accent/30 bg-accent/10 rounded-full border px-4 py-2"
-            >
-              Variant 02 • Signal Board
-            </p>
-            <p
-              class="text-content-body border-primary/10 bg-primary/5 text-primary rounded-full border px-4 py-2 font-semibold"
-            >
-              About Rod&apos;s Electrical
-            </p>
-          </div>
-
-          <div
-            class="mt-6 grid gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(14rem,15rem)] xl:items-start"
-          >
-            <div>
-              <h2
-                id="about-hero-variant-two-title"
-                class="text-primary max-w-[11ch] text-[clamp(2.7rem,5vw,4.6rem)] leading-[0.96] font-black tracking-[-0.05em]"
-              >
-                Licensed Edmonton electricians for homes, businesses, and work
-                that has to last.
-              </h2>
-              <p class="text-section-body mt-5 max-w-2xl text-slate-700">
-                Backed by 14+ years in field, Rod&apos;s Electrical delivers
-                residential and commercial service with safety, trust,
-                craftsmanship, integrity, and code compliance at core.
-              </p>
-
-              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a
-                  href="/contact/"
-                  class="bg-accent text-primary focus-visible:ring-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold tracking-[0.03em] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(255,204,1,0.28)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-                >
-                  Start Your Quote
-                  <Icon
-                    name="tabler:arrow-right"
-                    class="size-4"
-                    aria-hidden="true"
-                  />
-                </a>
-                <a
-                  href={`tel:${BUSINESS.phoneForTel}`}
-                  aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
-                  class="border-primary/15 text-primary hover:border-accent focus-visible:ring-accent inline-flex min-h-13 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold tracking-[0.03em] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,40,79,0.10)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-                >
-                  <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
-                  Call {BUSINESS.phoneFormatted}
-                </a>
-              </div>
-            </div>
-
-            <div class="grid gap-3">
-              <div
-                class="border-primary/10 bg-primary rounded-[1.5rem] border px-5 py-5 text-white shadow-[0_18px_40px_rgba(0,40,79,0.18)]"
-              >
-                <p class="text-topper text-accent">Experience</p>
-                <p class="mt-3 text-4xl leading-none font-black">14+</p>
-                <p class="text-content-body mt-3 text-white/80">
-                  Years of hands-on field experience.
-                </p>
-              </div>
-              <div
-                class="border-primary/10 bg-bg-primary rounded-[1.5rem] border px-5 py-5"
-              >
-                <p class="text-topper text-accent">Coverage</p>
-                <p class="text-primary mt-3 text-xl leading-7 font-bold">
-                  Residential and commercial support.
-                </p>
-              </div>
-              <div
-                class="border-primary/10 rounded-[1.5rem] border bg-white px-5 py-5"
-              >
-                <p class="text-topper text-accent">Credentials</p>
-                <p class="text-primary mt-3 text-xl leading-7 font-bold">
-                  Fully licensed, insured, and certified.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="border-primary/10 border-t lg:border-t-0 lg:border-l">
-          <div class="relative min-h-[22rem] sm:min-h-[26rem]">
-            <img
-              src={image.src}
-              alt="Residential electrical lighting project completed by Rod's Electrical"
-              width={image.attributes.width}
-              height={image.attributes.height}
-              class="absolute inset-0 h-full w-full object-cover object-center"
-              loading="lazy"
-            />
-            <div
-              class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,40,79,0.05)_0%,rgba(0,40,79,0.24)_45%,rgba(0,40,79,0.88)_100%)]"
-              aria-hidden="true"
-            >
-            </div>
-
-            <div
-              class="absolute right-4 bottom-4 left-4 sm:right-6 sm:bottom-6 sm:left-6"
-            >
-              <div
-                class="rounded-[1.5rem] border border-white/15 bg-white/90 p-5 shadow-[0_20px_50px_rgba(2,8,23,0.16)] backdrop-blur"
-              >
-                <p class="text-topper text-accent">Why It Lands</p>
-                <p class="mt-3 text-lg leading-7 font-semibold text-slate-900">
-                  Structured, proof-first layout for clients who scan fast and
-                  want credentials up front.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid gap-3 bg-white p-6 sm:grid-cols-2">
-            {
-              operationalHighlights.map((item) => (
-                <div class="border-primary/10 bg-bg-primary rounded-[1.25rem] border px-4 py-4">
-                  <div class="flex items-start gap-3">
-                    <span
-                      class="bg-primary mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white"
-                      aria-hidden="true"
-                    >
-                      <Icon name="tabler:check" class="size-4" />
-                    </span>
-                    <span class="text-content-body font-semibold text-slate-700">
-                      {item}
-                    </span>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article
-      class="border-primary/10 bg-primary relative overflow-hidden rounded-[2rem] border shadow-[0_32px_90px_rgba(0,40,79,0.22)]"
-      aria-labelledby="about-hero-variant-three-title"
-    >
-      <img
-        src={image.src}
-        alt="Electrical lighting and interior finishing project by Rod's Electrical in Edmonton"
-        width={image.attributes.width}
-        height={image.attributes.height}
-        class="absolute inset-0 h-full w-full object-cover object-center opacity-30"
-        loading="lazy"
-      />
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,204,1,0.26)_0%,rgba(255,204,1,0)_32%),linear-gradient(135deg,rgba(0,40,79,0.94)_0%,rgba(0,21,41,0.90)_54%,rgba(0,16,32,0.94)_100%)]"
-        aria-hidden="true"
-      >
-      </div>
-
-      <div
-        class="relative grid gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.75fr)] lg:items-end lg:px-10 lg:py-12"
-      >
-        <div>
-          <p class="text-topper text-accent">Variant 03 • Local Standard</p>
-          <h2
-            id="about-hero-variant-three-title"
-            class="mt-4 max-w-[11ch] text-[clamp(2.8rem,5vw,4.8rem)] leading-[0.95] font-black tracking-[-0.05em] text-white"
-          >
-            Code-first electrical work Edmonton property owners can trust.
-          </h2>
-          <p class="text-section-body mt-5 max-w-2xl text-white/82">
-            Rod&apos;s Electrical supports residential upgrades, commercial
-            jobs, and ongoing electrical needs with licensed and insured service
-            shaped by safety, integrity, and respect for every property.
-          </p>
-
-          <ul class="mt-8 flex list-none flex-wrap gap-3 p-0">
-            {
-              sharedProofItems.map((item) => (
-                <li class="rounded-full border border-white/15 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur">
-                  {item}
-                </li>
-              ))
-            }
-          </ul>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href="/contact/"
-              class="text-primary focus-visible:ring-accent focus-visible:ring-offset-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold tracking-[0.03em] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(255,255,255,0.20)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              Get A Quote
-              <Icon
-                name="tabler:arrow-right"
-                class="size-4"
-                aria-hidden="true"
-              />
-            </a>
-            <a
-              href={`tel:${BUSINESS.phoneForTel}`}
-              aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
-              class="hover:border-accent focus-visible:ring-accent focus-visible:ring-offset-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-white/18 bg-white/10 px-6 text-sm font-semibold tracking-[0.03em] text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
-              {BUSINESS.phoneFormatted}
-            </a>
-          </div>
-        </div>
-
-        <aside
-          class="rounded-[1.75rem] border border-white/15 bg-white/10 p-6 shadow-[0_18px_40px_rgba(2,8,23,0.18)] backdrop-blur"
-        >
-          <p class="text-topper text-accent">Quick Proof</p>
-          <div class="mt-5 space-y-4">
-            {
-              quickProofItems.map((item) => (
-                <div class="border-b border-white/12 pb-4 last:border-b-0 last:pb-0">
-                  <p class="text-content-body font-semibold text-white">
-                    {item}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
-          <p class="text-content-body mt-5 text-white/72">
-            Strongest fit if you want About page to feel more premium and
-            authoritative while keeping brand colors front and center.
-          </p>
-        </aside>
-      </div>
-    </article>
+    </div>
   </div>
 </section>

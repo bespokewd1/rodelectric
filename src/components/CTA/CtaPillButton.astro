@@ -12,6 +12,7 @@ interface Props {
   as?: "a" | "button";
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  variant?: "dark" | "light";
 }
 
 const {
@@ -25,12 +26,18 @@ const {
   as,
   type = "button",
   disabled = false,
+  variant = "dark",
   "aria-label": ariaLabelAttr,
   ...rest
 } = Astro.props as Props & { "aria-label"?: string };
 
 const resolvedAriaLabel = ariaLabel ?? ariaLabelAttr ?? label;
 const tag = as ?? (href ? "a" : "button");
+
+const rootClasses = {
+  dark: "cta-pill-button cta-pill-button--dark",
+  light: "cta-pill-button cta-pill-button--light",
+} as const;
 ---
 
 {
@@ -39,7 +46,7 @@ const tag = as ?? (href ? "a" : "button");
       href={href}
       aria-label={resolvedAriaLabel}
       class:list={[
-        "cta-pill-button",
+        rootClasses[variant],
         compactOnMobile && "cta-pill-button--compact-mobile",
         className,
       ]}
@@ -59,7 +66,7 @@ const tag = as ?? (href ? "a" : "button");
       aria-label={resolvedAriaLabel}
       disabled={disabled}
       class:list={[
-        "cta-pill-button",
+        rootClasses[variant],
         compactOnMobile && "cta-pill-button--compact-mobile",
         className,
       ]}
@@ -83,15 +90,7 @@ const tag = as ?? (href ? "a" : "button");
     --cta-pill-gap: 0.375rem;
     --cta-pill-icon-size: calc(var(--cta-pill-height) - 0.625rem);
     align-items: center;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 40, 79, 0.96) 0%,
-      rgba(0, 24, 48, 0.98) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 999px;
-    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
-    color: #fff;
     display: inline-flex;
     flex-shrink: 0;
     height: var(--cta-pill-height);
@@ -106,10 +105,38 @@ const tag = as ?? (href ? "a" : "button");
     width: var(--cta-pill-width);
   }
 
+  .cta-pill-button--dark {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 40, 79, 0.96) 0%,
+      rgba(0, 24, 48, 0.98) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
+    color: #fff;
+  }
+
+  .cta-pill-button--light {
+    background: #fff;
+    border: 1px solid rgba(0, 40, 79, 0.14);
+    box-shadow: 0 14px 30px rgba(0, 40, 79, 0.1);
+    color: var(--brand-strong);
+  }
+
   .cta-pill-button:hover,
   .cta-pill-button:focus-visible {
-    box-shadow: 0 20px 40px rgba(0, 40, 79, 0.26);
     transform: translateY(-1px);
+  }
+
+  .cta-pill-button--dark:hover,
+  .cta-pill-button--dark:focus-visible {
+    box-shadow: 0 20px 40px rgba(0, 40, 79, 0.26);
+  }
+
+  .cta-pill-button--light:hover,
+  .cta-pill-button--light:focus-visible {
+    border-color: var(--brand-accent);
+    box-shadow: 0 18px 38px rgba(0, 40, 79, 0.14);
   }
 
   .cta-pill-button:focus-visible {
@@ -129,8 +156,18 @@ const tag = as ?? (href ? "a" : "button");
 
   .cta-pill-button:disabled:hover,
   .cta-pill-button:disabled:focus-visible {
-    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
     transform: none;
+  }
+
+  .cta-pill-button--dark:disabled:hover,
+  .cta-pill-button--dark:disabled:focus-visible {
+    box-shadow: 0 18px 36px rgba(0, 40, 79, 0.18);
+  }
+
+  .cta-pill-button--light:disabled:hover,
+  .cta-pill-button--light:disabled:focus-visible {
+    border-color: rgba(0, 40, 79, 0.14);
+    box-shadow: 0 14px 30px rgba(0, 40, 79, 0.1);
   }
 
   .cta-pill-button__icon-wrap {
@@ -154,7 +191,6 @@ const tag = as ?? (href ? "a" : "button");
 
   .cta-pill-button__text {
     align-items: center;
-    color: #fff;
     display: flex;
     font-size: 0.97rem;
     font-weight: 700;
@@ -170,6 +206,14 @@ const tag = as ?? (href ? "a" : "button");
       font-size 0.3s ease;
     white-space: nowrap;
     width: calc(100% - var(--cta-pill-icon-size) - var(--cta-pill-gap));
+  }
+
+  .cta-pill-button--dark .cta-pill-button__text {
+    color: #fff;
+  }
+
+  .cta-pill-button--light .cta-pill-button__text {
+    color: var(--brand-strong);
   }
 
   .cta-pill-button:hover .cta-pill-button__icon-wrap,
