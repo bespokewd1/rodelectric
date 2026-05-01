@@ -53,7 +53,7 @@ export const serviceHubItems: ServiceHubItem[] = [
       "Electrical upgrades for kitchens, basements, and additions",
       "Careful troubleshooting for older homes and legacy wiring",
     ],
-    cardImage: residentialCardImage,
+    cardImage: residentialDetailImage2,
     detailImage: residentialDetailImage,
     detailImages: [
       residentialDetailImage,
@@ -85,8 +85,8 @@ export const serviceHubItems: ServiceHubItem[] = [
       "Lighting, circuits, and distribution updates for changing needs",
       "Code-minded electrical work with clear communication throughout",
     ],
-    cardImage: commercialCardImage,
-    detailImage: commercialDetailImage,
+    cardImage: residentialDetailImage2,
+    detailImage: residentialDetailImage2,
     alt: "Commercial electrical work completed inside a business property",
   },
   {
@@ -107,8 +107,8 @@ export const serviceHubItems: ServiceHubItem[] = [
       "Safe corrections for damaged wiring and failing devices",
       "Fast response for urgent electrical issues and emergency calls",
     ],
-    cardImage: repairsCardImage,
-    detailImage: repairsDetailImage,
+    cardImage: residentialDetailImage3,
+    detailImage: residentialDetailImage3,
     alt: "Electrical repair and troubleshooting service inside a finished property",
   },
   {
@@ -129,8 +129,8 @@ export const serviceHubItems: ServiceHubItem[] = [
       "Accent, task, and ambient lighting upgrades",
       "Energy-conscious options with controls and dimming where needed",
     ],
-    cardImage: lightingCardImage,
-    detailImage: lightingDetailImage,
+    cardImage: residentialDetailImage4,
+    detailImage: residentialDetailImage4,
     alt: "Professional lighting installation completed inside a property",
   },
   {
@@ -151,8 +151,8 @@ export const serviceHubItems: ServiceHubItem[] = [
       "Load planning for new appliances and added circuits",
       "Clear guidance on what needs attention now versus later",
     ],
-    cardImage: panelCardImage,
-    detailImage: panelDetailImage,
+    cardImage: residentialDetailImage5,
+    detailImage: residentialDetailImage5,
     alt: "Electrical panel upgrade and inspection support for a property",
   },
 ];
