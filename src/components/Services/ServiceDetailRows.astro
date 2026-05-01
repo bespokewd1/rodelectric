@@ -194,276 +194,284 @@ import { serviceHubItems } from "@/data/services";
 </style>
 
 <script>
-  // Autoplay duration in ms. Set to 0 to disable autoplay entirely.
-  const AUTOPLAY_INTERVAL = 3000;
-  // Distance (in % of slide width) the entering / exiting slide travels.
-  const SLIDE_OFFSET = "15%";
+  document.addEventListener("astro:page-load", () => {
+    // Autoplay duration in ms. Set to 0 to disable autoplay entirely.
+    const AUTOPLAY_INTERVAL = 3000;
+    // Distance (in % of slide width) the entering / exiting slide travels.
+    const SLIDE_OFFSET = "15%";
 
-  const carousels = document.querySelectorAll<HTMLElement>(
-    "[data-service-carousel]",
-  );
-
-  carousels.forEach((carousel) => {
-    const slides = Array.from(
-      carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]"),
-    );
-    const dots = Array.from(
-      carousel.querySelectorAll<HTMLElement>("[data-carousel-dot]"),
-    );
-    const prevBtn = carousel.querySelector<HTMLButtonElement>(
-      "[data-carousel-prev]",
-    );
-    const nextBtn = carousel.querySelector<HTMLButtonElement>(
-      "[data-carousel-next]",
+    const carousels = document.querySelectorAll<HTMLElement>(
+      "[data-service-carousel]",
     );
 
-    if (slides.length <= 1) return;
+    carousels.forEach((carousel) => {
+      const slides = Array.from(
+        carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]"),
+      );
+      const dots = Array.from(
+        carousel.querySelectorAll<HTMLElement>("[data-carousel-dot]"),
+      );
+      const prevBtn = carousel.querySelector<HTMLButtonElement>(
+        "[data-carousel-prev]",
+      );
+      const nextBtn = carousel.querySelector<HTMLButtonElement>(
+        "[data-carousel-next]",
+      );
 
-    let current = 0;
+      if (slides.length <= 1) return;
 
-    // Direction-aware translate-x + fade transition.
-    const setActive = (index: number, direction?: "forward" | "backward") => {
-      const next = (index + slides.length) % slides.length;
-      if (next === current) return;
-      const dir = direction ?? (next > current ? "forward" : "backward");
-      const enterFrom = dir === "forward" ? SLIDE_OFFSET : `-${SLIDE_OFFSET}`;
-      const exitTo = dir === "forward" ? `-${SLIDE_OFFSET}` : SLIDE_OFFSET;
-      const prev = current;
-      const incoming = slides[next];
-      const outgoing = slides[prev];
+      let current = 0;
 
-      // Pre-position incoming at entry side without transition, then reflow
-      // so the subsequent transform / opacity values animate from that side.
-      if (incoming) {
-        incoming.style.transition = "none";
-        incoming.style.transform = `translateX(${enterFrom})`;
-        incoming.style.opacity = "0";
-        void incoming.offsetWidth;
-        incoming.style.transition = "";
-      }
+      // Direction-aware translate-x + fade transition.
+      const setActive = (index: number, direction?: "forward" | "backward") => {
+        const next = (index + slides.length) % slides.length;
+        if (next === current) return;
+        const dir = direction ?? (next > current ? "forward" : "backward");
+        const enterFrom = dir === "forward" ? SLIDE_OFFSET : `-${SLIDE_OFFSET}`;
+        const exitTo = dir === "forward" ? `-${SLIDE_OFFSET}` : SLIDE_OFFSET;
+        const prev = current;
+        const incoming = slides[next];
+        const outgoing = slides[prev];
 
-      // Make sure outgoing's transition is the stylesheet one (drag may have
-      // set transition: none inline).
-      if (outgoing) outgoing.style.transition = "";
-
-      slides.forEach((slide, i) => {
-        const isActive = i === next;
-        const wasActive = i === prev;
-        slide.dataset.active = isActive ? "true" : "false";
-
-        if (isActive) {
-          slide.style.opacity = "1";
-          slide.style.pointerEvents = "auto";
-          slide.style.transform = "translateX(0)";
-          slide.removeAttribute("aria-hidden");
-        } else if (wasActive) {
-          slide.style.opacity = "0";
-          slide.style.pointerEvents = "none";
-          slide.style.transform = `translateX(${exitTo})`;
-          slide.setAttribute("aria-hidden", "true");
-        } else {
-          slide.style.opacity = "0";
-          slide.style.pointerEvents = "none";
-          slide.style.transform = "translateX(0)";
-          slide.setAttribute("aria-hidden", "true");
+        // Pre-position incoming at entry side without transition, then reflow
+        // so the subsequent transform / opacity values animate from that side.
+        if (incoming) {
+          incoming.style.transition = "none";
+          incoming.style.transform = `translateX(${enterFrom})`;
+          incoming.style.opacity = "0";
+          void incoming.offsetWidth;
+          incoming.style.transition = "";
         }
-      });
+
+        // Make sure outgoing's transition is the stylesheet one (drag may have
+        // set transition: none inline).
+        if (outgoing) outgoing.style.transition = "";
+
+        slides.forEach((slide, i) => {
+          const isActive = i === next;
+          const wasActive = i === prev;
+          slide.dataset.active = isActive ? "true" : "false";
+
+          if (isActive) {
+            slide.style.opacity = "1";
+            slide.style.pointerEvents = "auto";
+            slide.style.transform = "translateX(0)";
+            slide.removeAttribute("aria-hidden");
+          } else if (wasActive) {
+            slide.style.opacity = "0";
+            slide.style.pointerEvents = "none";
+            slide.style.transform = `translateX(${exitTo})`;
+            slide.setAttribute("aria-hidden", "true");
+          } else {
+            slide.style.opacity = "0";
+            slide.style.pointerEvents = "none";
+            slide.style.transform = "translateX(0)";
+            slide.setAttribute("aria-hidden", "true");
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          const isActive = i === next;
+          dot.dataset.active = isActive ? "true" : "false";
+          dot.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        current = next;
+      };
+
+      // ---- Autoplay ----
+      let autoplayTimer: ReturnType<typeof window.setInterval> | null = null;
+      let inView = false;
+      let isHovering = false;
+      let isFocused = false;
+      let isDragging = false;
+
+      const startAutoplay = () => {
+        if (AUTOPLAY_INTERVAL <= 0 || autoplayTimer !== null) return;
+        autoplayTimer = window.setInterval(() => {
+          setActive(current + 1, "forward");
+        }, AUTOPLAY_INTERVAL);
+      };
+
+      const stopAutoplay = () => {
+        if (autoplayTimer !== null) {
+          window.clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      };
+
+      const updateAutoplay = () => {
+        const shouldRun =
+          inView &&
+          !document.hidden &&
+          !isHovering &&
+          !isFocused &&
+          !isDragging;
+        if (shouldRun) startAutoplay();
+        else stopAutoplay();
+      };
+
+      // ---- Buttons / dots / keyboard ----
+      prevBtn?.addEventListener("click", () =>
+        setActive(current - 1, "backward"),
+      );
+      nextBtn?.addEventListener("click", () =>
+        setActive(current + 1, "forward"),
+      );
 
       dots.forEach((dot, i) => {
-        const isActive = i === next;
-        dot.dataset.active = isActive ? "true" : "false";
-        dot.setAttribute("aria-selected", isActive ? "true" : "false");
+        dot.addEventListener("click", () => setActive(i));
       });
 
-      current = next;
-    };
-
-    // ---- Autoplay ----
-    let autoplayTimer: ReturnType<typeof window.setInterval> | null = null;
-    let inView = false;
-    let isHovering = false;
-    let isFocused = false;
-    let isDragging = false;
-
-    const startAutoplay = () => {
-      if (AUTOPLAY_INTERVAL <= 0 || autoplayTimer !== null) return;
-      autoplayTimer = window.setInterval(() => {
-        setActive(current + 1, "forward");
-      }, AUTOPLAY_INTERVAL);
-    };
-
-    const stopAutoplay = () => {
-      if (autoplayTimer !== null) {
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    };
-
-    const updateAutoplay = () => {
-      const shouldRun =
-        inView && !document.hidden && !isHovering && !isFocused && !isDragging;
-      if (shouldRun) startAutoplay();
-      else stopAutoplay();
-    };
-
-    // ---- Buttons / dots / keyboard ----
-    prevBtn?.addEventListener("click", () =>
-      setActive(current - 1, "backward"),
-    );
-    nextBtn?.addEventListener("click", () => setActive(current + 1, "forward"));
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => setActive(i));
-    });
-
-    carousel.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        setActive(current - 1, "backward");
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        setActive(current + 1, "forward");
-      }
-    });
-
-    // ---- Pointer-based swipe gesture (touch + mouse) ----
-    const INTERACTIVE_SELECTOR =
-      "[data-carousel-prev],[data-carousel-next],[data-carousel-dot]";
-    const LOCK_THRESHOLD = 8;
-    const COMMIT_THRESHOLD = 50;
-    const RESISTANCE = 0.4;
-
-    let pointerId: number | null = null;
-    let startX = 0;
-    let startY = 0;
-    let deltaX = 0;
-    let dragActive = false;
-    let horizontalLock = false;
-
-    const isInteractive = (target: EventTarget | null) => {
-      if (!(target instanceof Element)) return false;
-      return !!target.closest(INTERACTIVE_SELECTOR);
-    };
-
-    const onPointerDown = (event: PointerEvent) => {
-      if (isInteractive(event.target)) return;
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-
-      pointerId = event.pointerId;
-      startX = event.clientX;
-      startY = event.clientY;
-      deltaX = 0;
-      dragActive = true;
-      horizontalLock = false;
-    };
-
-    const onPointerMove = (event: PointerEvent) => {
-      if (!dragActive || event.pointerId !== pointerId) return;
-      const dx = event.clientX - startX;
-      const dy = event.clientY - startY;
-
-      if (!horizontalLock) {
-        if (Math.abs(dx) < LOCK_THRESHOLD && Math.abs(dy) < LOCK_THRESHOLD) {
-          return;
-        }
-        if (Math.abs(dy) > Math.abs(dx)) {
-          dragActive = false;
-          horizontalLock = false;
-          pointerId = null;
-          return;
-        }
-        horizontalLock = true;
-        carousel.dataset.dragging = "true";
-        isDragging = true;
-        updateAutoplay();
-        try {
-          carousel.setPointerCapture(event.pointerId);
-        } catch {
-          // older browsers may throw; ignore
-        }
-      }
-
-      event.preventDefault();
-      deltaX = dx;
-      const active = slides[current];
-      if (active) {
-        active.style.transition = "none";
-        active.style.transform = `translateX(${deltaX * RESISTANCE}px)`;
-      }
-    };
-
-    const finishDrag = (event: PointerEvent) => {
-      if (!dragActive || event.pointerId !== pointerId) return;
-      const wasHorizontal = horizontalLock;
-      const committedDelta = deltaX;
-
-      dragActive = false;
-      horizontalLock = false;
-      pointerId = null;
-      delete carousel.dataset.dragging;
-      isDragging = false;
-
-      try {
-        if (carousel.hasPointerCapture(event.pointerId)) {
-          carousel.releasePointerCapture(event.pointerId);
-        }
-      } catch {
-        // ignore
-      }
-
-      if (wasHorizontal) {
-        const active = slides[current];
-        if (active) active.style.transition = "";
-
-        if (committedDelta > COMMIT_THRESHOLD) {
+      carousel.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
           setActive(current - 1, "backward");
-        } else if (committedDelta < -COMMIT_THRESHOLD) {
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
           setActive(current + 1, "forward");
-        } else if (active) {
-          active.style.transform = "";
         }
-      }
+      });
 
-      updateAutoplay();
-    };
+      // ---- Pointer-based swipe gesture (touch + mouse) ----
+      const INTERACTIVE_SELECTOR =
+        "[data-carousel-prev],[data-carousel-next],[data-carousel-dot]";
+      const LOCK_THRESHOLD = 8;
+      const COMMIT_THRESHOLD = 50;
+      const RESISTANCE = 0.4;
 
-    carousel.addEventListener("pointerdown", onPointerDown);
-    carousel.addEventListener("pointermove", onPointerMove);
-    carousel.addEventListener("pointerup", finishDrag);
-    carousel.addEventListener("pointercancel", finishDrag);
-    carousel.addEventListener("dragstart", (event) => event.preventDefault());
+      let pointerId: number | null = null;
+      let startX = 0;
+      let startY = 0;
+      let deltaX = 0;
+      let dragActive = false;
+      let horizontalLock = false;
 
-    // ---- Autoplay pause / resume wiring ----
-    carousel.addEventListener("pointerenter", () => {
-      isHovering = true;
-      updateAutoplay();
-    });
-    carousel.addEventListener("pointerleave", () => {
-      isHovering = false;
-      updateAutoplay();
-    });
-    carousel.addEventListener("focusin", () => {
-      isFocused = true;
-      updateAutoplay();
-    });
-    carousel.addEventListener("focusout", () => {
-      isFocused = false;
-      updateAutoplay();
-    });
-    document.addEventListener("visibilitychange", updateAutoplay);
+      const isInteractive = (target: EventTarget | null) => {
+        if (!(target instanceof Element)) return false;
+        return !!target.closest(INTERACTIVE_SELECTOR);
+      };
 
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) inView = entry.isIntersecting;
+      const onPointerDown = (event: PointerEvent) => {
+        if (isInteractive(event.target)) return;
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        deltaX = 0;
+        dragActive = true;
+        horizontalLock = false;
+      };
+
+      const onPointerMove = (event: PointerEvent) => {
+        if (!dragActive || event.pointerId !== pointerId) return;
+        const dx = event.clientX - startX;
+        const dy = event.clientY - startY;
+
+        if (!horizontalLock) {
+          if (Math.abs(dx) < LOCK_THRESHOLD && Math.abs(dy) < LOCK_THRESHOLD) {
+            return;
+          }
+          if (Math.abs(dy) > Math.abs(dx)) {
+            dragActive = false;
+            horizontalLock = false;
+            pointerId = null;
+            return;
+          }
+          horizontalLock = true;
+          carousel.dataset.dragging = "true";
+          isDragging = true;
           updateAutoplay();
-        },
-        { threshold: 0.25 },
-      );
-      observer.observe(carousel);
-    } else {
-      inView = true;
-      updateAutoplay();
-    }
+          try {
+            carousel.setPointerCapture(event.pointerId);
+          } catch {
+            // older browsers may throw; ignore
+          }
+        }
+
+        event.preventDefault();
+        deltaX = dx;
+        const active = slides[current];
+        if (active) {
+          active.style.transition = "none";
+          active.style.transform = `translateX(${deltaX * RESISTANCE}px)`;
+        }
+      };
+
+      const finishDrag = (event: PointerEvent) => {
+        if (!dragActive || event.pointerId !== pointerId) return;
+        const wasHorizontal = horizontalLock;
+        const committedDelta = deltaX;
+
+        dragActive = false;
+        horizontalLock = false;
+        pointerId = null;
+        delete carousel.dataset.dragging;
+        isDragging = false;
+
+        try {
+          if (carousel.hasPointerCapture(event.pointerId)) {
+            carousel.releasePointerCapture(event.pointerId);
+          }
+        } catch {
+          // ignore
+        }
+
+        if (wasHorizontal) {
+          const active = slides[current];
+          if (active) active.style.transition = "";
+
+          if (committedDelta > COMMIT_THRESHOLD) {
+            setActive(current - 1, "backward");
+          } else if (committedDelta < -COMMIT_THRESHOLD) {
+            setActive(current + 1, "forward");
+          } else if (active) {
+            active.style.transform = "";
+          }
+        }
+
+        updateAutoplay();
+      };
+
+      carousel.addEventListener("pointerdown", onPointerDown);
+      carousel.addEventListener("pointermove", onPointerMove);
+      carousel.addEventListener("pointerup", finishDrag);
+      carousel.addEventListener("pointercancel", finishDrag);
+      carousel.addEventListener("dragstart", (event) => event.preventDefault());
+
+      // ---- Autoplay pause / resume wiring ----
+      carousel.addEventListener("pointerenter", () => {
+        isHovering = true;
+        updateAutoplay();
+      });
+      carousel.addEventListener("pointerleave", () => {
+        isHovering = false;
+        updateAutoplay();
+      });
+      carousel.addEventListener("focusin", () => {
+        isFocused = true;
+        updateAutoplay();
+      });
+      carousel.addEventListener("focusout", () => {
+        isFocused = false;
+        updateAutoplay();
+      });
+      document.addEventListener("visibilitychange", updateAutoplay);
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) inView = entry.isIntersecting;
+            updateAutoplay();
+          },
+          { threshold: 0.25 },
+        );
+        observer.observe(carousel);
+      } else {
+        inView = true;
+        updateAutoplay();
+      }
+    });
   });
 </script>

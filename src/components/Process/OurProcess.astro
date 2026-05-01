@@ -3,14 +3,13 @@ import { Image } from "astro:assets";
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 import OurProcessQuoteForm from "@/components/Process/OurProcessQuoteForm.astro";
 import { BUSINESS } from "@/data/client";
-// import processImg from "@/assets/images/projects/port6.jpg";
+import processImg from "@/assets/images/services/residential/basement-electrical5.jpg";
 
 interface Props {
   variant?: "image" | "form";
-  processImg: ImageMetadata;
 }
 
-const { variant = "image", processImg } = Astro.props as Props;
+const { variant = "image" } = Astro.props as Props;
 const isFormVariant = variant === "form";
 
 const processSteps = [
