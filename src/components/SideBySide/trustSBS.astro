@@ -4,7 +4,9 @@ import { Icon } from "astro-icon/components";
 import { BUSINESS } from "@/data/client";
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
-import trustImg from "@/assets/images/projects/port7.jpg";
+interface Props {
+  trustImg: ImageMetadata;
+}
 
 const trustItems = [
   {
@@ -34,6 +36,8 @@ const trustItems = [
       "Locally owned and operated, we’re your trusted neighbors for all electrical needs.",
   },
 ];
+
+const { trustImg } = Astro.props;
 ---
 
 <section

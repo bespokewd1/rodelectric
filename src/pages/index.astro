@@ -14,6 +14,9 @@ import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
 import heroImage from "@/assets/images/gallery/installation/installation1.jpg";
+import trustImg from "@/assets/images/gallery/installation/installation3.jpg";
+import processImg from "@/assets/images/services/residential/basement-electrical5.jpg";
+
 import { getHomeFaqSchema } from "@/data/homeFaq";
 
 const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
@@ -33,8 +36,8 @@ const homeFaqSchema = getHomeFaqSchema();
   />
   <Hero image={optimizedHeroImage} />
   <ServiceGrid />
-  <TrustSBS />
-  <OurProcess />
+  <TrustSBS trustImg={trustImg} />
+  <OurProcess processImg={processImg} />
   <Gallery />
   <SimpleFAQ />
   <ServicesClosingCta />
