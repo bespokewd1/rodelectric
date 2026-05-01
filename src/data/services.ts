@@ -9,7 +9,14 @@ import panelDetailImage from "@/assets/images/projects/port9.jpg";
 import repairsCardImage from "@/assets/images/projects/port1.jpg";
 import repairsDetailImage from "@/assets/images/projects/port8.jpg";
 import residentialCardImage from "@/assets/images/projects/port3.jpg";
-import residentialDetailImage from "@/assets/images/projects/port4.jpg";
+import residentialDetailImage from "@/assets/images/services/residential/basement-electrical.jpg";
+import residentialDetailImage2 from "@/assets/images/services/residential/basement-electrical2.jpg";
+import residentialDetailImage3 from "@/assets/images/services/residential/basement-electrical3.jpg";
+import residentialDetailImage4 from "@/assets/images/services/residential/basement-electrical4.jpg";
+import residentialDetailImage5 from "@/assets/images/services/residential/basement-electrical5.jpg";
+import residentialDetailImage6 from "@/assets/images/services/residential/basement-electrical6.jpg";
+import residentialDetailImage7 from "@/assets/images/services/residential/basement-electrical7.jpg";
+import residentialDetailImage8 from "@/assets/images/services/residential/basement-electrical8.jpg";
 
 export type ServiceHubItem = {
   id: string;
@@ -23,6 +30,7 @@ export type ServiceHubItem = {
   bullets: string[];
   cardImage: ImageMetadata;
   detailImage: ImageMetadata;
+  detailImages?: ImageMetadata[];
   alt: string;
 };
 
@@ -47,6 +55,16 @@ export const serviceHubItems: ServiceHubItem[] = [
     ],
     cardImage: residentialCardImage,
     detailImage: residentialDetailImage,
+    detailImages: [
+      residentialDetailImage,
+      residentialDetailImage2,
+      residentialDetailImage3,
+      residentialDetailImage4,
+      residentialDetailImage5,
+      residentialDetailImage6,
+      residentialDetailImage7,
+      residentialDetailImage8,
+    ],
     alt: "Residential electrical installation inside an Edmonton home",
   },
   {
