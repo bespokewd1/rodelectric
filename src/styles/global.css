@@ -4,6 +4,7 @@
   --color-accent: var(--brand-accent);
   --color-primary: var(--brand-strong);
   --color-bg-primary: #f9f3e8;
+  --color-service-deep: #0d1f30;
 
   --font-roboto: var(--font-primary);
 
@@ -42,4 +43,14 @@
 
   --text-content-body: 0.95rem;
   --text-content-body--line-height: 1.7;
+
+  --text-service-variant-label: 0.72rem;
+  --text-service-variant-label--line-height: 1;
+  --text-service-variant-label--letter-spacing: 0.2em;
+  --text-service-variant-label--font-weight: 800;
+
+  --text-service-display: clamp(1.9rem, 2vw + 1.45rem, 2.75rem);
+  --text-service-display--line-height: 0.96;
+  --text-service-display--letter-spacing: var(--tracking-tight);
+  --text-service-display--font-weight: 900;
 }
