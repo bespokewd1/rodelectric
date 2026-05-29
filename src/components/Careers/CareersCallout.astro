@@ -22,6 +22,11 @@ const bodyColor = isNavy ? "text-slate-300" : "text-slate-600";
 const tagBg = isNavy ? "bg-accent text-primary" : "bg-primary text-white";
 const ctaVariant = isNavy ? "light" : "dark";
 const mailtoHref = `mailto:${BUSINESS.email}?subject=Electrician%20Application`;
+
+const panelClass = isNavy
+  ? "border-white/12 bg-white/[0.04] backdrop-blur-sm"
+  : "border-primary/10 bg-white shadow-[0_20px_50px_rgba(0,40,79,0.08)]";
+const panelLabelColor = isNavy ? "text-slate-400" : "text-slate-500";
 ---
 
 <section
@@ -71,23 +76,32 @@ const mailtoHref = `mailto:${BUSINESS.email}?subject=Electrician%20Application`;
         </p>
       </div>
 
-      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
-        <CtaPillButton
-          href={mailtoHref}
-          label="Email Your Resume"
-          icon="tabler:mail"
-          ariaLabel={`Email your resume to ${BUSINESS.email}`}
-          width="16rem"
-          variant={ctaVariant}
-        />
-        <CtaPillButton
-          href={`tel:${BUSINESS.phoneForTel}`}
-          label={BUSINESS.phoneFormatted}
-          icon="tabler:phone"
-          ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
-          width="14rem"
-          variant={ctaVariant}
-        />
+      <div
+        class={`flex w-full flex-col gap-4 rounded-3xl border p-6 sm:max-w-sm sm:p-7 lg:ml-auto ${panelClass}`}
+      >
+        <p
+          class={`text-service-variant-label m-0 uppercase ${panelLabelColor}`}
+        >
+          Two Ways to Apply
+        </p>
+        <div class="flex flex-col gap-3">
+          <CtaPillButton
+            href={mailtoHref}
+            label="Email Your Resume"
+            icon="tabler:mail"
+            ariaLabel={`Email your resume to ${BUSINESS.email}`}
+            width="100%"
+            variant={ctaVariant}
+          />
+          <CtaPillButton
+            href={`tel:${BUSINESS.phoneForTel}`}
+            label={BUSINESS.phoneFormatted}
+            icon="tabler:phone"
+            ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+            width="100%"
+            variant={ctaVariant}
+          />
+        </div>
       </div>
     </div>
   </div>

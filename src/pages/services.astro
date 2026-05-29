@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 
 import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
+import CareersCallout from "@/components/Careers/CareersCallout.astro";
 import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 import Gallery from "@/components/Gallery/Gallery.astro";
 import OurProcess from "@/components/Process/OurProcess.astro";
@@ -40,5 +41,6 @@ const homeFaqSchema = getHomeFaqSchema();
   </section>
   <OurProcess variant="form" />
   <SimpleFAQ />
+  <CareersCallout variant="navy" />
   <ServicesClosingCta />
 </BaseLayout>
