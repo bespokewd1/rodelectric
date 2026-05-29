@@ -1,0 +1,346 @@
+---
+import { getImage, Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import OurProcess from "@/components/Process/OurProcess.astro";
+import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
+import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
+import { BUSINESS } from "@/data/client";
+
+import heroImage from "@/assets/images/gallery/installation/installation2.jpg";
+import cctvImage from "@/assets/images/gallery/installation/installation4.jpg";
+import accessImage from "@/assets/images/gallery/installation/installation.jpg";
+import cablingImage from "@/assets/images/gallery/installation/installation1.jpg";
+
+const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
+
+const supportItems = [
+  {
+    label: "Residential and commercial systems",
+    icon: "tabler:building",
+  },
+  {
+    label: "24/7 monitoring and protection",
+    icon: "tabler:shield-check",
+  },
+  {
+    label: "Clean wiring and tidy installs",
+    icon: "tabler:plug-connected",
+  },
+];
+
+const offerings = [
+  {
+    eyebrow: "CCTV & Security Cameras",
+    title: "Security cameras that watch over what matters most.",
+    body: "We install and set up security camera systems for homes and businesses to help you monitor and protect your property 24/7.",
+    icon: "tabler:device-cctv",
+    image: cctvImage,
+    alt: "Security camera installation on an Edmonton property",
+    bullets: [
+      "Camera placement, wiring, and configuration",
+      "Indoor and outdoor coverage planning",
+      "Remote viewing setup on phone and desktop",
+    ],
+  },
+  {
+    eyebrow: "Access Control Systems",
+    title: "Keyless entry that puts you in control of every door.",
+    body: "We install keyless entry and access systems that let you control who can enter your building, improving security and convenience.",
+    icon: "tabler:key",
+    image: accessImage,
+    alt: "Access control and keyless entry system installation",
+    bullets: [
+      "Keypad, fob, and card-based entry",
+      "Door controllers and electric strikes",
+      "Access permissions tailored to your team",
+    ],
+  },
+  {
+    eyebrow: "Network / Data Cabling",
+    title: "Structured cabling for fast, reliable connections.",
+    body: "We provide structured cabling for internet and data connections, ensuring fast, reliable, and organized network performance for your property.",
+    icon: "tabler:network",
+    image: cablingImage,
+    alt: "Structured network and data cabling installation",
+    bullets: [
+      "Cat6 / Cat6a data drops and runs",
+      "Patch panels, racks, and clean terminations",
+      "Wi-Fi access point and PoE cabling",
+    ],
+  },
+];
+
+const brands = ["Leviton", "Lorex", "Swann"];
+---
+
+<BaseLayout
+  title="CCTV Installation & Security Cameras"
+  description="Rod's Electrical installs and services CCTV systems, access control, and structured data cabling for residential and commercial properties across Edmonton."
+  heroImage={optimizedHeroImage}
+>
+  <!-- Hero -->
+  <section
+    id="cctv-hero"
+    class="bg-bg-primary overflow-hidden pt-0"
+    aria-labelledby="cctv-hero-title"
+  >
+    <div class="mx-auto">
+      <div
+        class="grid gap-8 px-0 pt-10 pb-12 lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:pt-0 lg:pb-0"
+      >
+        <div
+          class="relative flex items-center px-[min(2rem,5vw)] lg:py-14 lg:pr-0 lg:pl-[min(20rem,5vw)] xl:py-18"
+        >
+          <div
+            class="pointer-events-none absolute top-4 left-0 hidden h-36 w-36 rounded-full bg-[rgba(255,204,1,0.24)] blur-3xl lg:block"
+            aria-hidden="true"
+          >
+          </div>
+          <div
+            class="pointer-events-none absolute right-8 bottom-0 hidden h-48 w-48 rounded-full bg-[rgba(255,255,255,0.75)] blur-3xl lg:block"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div
+            class="relative z-10 w-full rounded-4xl border border-white/70 bg-white/55 px-6 py-8 shadow-[0_24px_60px_rgba(111,84,42,0.10)] backdrop-blur-[2px] sm:px-8 sm:py-10 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
+          >
+            <p
+              class="text-service-variant-label text-accent m-0 mb-4 inline-flex items-center gap-2 uppercase"
+            >
+              <span
+                class="bg-accent inline-block h-1.5 w-6 rounded-full"
+                aria-hidden="true"></span>
+              Security & Low Voltage
+            </p>
+
+            <h1
+              id="cctv-hero-title"
+              class="text-primary text-hero-title mt-2 max-w-[15ch] text-balance uppercase"
+            >
+              CCTV Installation &amp; <span class="text-accent"
+                >Security Camera</span
+              > Systems
+            </h1>
+
+            <p
+              class="mt-6 max-w-2xl text-[1rem] leading-8 text-slate-600 sm:text-[1.08rem]"
+            >
+              We install and service CCTV systems for residential and commercial
+              properties, including camera setup, wiring, configuration, and
+              maintenance, keeping your property monitored and protected around
+              the clock.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <CtaPillButton
+                href="/contact/"
+                label="Request Free Quote"
+                icon="tabler:arrow-right"
+                ariaLabel="Request a free quote from Rod's Electrical"
+                width="14rem"
+              />
+              <CtaPillButton
+                href={`tel:${BUSINESS.phoneForTel}`}
+                label={BUSINESS.phoneFormatted}
+                icon="tabler:phone"
+                ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+                width="14rem"
+                variant="light"
+              />
+            </div>
+
+            <ul class="mt-8 flex flex-wrap gap-3 p-0">
+              {
+                supportItems.map(({ label, icon }) => (
+                  <li class="min-w-0 flex-[1_1_16rem] rounded-full border border-white/80 bg-white/88 px-4 py-3 text-sm font-medium text-slate-700 shadow-[0_12px_26px_rgba(15,23,42,0.06)] backdrop-blur">
+                    <span class="flex items-center gap-3">
+                      <span
+                        class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(255,204,1,0.18)] text-[var(--brand-strong)]"
+                        aria-hidden="true"
+                      >
+                        <Icon name={icon} class="size-4" aria-hidden="true" />
+                      </span>
+                      <span class="min-w-0 text-balance">{label}</span>
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="relative px-[min(2rem,5vw)] lg:min-h-168 lg:px-0 xl:min-h-184"
+        >
+          <div
+            class:list={[
+              "relative min-h-72 overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5",
+              "sm:min-h-96 md:min-h-120 lg:h-full lg:min-h-full lg:rounded-none lg:shadow-none lg:ring-0",
+            ]}
+          >
+            <img
+              src={optimizedHeroImage.src}
+              alt="CCTV and security camera installation for an Edmonton property"
+              width={optimizedHeroImage.attributes.width}
+              height={optimizedHeroImage.attributes.height}
+              class="absolute inset-0 h-full w-full object-cover object-[60%_24%] sm:object-[62%_20%] lg:object-[62%_center]"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div
+              class="absolute inset-0 bg-[linear-gradient(180deg,rgba(249,243,232,0)_0%,rgba(249,243,232,0.10)_54%,rgba(249,243,232,0.42)_100%)] lg:bg-[linear-gradient(90deg,#f9f3e8_0%,rgba(249,243,232,0.94)_18%,rgba(249,243,232,0.56)_36%,rgba(249,243,232,0)_54%)]"
+              aria-hidden="true"
+            >
+            </div>
+
+            <div
+              class="absolute right-4 bottom-4 left-4 sm:right-6 sm:bottom-6 sm:left-6 lg:hidden"
+            >
+              <div
+                class="rounded-3xl border border-white/65 bg-white/90 p-5 shadow-[0_20px_50px_rgba(76,54,28,0.14)] backdrop-blur"
+              >
+                <p
+                  class="text-accent text-[0.72rem] font-bold tracking-[0.18em] uppercase"
+                >
+                  24/7 Monitoring
+                </p>
+                <p class="mt-3 text-lg leading-7 font-semibold text-slate-900">
+                  Cameras, access control, and structured cabling installed
+                  cleanly by one trusted crew.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offerings -->
+  <section
+    id="cctv-offerings"
+    class="bg-white px-5 py-12 font-sans sm:px-6 sm:py-14 lg:px-8 lg:py-18"
+    aria-labelledby="cctv-offerings-title"
+  >
+    <div class="mx-auto max-w-312">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-topper text-accent m-0 uppercase">What We Install</p>
+        <h2
+          id="cctv-offerings-title"
+          class="text-section-title text-primary m-0 mt-3 uppercase"
+        >
+          Security Systems Built For Your Property
+        </h2>
+        <p class="mt-5 text-[1rem] leading-8 text-slate-600 sm:text-[1.08rem]">
+          From cameras and keyless entry to the cabling that ties it all
+          together, we plan, install, and maintain security systems that keep
+          homes and businesses protected.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:mt-12 lg:gap-8">
+        {
+          offerings.map((item, index) => {
+            const imageBlock = (
+              <div class="relative min-h-[18rem] overflow-hidden bg-slate-100 sm:min-h-[24rem] lg:min-h-full">
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  class="absolute inset-0 h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,27,52,0.04)_0%,rgba(8,27,52,0.12)_100%)]"
+                  aria-hidden="true"
+                />
+              </div>
+            );
+
+            const contentBlock = (
+              <div class="flex flex-col justify-center px-6 py-7 sm:px-8 sm:py-9 lg:px-10">
+                <p class="text-topper text-accent m-0 inline-flex items-center gap-3 uppercase">
+                  <span
+                    class="bg-accent/15 text-primary inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+                    aria-hidden="true"
+                  >
+                    <Icon name={item.icon} class="size-5" />
+                  </span>
+                  {item.eyebrow}
+                </p>
+                <h3 class="text-primary mt-4 text-[clamp(1.85rem,2.6vw,2.85rem)] leading-[1.08] font-bold text-balance">
+                  {item.title}
+                </h3>
+                <p class="mt-4 text-[1rem] leading-8 text-slate-600">
+                  {item.body}
+                </p>
+
+                <ul class="m-0 mt-6 grid list-none gap-3 p-0">
+                  {item.bullets.map((bullet) => (
+                    <li class="flex items-start gap-3 text-[0.98rem] leading-7 text-slate-700">
+                      <span
+                        class="bg-accent mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full"
+                        aria-hidden="true"
+                      />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                  <CtaPillButton
+                    href="/contact/"
+                    label="Request Service"
+                    icon="tabler:arrow-right"
+                    ariaLabel={`Request ${item.eyebrow} from Rod's Electrical`}
+                    width="13rem"
+                  />
+                </div>
+              </div>
+            );
+
+            return (
+              <article class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_22px_48px_rgba(15,23,42,0.08)]">
+                <div class="grid lg:grid-cols-2 lg:items-stretch">
+                  {index % 2 === 0 ? (
+                    <>
+                      {contentBlock}
+                      {imageBlock}
+                    </>
+                  ) : (
+                    <>
+                      {imageBlock}
+                      {contentBlock}
+                    </>
+                  )}
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
+        <span class="text-service-variant-label text-copy-muted uppercase">
+          Trusted brands
+        </span>
+        <span class="h-px w-6 bg-slate-300" aria-hidden="true"></span>
+        <ul class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+          {
+            brands.map((brand) => (
+              <li class="text-primary inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[0.78rem] font-bold tracking-wide uppercase shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
+                {brand}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <OurProcess variant="form" />
+  <SimpleFAQ />
+  <ServicesClosingCta />
+</BaseLayout>

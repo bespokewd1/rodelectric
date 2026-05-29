@@ -42,6 +42,7 @@ export type ServiceHubItem = {
   alt: string;
   subServices?: ServiceSubItem[];
   brands?: string[];
+  navUrl?: string;
 };
 
 export const serviceHubItems: ServiceHubItem[] = [
@@ -204,10 +205,11 @@ export const serviceHubItems: ServiceHubItem[] = [
     cardImage: cctvCardImage,
     detailImage: cctvDetailImage,
     alt: "CCTV and security camera installation for an Edmonton property",
+    navUrl: "/cctv-security-cameras/",
   },
 ];
 
 export const serviceNavChildren = serviceHubItems.map((service) => ({
   key: service.navLabel,
-  url: `/services/#${service.id}`,
+  url: service.navUrl ?? `/services/#${service.id}`,
 }));
