@@ -126,17 +126,62 @@ import { serviceHubItems } from "@/data/services";
                 {service.detailBody}
               </p>
 
-              <ul class="m-0 mt-6 grid list-none gap-3 p-0">
-                {service.bullets.map((bullet) => (
-                  <li class="flex items-start gap-3 text-[0.98rem] leading-7 text-slate-700">
-                    <span
-                      class="bg-accent mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full"
-                      aria-hidden="true"
-                    />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+              {service.subServices && service.subServices.length > 0 ? (
+                <ul class="m-0 mt-6 grid list-none gap-3 p-0">
+                  {service.subServices.map((sub) => (
+                    <li class="flex items-start gap-3 rounded-[1.1rem] border border-slate-200 bg-slate-50/70 p-4">
+                      <span
+                        class="bg-accent/15 text-primary mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+                        aria-hidden="true"
+                      >
+                        <Icon
+                          name={sub.icon ?? "tabler:check"}
+                          class="size-5"
+                        />
+                      </span>
+                      <div class="min-w-0">
+                        <p class="text-primary m-0 text-[1rem] leading-6 font-bold">
+                          {sub.title}
+                        </p>
+                        <p class="m-0 mt-1 text-[0.95rem] leading-7 text-slate-600">
+                          {sub.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul class="m-0 mt-6 grid list-none gap-3 p-0">
+                  {service.bullets.map((bullet) => (
+                    <li class="flex items-start gap-3 text-[0.98rem] leading-7 text-slate-700">
+                      <span
+                        class="bg-accent mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full"
+                        aria-hidden="true"
+                      />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {service.brands && service.brands.length > 0 && (
+                <div class="mt-6 flex flex-wrap items-center gap-2">
+                  <span class="text-service-variant-label text-copy-muted uppercase">
+                    Trusted brands
+                  </span>
+                  <span
+                    class="h-px w-6 bg-slate-300"
+                    aria-hidden="true"
+                  />
+                  <ul class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+                    {service.brands.map((brand) => (
+                      <li class="text-primary inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[0.78rem] font-bold tracking-wide uppercase shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
+                        {brand}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               <div class="mt-8 flex flex-wrap gap-4">
                 <CtaPillButton

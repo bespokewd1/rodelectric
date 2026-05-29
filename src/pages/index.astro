@@ -4,6 +4,7 @@ import { getImage } from "astro:assets";
 
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import CareersCallout from "@/components/Careers/CareersCallout.astro";
 import SimpleFAQ from "@/components/FAQ/SimpleFAQ.astro";
 import Gallery from "@/components/Gallery/Gallery.astro";
 import Hero from "@/components/Hero/Hero.astro";
@@ -11,9 +12,10 @@ import OurProcess from "@/components/Process/OurProcess.astro";
 import ServiceGrid from "@/components/Services/ServiceGrid.astro";
 import TrustSBS from "@/components/SideBySide/trustSBS.astro";
 import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
+import WhyChooseUs from "@/components/WhyChoose/WhyChooseUs.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
-import heroImage from "@/assets/images/gallery/installation/installation1.jpg";
+import heroImage from "@/assets/images/services/residential/basement-electrical.jpg";
 import trustImg from "@/assets/images/gallery/installation/installation3.jpg";
 
 import { getHomeFaqSchema } from "@/data/homeFaq";
@@ -24,7 +26,7 @@ const homeFaqSchema = getHomeFaqSchema();
 
 <BaseLayout
   title="Edmonton Electrician"
-  description="Rod's Electrical provides residential and commercial electrical services, repairs, lighting installation, panel upgrades, inspections, and 24/7 emergency support in Edmonton and area."
+  description="Rod's Electrical provides safe residential and commercial electrical service across Edmonton, from troubleshooting and lighting installs to panel upgrades, inspections, and emergency calls."
   heroImage={optimizedHeroImage}
 >
   <script
@@ -36,8 +38,10 @@ const homeFaqSchema = getHomeFaqSchema();
   <Hero image={optimizedHeroImage} />
   <ServiceGrid />
   <TrustSBS trustImg={trustImg} />
+  <WhyChooseUs />
   <OurProcess />
   <Gallery />
+  <CareersCallout variant="navy" />
   <SimpleFAQ />
   <ServicesClosingCta />
 </BaseLayout>

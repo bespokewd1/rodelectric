@@ -1,0 +1,94 @@
+---
+import { Icon } from "astro-icon/components";
+import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
+import { BUSINESS } from "@/data/client";
+
+interface Props {
+  variant?: "cream" | "navy";
+  sectionId?: string;
+}
+
+const { variant = "cream", sectionId = "careers-callout" } =
+  Astro.props as Props;
+
+const titleId = `${sectionId}-title`;
+const isNavy = variant === "navy";
+
+const sectionBg = isNavy
+  ? "bg-[linear-gradient(135deg,#0d1f30_0%,#00284f_55%,#001830_100%)]"
+  : "bg-bg-primary";
+const titleColor = isNavy ? "text-white" : "text-primary";
+const bodyColor = isNavy ? "text-slate-300" : "text-slate-600";
+const tagBg = isNavy ? "bg-accent text-primary" : "bg-primary text-white";
+const ctaVariant = isNavy ? "light" : "dark";
+const mailtoHref = `mailto:${BUSINESS.email}?subject=Electrician%20Application`;
+---
+
+<section
+  id={sectionId}
+  class={`relative isolate overflow-hidden px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20 ${sectionBg}`}
+  aria-labelledby={titleId}
+>
+  <div
+    class="bg-accent/10 pointer-events-none absolute -top-10 -left-12 h-48 w-48 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="bg-primary/10 pointer-events-none absolute -right-12 -bottom-12 h-56 w-56 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
+    <div
+      class="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-center lg:gap-12"
+    >
+      <div>
+        <p
+          class={`text-service-variant-label m-0 inline-flex items-center gap-2 rounded-full px-3 py-1.5 uppercase ${tagBg}`}
+        >
+          <Icon name="tabler:bolt" class="size-3.5" aria-hidden="true" />
+          We&apos;re Hiring
+        </p>
+        <h2
+          id={titleId}
+          class={`text-section-title m-0 mt-4 text-balance uppercase ${titleColor}`}
+        >
+          Apprentice &amp; Journeyman Electricians
+        </h2>
+        <p
+          class={`m-0 mt-5 max-w-2xl text-[1.02rem] leading-8 sm:text-[1.08rem] ${bodyColor}`}
+        >
+          We are hiring Apprentice and Journeyman Electricians. Interested
+          candidates are invited to submit their resume to
+          <a
+            href={mailtoHref}
+            class={`font-semibold underline-offset-4 hover:underline ${isNavy ? "text-accent" : "text-primary"}`}
+          >
+            {BUSINESS.email}
+          </a>.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+        <CtaPillButton
+          href={mailtoHref}
+          label="Email Your Resume"
+          icon="tabler:mail"
+          ariaLabel={`Email your resume to ${BUSINESS.email}`}
+          width="16rem"
+          variant={ctaVariant}
+        />
+        <CtaPillButton
+          href={`tel:${BUSINESS.phoneForTel}`}
+          label={BUSINESS.phoneFormatted}
+          icon="tabler:phone"
+          ariaLabel={`Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`}
+          width="14rem"
+          variant={ctaVariant}
+        />
+      </div>
+    </div>
+  </div>
+</section>

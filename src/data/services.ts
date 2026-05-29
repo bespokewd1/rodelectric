@@ -17,6 +17,14 @@ import residentialDetailImage5 from "@/assets/images/services/residential/baseme
 import residentialDetailImage6 from "@/assets/images/services/residential/basement-electrical6.jpg";
 import residentialDetailImage7 from "@/assets/images/services/residential/basement-electrical7.jpg";
 import residentialDetailImage8 from "@/assets/images/services/residential/basement-electrical8.jpg";
+import cctvCardImage from "@/assets/images/gallery/installation/installation4.jpg";
+import cctvDetailImage from "@/assets/images/gallery/installation/installation4.jpg";
+
+export type ServiceSubItem = {
+  title: string;
+  body: string;
+  icon?: string;
+};
 
 export type ServiceHubItem = {
   id: string;
@@ -32,6 +40,8 @@ export type ServiceHubItem = {
   detailImage: ImageMetadata;
   detailImages?: ImageMetadata[];
   alt: string;
+  subServices?: ServiceSubItem[];
+  brands?: string[];
 };
 
 export const serviceHubItems: ServiceHubItem[] = [
@@ -154,6 +164,46 @@ export const serviceHubItems: ServiceHubItem[] = [
     cardImage: residentialDetailImage5,
     detailImage: residentialDetailImage5,
     alt: "Electrical panel upgrade and inspection support for a property",
+  },
+  {
+    id: "cctv-security-cameras",
+    navLabel: "CCTV & Security Cameras",
+    shortNavLabel: "CCTV",
+    icon: "tabler:device-cctv",
+    title: "CCTV Installation & Security Camera Systems",
+    shortDescription:
+      "Camera setup, wiring, configuration, and maintenance for residential and commercial properties.",
+    detailHeading:
+      "Security camera systems installed and serviced end to end.",
+    detailBody:
+      "We install and service CCTV systems for residential and commercial properties, including camera setup, wiring, configuration, and maintenance.",
+    bullets: [
+      "CCTV installation, wiring, and configuration",
+      "Access control and keyless entry systems",
+      "Structured network and data cabling",
+      "Ongoing maintenance and configuration support",
+    ],
+    subServices: [
+      {
+        title: "CCTV Installation & Security Cameras",
+        body: "We install and set up security camera systems for homes and businesses to help you monitor and protect your property 24/7.",
+        icon: "tabler:device-cctv",
+      },
+      {
+        title: "Access Control Systems",
+        body: "We install keyless entry and access systems that let you control who can enter your building, improving security and convenience.",
+        icon: "tabler:key",
+      },
+      {
+        title: "Network / Data Cabling",
+        body: "We provide structured cabling for internet and data connections, ensuring fast, reliable, and organized network performance for your property.",
+        icon: "tabler:network",
+      },
+    ],
+    brands: ["Leviton", "Lorex", "Swann"],
+    cardImage: cctvCardImage,
+    detailImage: cctvDetailImage,
+    alt: "CCTV and security camera installation for an Edmonton property",
   },
 ];
 

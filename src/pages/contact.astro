@@ -5,6 +5,7 @@ import { Image, Picture, getImage } from "astro:assets";
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Banner from "@/components/Banner/Banner.astro";
+import CareersCallout from "@/components/Careers/CareersCallout.astro";
 
 // Data
 import { BUSINESS } from "@/data/client";
@@ -33,6 +34,7 @@ const cityStateZip = [
   heroImage={optimizedImage}
 >
   <ContactForm />
+  <CareersCallout variant="cream" />
   <section>
     <iframe
       loading="lazy"
