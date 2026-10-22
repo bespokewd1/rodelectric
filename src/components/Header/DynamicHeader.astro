@@ -137,6 +137,10 @@ const isEntryActive = (entry: NavEntry) =>
         <Image
           src={headerLogo}
           alt="Rod's Electrical logo"
+          width={112}
+          widths={[80, 112, 160, 224, 288, 336]}
+          sizes="(min-width: 48rem) 7rem, (min-width: 40rem) 5.5rem, 5rem"
+          loading="eager"
           class="h-auto w-full"
         />
       </a>
@@ -170,7 +174,7 @@ const isEntryActive = (entry: NavEntry) =>
                         class:list={[
                           "cs-li group relative w-full lg:w-auto",
                           entry.children?.length > 0 &&
-                            "cs-dropdown [&.cs-active_.cs-drop-icon]:rotate-180 [&.cs-active_.cs-drop-ul]:mt-3 [&.cs-active_.cs-drop-ul]:max-h-[24rem] [&.cs-active_.cs-drop-ul]:opacity-100",
+                            "cs-dropdown [&.cs-active_.cs-drop-icon]:rotate-180 [&.cs-active_.cs-drop-ul]:mt-3 [&.cs-active_.cs-drop-ul]:max-h-[24rem] [&.cs-active_.cs-drop-ul]:opacity-100 lg:[&.cs-active_.cs-drop-ul]:visible lg:[&.cs-active_.cs-drop-ul]:mt-1 lg:[&.cs-active_.cs-drop-ul]:translate-y-0",
                         ]}
                       >
                         {entry.children?.length > 0 ? (
@@ -180,7 +184,7 @@ const isEntryActive = (entry: NavEntry) =>
                                 <a
                                   href={entry.url}
                                   class:list={[
-                                    "cs-li-link relative block flex-1 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:flex-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                                    "cs-li-link relative block flex-1 rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:flex-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                                     entryActive &&
                                       "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                                   ]}
@@ -195,16 +199,16 @@ const isEntryActive = (entry: NavEntry) =>
                                   id={getDropdownId(entry.key)}
                                   type="button"
                                   aria-expanded="false"
-                                  aria-haspopup="menu"
+                                  aria-controls={`${getDropdownId(entry.key)}-menu`}
                                   aria-label={`Toggle ${entry.key} submenu`}
                                   class:list={[
-                                    "cs-dropdown-toggle relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.35rem] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:h-auto lg:w-auto lg:rounded-none lg:px-2 lg:py-7",
+                                    "cs-dropdown-toggle relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.35rem] text-slate-800 transition duration-200 hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:h-auto lg:w-auto lg:rounded-none lg:px-2 lg:py-7",
                                     entryActive && "text-[var(--brand-strong)]",
                                   ]}
                                 >
                                   <Icon
                                     name="tabler:chevron-down"
-                                    class="cs-drop-icon size-4 shrink-0 transition-transform duration-300 lg:group-hover:rotate-180 lg:group-focus-within:rotate-180"
+                                    class="cs-drop-icon size-4 shrink-0 transition-transform duration-300"
                                   />
                                 </button>
                               </div>
@@ -213,9 +217,9 @@ const isEntryActive = (entry: NavEntry) =>
                                 id={getDropdownId(entry.key)}
                                 type="button"
                                 aria-expanded="false"
-                                aria-haspopup="menu"
+                                aria-controls={`${getDropdownId(entry.key)}-menu`}
                                 class:list={[
-                                  "cs-dropdown-toggle relative flex w-full items-center justify-start rounded-[0.35rem] px-3 py-3 pr-11 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:w-auto lg:gap-2 lg:rounded-none lg:px-4 lg:py-7 lg:pr-4 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                                  "cs-dropdown-toggle relative flex w-full items-center justify-start rounded-[0.35rem] px-3 py-3 pr-11 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:w-auto lg:gap-2 lg:rounded-none lg:px-4 lg:py-7 lg:pr-4 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                                   entryActive &&
                                     "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                                 ]}
@@ -223,13 +227,14 @@ const isEntryActive = (entry: NavEntry) =>
                                 <span>{entry.key}</span>
                                 <Icon
                                   name="tabler:chevron-down"
-                                  class="cs-drop-icon absolute top-1/2 right-3 size-4 shrink-0 -translate-y-1/2 transition-transform duration-300 lg:static lg:mt-px lg:translate-y-0 lg:group-hover:rotate-180 lg:group-focus-within:rotate-180"
+                                  class="cs-drop-icon absolute top-1/2 right-3 size-4 shrink-0 -translate-y-1/2 transition-transform duration-300 lg:static lg:mt-px lg:translate-y-0"
                                 />
                               </button>
                             )}
 
                             <ul
-                              class="cs-drop-ul flex max-h-0 w-full flex-col items-start overflow-hidden opacity-0 transition-all duration-300 lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-30 lg:mt-3 lg:max-h-none lg:min-w-[15rem] lg:translate-y-3 lg:overflow-visible lg:rounded-sm lg:border lg:border-slate-200 lg:bg-white lg:p-3 lg:opacity-0 lg:shadow-[0_24px_40px_rgba(15,23,42,0.14)] lg:transition-all lg:group-focus-within:visible lg:group-focus-within:mt-1 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:visible lg:group-hover:mt-1 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:before:absolute lg:before:bottom-full lg:before:left-0 lg:before:h-3 lg:before:w-full lg:before:content-['']"
+                              id={`${getDropdownId(entry.key)}-menu`}
+                              class="cs-drop-ul flex max-h-0 w-full flex-col items-start overflow-hidden opacity-0 transition-all duration-300 lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-30 lg:mt-3 lg:max-h-none lg:min-w-[15rem] lg:translate-y-3 lg:overflow-visible lg:rounded-sm lg:border lg:border-slate-200 lg:bg-white lg:p-3 lg:opacity-0 lg:shadow-[0_24px_40px_rgba(15,23,42,0.14)] lg:transition-all lg:before:absolute lg:before:bottom-full lg:before:left-0 lg:before:h-3 lg:before:w-full lg:before:content-['']"
                               aria-labelledby={getDropdownId(entry.key)}
                             >
                               {entry.children.map((child) => (
@@ -237,7 +242,7 @@ const isEntryActive = (entry: NavEntry) =>
                                   <a
                                     href={child.url}
                                     class:list={[
-                                      "cs-li-link cs-drop-link block w-full rounded-[0.35rem] border-l border-slate-200 px-4 py-2.5 text-left text-sm text-slate-700 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-[0.2rem] lg:border-l-0 lg:px-3",
+                                      "cs-li-link cs-drop-link block w-full rounded-[0.35rem] border-l border-slate-200 px-4 py-2.5 text-left text-sm text-slate-700 transition duration-200 hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:rounded-[0.2rem] lg:border-l-0 lg:px-3",
                                       pathname === child.url &&
                                         "border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-strong)]",
                                     ]}
@@ -256,7 +261,7 @@ const isEntryActive = (entry: NavEntry) =>
                           <a
                             href={entry.url}
                             class:list={[
-                              "cs-li-link relative block w-full rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
+                              "cs-li-link relative block w-full rounded-[0.35rem] px-3 py-3 text-left text-[0.98rem] font-medium tracking-[0.01em] text-slate-800 transition duration-200 hover:text-[var(--brand-strong)] focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:rounded-none lg:px-4 lg:py-7 lg:text-[1rem] before:lg:absolute before:lg:bottom-[1.3rem] before:lg:left-4 before:lg:h-[2px] before:lg:w-0 before:lg:bg-[var(--brand-accent)] before:lg:transition-all",
                               pathname === entry.url &&
                                 "text-[var(--brand-strong)] before:lg:w-[calc(100%-2rem)]",
                             ]}
@@ -276,11 +281,10 @@ const isEntryActive = (entry: NavEntry) =>
       </nav>
 
       <button
-        class="cs-toggle relative order-3 inline-flex h-11 w-11 items-center justify-center rounded-[0.2rem] text-[var(--brand-strong)] transition hover:bg-slate-100 focus:ring-2 focus:ring-[var(--brand-accent)]/50 focus:outline-none lg:hidden [&.cs-active_.line-bottom]:-translate-y-[7px] [&.cs-active_.line-bottom]:-rotate-45 [&.cs-active_.line-middle]:opacity-0 [&.cs-active_.line-top]:translate-y-[7px] [&.cs-active_.line-top]:rotate-45"
+        class="cs-toggle relative order-3 inline-flex h-11 w-11 items-center justify-center rounded-[0.2rem] text-[var(--brand-strong)] transition hover:bg-slate-100 focus:ring-2 focus:ring-[var(--brand-strong)] focus:outline-none lg:hidden [&.cs-active_.line-bottom]:-translate-y-[7px] [&.cs-active_.line-bottom]:-rotate-45 [&.cs-active_.line-middle]:opacity-0 [&.cs-active_.line-top]:translate-y-[7px] [&.cs-active_.line-top]:rotate-45"
         id="cs-toggle"
         aria-expanded="false"
         aria-controls="cs-ul-wrapper"
-        aria-haspopup="menu"
         aria-label="Open navigation menu"
       >
         <span class="relative block h-4 w-5" aria-hidden="true">

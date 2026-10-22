@@ -39,8 +39,8 @@ const rows = Array.from(
 <section id="gallery">
   <div class="cs-container">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="text-topper text-accent m-0 uppercase">Our Portfolio</p>
-      <h2 class="text-section-title m-0 mt-3 text-balance uppercase">
+      <p class="text-topper text-primary m-0 uppercase">Our Portfolio</p>
+      <h2 id="gallery-title" class="text-section-title m-0 mt-3 text-balance uppercase">
         Recent Electrical Projects
       </h2>
       <p class="text-section-body text-copy-muted m-0 mx-auto mt-5 max-w-3xl">
@@ -48,7 +48,12 @@ const rows = Array.from(
         Rod&apos;s Electrical across Edmonton and surrounding areas.
       </p>
     </div>
-    <div class="cs-image-group overflow-x-clip">
+    <div
+      class="cs-image-group overflow-x-clip focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+      role="region"
+      aria-labelledby="gallery-title"
+      tabindex="0"
+    >
       {
         rows.map((row, rowIdx) => (
           <div class={`cs-row cs-row-${(rowIdx % 3) + 1}`}>

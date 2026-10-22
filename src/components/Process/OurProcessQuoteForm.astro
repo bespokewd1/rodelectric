@@ -23,7 +23,7 @@ import {
   </div>
 
   <div class="relative px-6 py-8 sm:px-8 sm:py-9 lg:px-9 lg:py-10">
-    <p class="text-topper text-accent m-0 uppercase">Get in Touch</p>
+    <p class="text-topper text-primary m-0 uppercase">Get in Touch</p>
     <h3 class="text-section-title text-primary m-0 mt-3 uppercase">
       Get Your Free Quote
     </h3>
@@ -44,7 +44,13 @@ import {
       <input type="hidden" name="form-name" value={QUOTE_REQUEST_FORM_NAME} />
       <div class="sr-only" aria-hidden="true">
         <label for="process-quote-bot-field">Do not fill this out</label>
-        <input id="process-quote-bot-field" name="bot-field" type="text" />
+        <input
+          id="process-quote-bot-field"
+          name="bot-field"
+          type="text"
+          tabindex="-1"
+          autocomplete="off"
+        />
       </div>
 
       <div class="grid gap-5">
@@ -149,7 +155,7 @@ import {
           type="submit"
           label="Request Free Quote"
           icon="tabler:arrow-right"
-          ariaLabel="Submit quote request form"
+          ariaLabel="Request Free Quote from Rod's Electrical"
           width="100%"
           className="process-quote-form__submit"
           data-process-quote-submit
@@ -312,7 +318,7 @@ import {
   }
 
   .process-quote-form__label span {
-    color: var(--brand-accent);
+    color: var(--brand-strong);
   }
 
   .process-quote-form__control {
@@ -341,7 +347,7 @@ import {
 
   .process-quote-form__control:focus,
   .process-quote-form__control:focus-visible {
-    border-color: rgba(255, 204, 1, 0.92);
+    border-color: var(--brand-strong);
     box-shadow:
       0 0 0 4px rgba(255, 204, 1, 0.18),
       0 14px 30px rgba(0, 40, 79, 0.08);

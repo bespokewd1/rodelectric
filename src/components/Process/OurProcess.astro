@@ -50,7 +50,7 @@ const processSteps = [
 
   <div class="relative mx-auto max-w-312">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="text-topper text-accent m-0 uppercase">How It Works</p>
+      <p class="text-topper text-primary m-0 uppercase">How It Works</p>
       <h2 class="text-section-title m-0 mt-3 text-balance uppercase">
         Our Simple Process
       </h2>
@@ -78,7 +78,7 @@ const processSteps = [
             processSteps.map((step, index) => (
               <li class="h-full">
                 <article class="flex min-h-62 flex-col rounded-3xl border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,252,255,0.92)_100%)] p-6 shadow-sm backdrop-blur-sm sm:min-h-66 sm:p-7 lg:min-h-70">
-                  <p class="text-process text-accent/50 m-0">
+                  <p class="text-process text-primary m-0">
                     {String(index + 1).padStart(2, "0")}
                   </p>
                   <h3 class="text-card-heading text-primary m-0 mt-4 text-balance">
@@ -105,7 +105,7 @@ const processSteps = [
                 href="/contact/"
                 label="Get Free Quote"
                 icon="tabler:file-invoice"
-                ariaLabel="Get a free quote from Rod's Electrical"
+                ariaLabel="Get Free Quote from Rod's Electrical"
                 width="14rem"
               />
               <CtaPillButton
@@ -129,9 +129,11 @@ const processSteps = [
             <div class="relative">
               <Image
                 src={processImg}
-                alt="our process img"
+                alt="Basement electrical wiring and panel installation"
+                widths={[360, 544, 750, 946]}
+                sizes="(min-width: 64rem) clamp(24rem, calc(100vw - 41.5rem), 40.5rem), (min-width: 36.5rem) 34rem, calc(100vw - 2.5rem)"
                 class={
-                  "relative block max-h-250 overflow-hidden rounded-[1.75rem] border border-white/75 bg-white shadow-[0_24px_56px_rgba(14,53,94,0.2)]"
+                  "relative block max-h-250 overflow-hidden rounded-[1.75rem] border border-white/75 bg-white object-cover shadow-[0_24px_56px_rgba(14,53,94,0.2)]"
                 }
               />
             </div>

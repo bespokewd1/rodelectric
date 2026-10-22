@@ -14,26 +14,33 @@ import TrustSBS from "@/components/SideBySide/trustSBS.astro";
 import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
 import WhyChooseUs from "@/components/WhyChoose/WhyChooseUs.astro";
 
-// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
 import heroImage from "@/assets/images/gallery/installation/installation3.jpg";
-import trustImg from "@/assets/images/gallery/installation/installation3.jpg";
 
 import { getHomeFaqSchema } from "@/data/homeFaq";
 
-const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
+// Generate one candidate set for the hero, its preload, and the trust photo.
+const optimizedHeroImage = await getImage({
+  src: heroImage,
+  format: "webp",
+  layout: "none",
+  width: 960,
+  widths: [320, 480, 640, 768, 960, 1280, 1536],
+});
+const heroImageSizes =
+  "(min-width: 64rem) 50vw, (min-width: 40rem) calc(100vw - 4rem), 90vw";
 const homeFaqSchema = getHomeFaqSchema();
 ---
 
-<BaseLayout heroImage={optimizedHeroImage}>
+<BaseLayout heroImage={optimizedHeroImage} heroImageSizes={heroImageSizes}>
   <script
     slot="schema"
     is:inline
     type="application/ld+json"
     set:html={JSON.stringify(homeFaqSchema)}
   />
-  <Hero image={optimizedHeroImage} />
+  <Hero image={optimizedHeroImage} sizes={heroImageSizes} />
   <ServiceGrid />
-  <TrustSBS trustImg={trustImg} />
+  <TrustSBS trustImg={optimizedHeroImage} />
   <WhyChooseUs />
   <OurProcess />
   <Gallery />

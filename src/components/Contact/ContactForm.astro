@@ -56,21 +56,18 @@ const contactItems = [
     lines: [BUSINESS.phoneFormatted],
     href: `tel:${BUSINESS.phoneForTel}`,
     icon: "tabler:phone",
-    ariaLabel: `Call ${BUSINESS.name} at ${BUSINESS.phoneFormatted}`,
   },
   {
     title: "Email",
     lines: [BUSINESS.email],
     href: `mailto:${BUSINESS.email}`,
     icon: "tabler:mail",
-    ariaLabel: `Email ${BUSINESS.name} at ${BUSINESS.email}`,
   },
   {
     title: "Location",
     lines: [...addressLines, cityStateZip].filter(Boolean),
     href: BUSINESS.address.mapLink,
     icon: "tabler:map-pin",
-    ariaLabel: `View ${BUSINESS.name} address on map`,
     external: true,
   },
 ];
@@ -115,7 +112,7 @@ const socialItems = [
       <div class="mx-auto w-full max-w-136 lg:mx-0 lg:max-w-140">
         <div class="grid gap-4 sm:gap-5 lg:gap-6">
           <div class="rounded-[1.75rem] border border-white/75 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(249,252,255,0.92)_100%)] px-6 py-7 shadow-[0_18px_40px_rgba(14,53,94,0.14)] backdrop-blur-sm sm:px-7">
-            <p class="text-topper text-accent m-0 uppercase">Get In Touch</p>
+            <p class="text-topper text-primary m-0 uppercase">Get In Touch</p>
             <h2
               class="text-section-title text-primary m-0 mt-3 text-balance uppercase"
             >
@@ -156,10 +153,9 @@ const socialItems = [
                   <li class={index > 0 ? "border-t border-slate-200/80" : ""}>
                     <a
                       href={item.href}
-                      aria-label={item.ariaLabel}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noreferrer" : undefined}
-                      class="group flex items-start gap-4 rounded-[1.15rem] px-3 py-4 transition duration-300 hover:bg-white/65 focus-visible:bg-white/70 focus-visible:outline-none"
+                      class="group flex items-start gap-4 rounded-[1.15rem] px-3 py-4 transition duration-300 hover:bg-white/65 focus-visible:bg-white/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                     >
                       <span
                         class="text-accent flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgba(255,204,1,0.14)] transition duration-300 group-hover:bg-[rgba(255,204,1,0.2)] group-focus-visible:bg-[rgba(255,204,1,0.2)]"

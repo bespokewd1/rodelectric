@@ -13,7 +13,7 @@ import { serviceHubItems } from "@/data/services";
 >
   <div class="mx-auto max-w-312">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="text-topper text-accent m-0 uppercase">Service Details</p>
+      <p class="text-topper text-primary m-0 uppercase">Service Details</p>
       <h2
         id="service-details-title"
         class="text-section-title text-primary m-0 mt-3 uppercase"
@@ -116,7 +116,7 @@ import { serviceHubItems } from "@/data/services";
 
           const contentBlock = (
             <div class="flex flex-col justify-center px-6 py-7 sm:px-8 sm:py-9 lg:px-10">
-              <p class="text-topper text-accent m-0 uppercase">
+              <p class="text-topper text-primary m-0 uppercase">
                 {service.title}
               </p>
               <h3 class="text-primary mt-4 text-[clamp(1.85rem,2.6vw,2.85rem)] leading-[1.08] font-bold text-balance">
@@ -188,7 +188,7 @@ import { serviceHubItems } from "@/data/services";
                   href="/contact/"
                   label="Request Service"
                   icon="tabler:arrow-right"
-                  ariaLabel={`Request ${service.title} from Rod's Electrical`}
+                  ariaLabel={`Request Service: ${service.title} from Rod's Electrical`}
                   width="13rem"
                 />
               </div>

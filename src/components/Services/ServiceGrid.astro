@@ -46,7 +46,7 @@ const cardInteractiveClasses =
 
   <div class="relative mx-auto max-w-7xl">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="text-topper text-accent m-0 uppercase">Our Services</p>
+      <p class="text-topper text-primary m-0 uppercase">Our Services</p>
       <h2
         id={sectionTitleId}
         class="text-section-title m-0 mt-3 text-balance text-neutral-950 uppercase"
@@ -167,7 +167,7 @@ const cardInteractiveClasses =
               href="/contact/"
               label="Get Free Quote"
               icon="tabler:file-invoice"
-              ariaLabel={`Get a free quote from ${BUSINESS.name}`}
+              ariaLabel={`Get Free Quote from ${BUSINESS.name}`}
               width="14rem"
               variant="light"
             />
@@ -188,13 +188,14 @@ const cardInteractiveClasses =
               <li>
                 <a
                   href={card.href}
-                  aria-label={`View service: ${card.title}`}
                   class={`group relative grid gap-4 overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/[0.04] p-4 no-underline transition duration-300 sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-center ${cardInteractiveClasses}`}
                 >
                   <div class="relative min-h-32 overflow-hidden rounded-[1.35rem] sm:min-h-full">
                     <Picture
                       src={card.cardImage}
                       alt={card.alt}
+                      widths={[144, 288, 432, 640, 828, 946]}
+                      sizes="(min-width: 40rem) 9rem, calc(100vw - 6.625rem)"
                       class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105"
                     />
                     <div

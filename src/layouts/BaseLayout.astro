@@ -27,9 +27,10 @@ interface Props {
   ogDescription?: string;
   socialImage?: SocialImage;
   heroImage?: HeroImage;
+  heroImageSizes?: string;
 }
 
-const { description, title, ogTitle, ogDescription, socialImage, heroImage } = Astro.props;
+const { description, title, ogTitle, ogDescription, socialImage, heroImage, heroImageSizes } = Astro.props;
 ---
 
 <html lang={SITE.locale}>
@@ -43,10 +44,19 @@ const { description, title, ogTitle, ogDescription, socialImage, heroImage } = A
     </Meta>
 
     <!-- Astro custom Font API -->
-    <Font cssVariable="--font-primary" />
+    <Font cssVariable="--font-primary" preload />
 
     <!-- If present, preloads the image passed as a prop -->
-    {heroImage && <link rel="preload" href={heroImage.src} as="image" />}
+    {heroImage && (
+      <link
+        rel="preload"
+        href={heroImage.src}
+        as="image"
+        imagesrcset={heroImageSizes && "srcSet" in heroImage ? heroImage.srcSet.attribute : undefined}
+        imagesizes={heroImageSizes}
+        fetchpriority="high"
+      />
+    )}
 
     <!-- Sitewide Scripts -->
     <script src="@/js/nav.js"></script>

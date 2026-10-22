@@ -16,7 +16,11 @@ document.addEventListener("astro:page-load", () => {
 	let frameId = 0;
 
 	const showStrip = () => strip.classList.remove("translate-y-full");
-	const hideStrip = () => strip.classList.add("translate-y-full");
+	const hideStrip = () => {
+		if (!strip.contains(document.activeElement)) {
+			strip.classList.add("translate-y-full");
+		}
+	};
 
 	const syncState = () => {
 		lastScrollY = window.scrollY;
@@ -83,6 +87,7 @@ document.addEventListener("astro:page-load", () => {
 		window.requestAnimationFrame(syncState);
 	};
 
+	strip.addEventListener("focusin", showStrip);
 	window.addEventListener("scroll", handleScroll, { passive: true });
 	window.addEventListener("resize", handleViewportChange, { passive: true });
 	toggle?.addEventListener("click", handleToggle);
@@ -96,6 +101,7 @@ document.addEventListener("astro:page-load", () => {
 	syncState();
 
 	window.__mobileStickyCtaCleanup = () => {
+		strip.removeEventListener("focusin", showStrip);
 		window.removeEventListener("scroll", handleScroll);
 		window.removeEventListener("resize", handleViewportChange);
 		toggle?.removeEventListener("click", handleToggle);

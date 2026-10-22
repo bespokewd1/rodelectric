@@ -1,11 +1,11 @@
 ---
-import { Image } from "astro:assets";
+import type { GetImageResult } from "astro";
 import { Icon } from "astro-icon/components";
 import { BUSINESS } from "@/data/client";
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 
 interface Props {
-  trustImg: ImageMetadata;
+  trustImg: GetImageResult;
 }
 
 const trustItems = [
@@ -38,6 +38,10 @@ const trustItems = [
 ];
 
 const { trustImg } = Astro.props;
+// The desktop photo is 47.5% of the grid after its gap, inside a 1px border.
+// root.less scales rem units with the viewport from 2000px upward.
+const trustImageSizes =
+  "(min-width: 2000px) calc(30.685vw - 2px), (min-width: 82rem) calc(36.1rem - 2px), (min-width: 64rem) calc(47.5vw - 2.85rem - 2px), (min-width: 40rem) calc(100vw - 3rem - 2px), calc(100vw - 2.5rem - 2px)";
 ---
 
 <section
@@ -48,7 +52,7 @@ const { trustImg } = Astro.props;
     class="mx-auto grid max-w-312 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] lg:items-center"
   >
     <div>
-      <p class="text-topper text-accent m-0 uppercase">Why Trust Us</p>
+      <p class="text-topper text-primary m-0 uppercase">Why Trust Us</p>
       <h2
         id="gm-window-glass-replacement-fit-title"
         class="text-section-title m-0 mt-3 text-balance uppercase"
@@ -93,7 +97,7 @@ const { trustImg } = Astro.props;
           href="/contact/"
           label="Get Free Quote"
           icon="tabler:file-invoice"
-          ariaLabel="Get a free quote from Rod's Electrical"
+          ariaLabel="Get Free Quote from Rod's Electrical"
           width="14rem"
         />
         <CtaPillButton
@@ -112,10 +116,16 @@ const { trustImg } = Astro.props;
         class="border-border shadow-card overflow-hidden rounded-[1.75rem] border bg-white"
       >
         <div class="relative min-h-[24rem] sm:min-h-[30rem] lg:min-h-[42rem]">
-          <Image
-            src={trustImg}
+          <img
+            src={trustImg.src}
+            srcset={trustImg.srcSet.attribute}
+            sizes={trustImageSizes}
             alt="Electrician working indoors with safety glasses and gloves"
-            class={"block h-full w-full max-w-full object-cover"}
+            width={trustImg.attributes.width}
+            height={trustImg.attributes.height}
+            class="block h-full w-full max-w-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           <div
             class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,18,34,0.02)_38%,rgba(4,18,34,0.78)_100%)]"
