@@ -11,7 +11,7 @@ import CareersCallout from "@/components/Careers/CareersCallout.astro";
 import { BUSINESS } from "@/data/client";
 
 // Images
-import landingImage from "@/assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import landingImage from "@/assets/images/gallery/installation/installation2.jpg";
 import skyscraperImage from "@/assets/images/gallery/skyscraper.jpg";
 import ContactForm from "@/components/Contact/ContactForm.astro";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
@@ -28,11 +28,8 @@ const cityStateZip = [
   .join(" ");
 ---
 
-<BaseLayout
-  title="Contact"
-  description="Meta description for the page"
-  heroImage={optimizedImage}
->
+<BaseLayout heroImage={optimizedImage}>
+  <Banner title="Contact Rod's Electrical" image={optimizedImage} />
   <ContactForm />
   <CareersCallout variant="navy" />
   <section>

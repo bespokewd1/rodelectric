@@ -1,0 +1,79 @@
+{
+  "home": {
+    "route": "/",
+    "title": "Edmonton Electrician | Rod's Electrical",
+    "description": "Licensed Edmonton electricians for residential and commercial repairs, lighting installation, panel upgrades and emergency service. Request a free quote today.",
+    "ogTitle": "Edmonton Electrician | Rod's Electrical",
+    "ogDescription": "Electrical repairs, lighting and panel upgrades for Edmonton homes and businesses. Ask Rod's Electrical for a free quote.",
+    "photo": "src/assets/images/gallery/installation/installation3.jpg",
+    "headline": "Edmonton\nelectricians",
+    "detail": "Electrical service for your home and business.",
+    "alt": "Rod's Electrical social card for Edmonton electrical service, with Rod working on an electrical installation."
+  },
+  "about": {
+    "route": "/about/",
+    "title": "About Our Edmonton Electricians | Rod's Electrical",
+    "description": "Meet Rod's Electrical, a locally owned Edmonton electrical company. Learn how we approach safe residential and commercial work with clear communication.",
+    "ogTitle": "About Rod's Electrical | Edmonton Electricians",
+    "ogDescription": "Get to know Rod's Electrical, a locally owned Edmonton company working on homes and businesses with care.",
+    "photo": "src/assets/images/gallery/installation/installation1.jpg",
+    "headline": "Your local\nelectrical company",
+    "detail": "Meet the Edmonton company behind the work.",
+    "alt": "About Rod's Electrical in Edmonton, with a photo of an electrician working at an electrical panel."
+  },
+  "services": {
+    "route": "/services/",
+    "title": "Electrical Services in Edmonton | Rod's Electrical",
+    "description": "Explore Rod's Electrical services in Edmonton, including residential and commercial work, repairs, lighting, panel upgrades, inspections and emergency calls.",
+    "ogTitle": "Edmonton Electrical Services | Rod's Electrical",
+    "ogDescription": "Repairs, lighting, panel upgrades and electrical work for Edmonton homes and businesses. Find the service you need.",
+    "photo": "src/assets/images/services/residential/basement-electrical5.jpg",
+    "headline": "Electrical services\nin Edmonton",
+    "detail": "Repairs, lighting, panels and new installations.",
+    "alt": "Rod's Electrical services in Edmonton, beside a photo of residential wiring and panel work."
+  },
+  "cctv": {
+    "route": "/cctv-security-cameras/",
+    "title": "CCTV Installation in Edmonton | Rod's Electrical",
+    "description": "Rod's Electrical installs CCTV security cameras, access control and structured data cabling for Edmonton homes and businesses. Request a free quote.",
+    "ogTitle": "Edmonton CCTV & Security Cameras | Rod's Electrical",
+    "ogDescription": "CCTV, access control and data cabling for Edmonton homes and businesses. Ask about installation and setup.",
+    "photo": "src/assets/images/gallery/installation/installation2.jpg",
+    "headline": "CCTV + security\ncamera installation",
+    "detail": "CCTV, access control and data cabling in Edmonton.",
+    "alt": "Rod's Electrical CCTV, access control and data cabling services in Edmonton, with an electrical work photo."
+  },
+  "contact": {
+    "route": "/contact/",
+    "title": "Contact an Edmonton Electrician | Rod's Electrical",
+    "description": "Contact Rod's Electrical in Edmonton for residential or commercial electrical work. Call 587-399-3722 or send your project details to request a free quote.",
+    "ogTitle": "Contact Rod's Electrical | Edmonton Electrician",
+    "ogDescription": "Need electrical work in Edmonton? Call 587-399-3722 or send Rod's Electrical your project details for a free quote.",
+    "photo": "src/assets/images/gallery/installation/installation.jpg",
+    "headline": "Request a free\nelectrical quote",
+    "detail": "Request a free quote for electrical work in Edmonton.",
+    "alt": "Contact Rod's Electrical for a free quote in Edmonton, with a photo of an electrician completing electrical work."
+  },
+  "projects": {
+    "route": "/projects/",
+    "title": "Edmonton Electrical Projects | Rod's Electrical",
+    "description": "Browse electrical project photos from Rod's Electrical in Edmonton, including residential wiring, basement installations and electrical work in progress.",
+    "ogTitle": "Edmonton Electrical Projects | Rod's Electrical",
+    "ogDescription": "See Rod's Electrical project photos, including residential wiring and basement electrical installations in Edmonton.",
+    "photo": "src/assets/images/services/residential/basement-electrical8.jpg",
+    "headline": "Electrical projects\nin Edmonton",
+    "detail": "Electrical project photos from Edmonton and area.",
+    "alt": "Rod's Electrical project gallery, with a photo of basement wiring and electrical panel work."
+  },
+  "reviews": {
+    "route": "/reviews/",
+    "title": "Customer Feedback | Rod's Electrical Edmonton",
+    "description": "Find customer feedback information for Rod's Electrical in Edmonton. Contact us to ask about our electrical work or share feedback about your service.",
+    "ogTitle": "Customer Feedback | Rod's Electrical Edmonton",
+    "ogDescription": "Contact Rod's Electrical to ask about our work or share feedback about your electrical service in Edmonton.",
+    "photo": "src/assets/images/gallery/installation/installation4.jpg",
+    "headline": "Customer\nfeedback",
+    "detail": "Share your experience with Rod's Electrical.",
+    "alt": "Rod's Electrical customer feedback page in Edmonton, with a photo of electrical testing work."
+  }
+}

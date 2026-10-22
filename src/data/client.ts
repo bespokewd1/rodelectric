@@ -3,9 +3,9 @@ export const SITE = {
 	title: "Rod's Electrical Services",
 	tagline: "Trusted Edmonton Electrician",
 	description: "Rod's Electrical provides residential, commercial, lighting, panel upgrade, troubleshooting, and 24/7 emergency electrical services in Edmonton and area.",
-	url: "https://rodselectrical.ca",
+	url: "https://rodselectrical.com",
 	author: "Rod's Electrical Services",
-	locale: "en",
+	locale: "en-CA",
 };
 
 // ===== BUSINESS INFO =====
@@ -14,7 +14,9 @@ export const BUSINESS = {
 	email: "info@rodselectrical.ca",
 	phoneForTel: "5873993722",
 	phoneFormatted: "(587) 399-3722",
-	logo: "/assets/favicons/favicon.svg",
+	logo: "/assets/brand/rod-mark.png",
+	image: "/assets/brand/rod-at-work.jpg",
+	serviceArea: "Edmonton and surrounding areas",
 	address: {
 		lineOne: "11902 70 St NW",
 		lineTwo: "",
@@ -24,9 +26,9 @@ export const BUSINESS = {
 		mapLink: "https://maps.google.com/?q=11902+70+St+NW+Edmonton+AB+T5B+1T9",
 	},
 	socials: {
-		linkedin: "https://www.linkedin.com/",
-		facebook: "https://www.facebook.com/",
-		instagram: "https://www.instagram.com/",
+		linkedin: "",
+		facebook: "",
+		instagram: "",
 	},
 };
 
@@ -38,6 +40,5 @@ export const SEO = {
 
 // ===== OPEN GRAPH DEFAULTS =====
 export const OG = {
-	locale: "en_US",
-	image: "/assets/social.jpg", // Default fallback social image located in public/
+	locale: "en_CA",
 };

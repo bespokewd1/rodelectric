@@ -15,7 +15,7 @@ import ServicesClosingCta from "@/components/CTA/ServicesClosingCta.astro";
 import WhyChooseUs from "@/components/WhyChoose/WhyChooseUs.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Banner (for rendering)
-import heroImage from "@/assets/images/services/residential/basement-electrical.jpg";
+import heroImage from "@/assets/images/gallery/installation/installation3.jpg";
 import trustImg from "@/assets/images/gallery/installation/installation3.jpg";
 
 import { getHomeFaqSchema } from "@/data/homeFaq";
@@ -24,11 +24,7 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
 const homeFaqSchema = getHomeFaqSchema();
 ---
 
-<BaseLayout
-  title="Edmonton Electrician"
-  description="Rod's Electrical provides safe residential and commercial electrical service across Edmonton, from troubleshooting and lighting installs to panel upgrades, inspections, and emergency calls."
-  heroImage={optimizedHeroImage}
->
+<BaseLayout heroImage={optimizedHeroImage}>
   <script
     slot="schema"
     is:inline

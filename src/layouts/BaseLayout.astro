@@ -15,17 +15,21 @@ import Meta from "@/components/Meta/Meta.astro";
 
 // Data
 import { SITE } from "@/data/client";
+import type { SocialImage } from "@/lib/seo";
 
 // Create a union type for heroImage
 type HeroImage = GetImageResult | ImageMetadata;
 
 interface Props {
-  title: string;
-  description: string;
-  heroImage?: HeroImage; // optional - passing a heroImage to BaseLayout will 1. preload the image and 2. use the image for og socials tags in the <head>
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  socialImage?: SocialImage;
+  heroImage?: HeroImage;
 }
 
-const { description, title, heroImage } = Astro.props as Props;
+const { description, title, ogTitle, ogDescription, socialImage, heroImage } = Astro.props;
 ---
 
 <html lang={SITE.locale}>
@@ -34,7 +38,7 @@ const { description, title, heroImage } = Astro.props as Props;
     <ClientRouter />
 
     <!-- SEO Meta Tags -->
-    <Meta title={title} description={description} heroImage={heroImage}>
+    <Meta title={title} description={description} ogTitle={ogTitle} ogDescription={ogDescription} socialImage={socialImage}>
       <slot name="schema" slot="schema" />
     </Meta>
 

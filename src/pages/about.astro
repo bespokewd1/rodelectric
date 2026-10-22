@@ -17,11 +17,7 @@ import landingImage from "@/assets/images/gallery/installation/installation.jpg"
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 ---
 
-<BaseLayout
-  title="About"
-  description="Learn about Rod's Electrical, a locally owned Edmonton electrical company with 14+ years of residential and commercial experience."
-  heroImage={optimizedImage}
->
+<BaseLayout heroImage={optimizedImage}>
   <AboutHero image={optimizedImage} />
   <AboutStory variant="editorial" />
   <AboutCredentials />

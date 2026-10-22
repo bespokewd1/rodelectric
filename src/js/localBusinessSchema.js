@@ -1,26 +1,27 @@
 import { SITE, BUSINESS } from "@/data/client";
 
-export function getLocalBusinessSchema(origin) {
-	const sameAs = Object.values(BUSINESS.socials ?? {}).filter(Boolean);
-	const streetAddress = [BUSINESS.address.lineOne, BUSINESS.address.lineTwo].filter(Boolean).join(", ");
+export function getLocalBusinessSchema() {
+  const sameAs = Object.values(BUSINESS.socials).filter(Boolean);
 
-	return {
-		"@context": "https://schema.org",
-		"@type": ["LocalBusiness", "WebSite"],
-		"name": BUSINESS.name,
-		"url": SITE.url,
-		"logo": origin + BUSINESS.logo,
-		"image": origin + BUSINESS.logo,
-		"email": BUSINESS.email,
-		"telephone": BUSINESS.phoneForTel,
-		"address": {
-			"@type": "PostalAddress",
-			"streetAddress": streetAddress,
-			"addressLocality": BUSINESS.address.city,
-			"addressRegion": BUSINESS.address.state,
-			"postalCode": BUSINESS.address.zip,
-		},
-		"sameAs": sameAs,
-		"inLanguage": SITE.locale,
-	};
+  return {
+    "@context": "https://schema.org",
+    "@type": "Electrician",
+    "@id": `${SITE.url}/#business`,
+    name: BUSINESS.name,
+    url: SITE.url,
+    logo: new URL(BUSINESS.logo, SITE.url).href,
+    image: new URL(BUSINESS.image, SITE.url).href,
+    email: BUSINESS.email,
+    telephone: `+1${BUSINESS.phoneForTel}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: [BUSINESS.address.lineOne, BUSINESS.address.lineTwo].filter(Boolean).join(", "),
+      addressLocality: BUSINESS.address.city,
+      addressRegion: BUSINESS.address.state,
+      postalCode: BUSINESS.address.zip,
+      addressCountry: "CA",
+    },
+    areaServed: BUSINESS.serviceArea,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
 }

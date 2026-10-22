@@ -5,16 +5,26 @@ import { getImage } from "astro:assets";
 // Components
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Banner from "@/components/Banner/Banner.astro";
-import ReviewsSection from "@/components/Reviews/Reviews.astro";
 import CTA from "@/components/CTA/CTASimple.astro";
 
 // Images
-import landingImage from "@/assets/images/landing.jpg";
+import landingImage from "@/assets/images/gallery/installation/installation2.jpg";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 ---
 
-<BaseLayout title="Reviews" description="Meta description for the page" heroImage={optimizedImage}>
-	<Banner title="Reviews" image={optimizedImage} />
-	<ReviewsSection />
+<BaseLayout heroImage={optimizedImage}>
+	<Banner title="Customer reviews" image={optimizedImage} />
+	<section class="bg-white px-5 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-18" aria-labelledby="reviews-feedback-title">
+		<div class="mx-auto max-w-3xl">
+			<h2 id="reviews-feedback-title" class="text-section-title text-primary m-0">Share your experience</h2>
+			<p class="text-section-body text-copy-muted mt-5">
+				We haven't published verified customer reviews on this website yet.
+				If Rod's Electrical has completed work for you, we'd like to hear your feedback.
+			</p>
+			<p class="text-section-body mt-4">
+				<a href="/contact/" class="text-primary font-semibold underline underline-offset-4">Contact us to share your experience.</a>
+			</p>
+		</div>
+	</section>
 	<CTA />
 </BaseLayout>

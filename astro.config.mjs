@@ -5,13 +5,12 @@ import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  // update me!
-  site: "https://www.yourwebsite.com",
+  site: "https://rodselectrical.com",
 
   integrations: [
       icon(),
       sitemap({
-          filter: (page) => !page.includes("/admin"),
+          filter: (page) => !["/admin/", "/dev/"].some((path) => new URL(page).pathname.startsWith(path)),
           changefreq: "weekly",
           priority: 0.7,
       }),

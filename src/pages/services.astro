@@ -19,11 +19,7 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
 const homeFaqSchema = getHomeFaqSchema();
 ---
 
-<BaseLayout
-  title="Electrical Services"
-  description="Explore residential electrical, commercial work, repairs, lighting installation, panel upgrades, inspections, and emergency support from Rod's Electrical in Edmonton."
-  heroImage={optimizedHeroImage}
->
+<BaseLayout heroImage={optimizedHeroImage}>
   <script
     slot="schema"
     is:inline

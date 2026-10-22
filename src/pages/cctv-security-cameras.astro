@@ -39,7 +39,7 @@ const offerings = [
     body: "We install and set up security camera systems for homes and businesses to help you monitor and protect your property 24/7.",
     icon: "tabler:device-cctv",
     image: cctvImage,
-    alt: "Security camera installation on an Edmonton property",
+    alt: "Electrician holding a handheld electrical tester near an outlet",
     bullets: [
       "Camera placement, wiring, and configuration",
       "Indoor and outdoor coverage planning",
@@ -52,7 +52,7 @@ const offerings = [
     body: "We install keyless entry and access systems that let you control who can enter your building, improving security and convenience.",
     icon: "tabler:key",
     image: accessImage,
-    alt: "Access control and keyless entry system installation",
+    alt: "Electrician working indoors with safety glasses and gloves",
     bullets: [
       "Keypad, fob, and card-based entry",
       "Door controllers and electric strikes",
@@ -65,7 +65,7 @@ const offerings = [
     body: "We provide structured cabling for internet and data connections, ensuring fast, reliable, and organized network performance for your property.",
     icon: "tabler:network",
     image: cablingImage,
-    alt: "Structured network and data cabling installation",
+    alt: "Electrician working on wiring inside an open breaker panel",
     bullets: [
       "Cat6 / Cat6a data drops and runs",
       "Patch panels, racks, and clean terminations",
@@ -77,11 +77,7 @@ const offerings = [
 const brands = ["Leviton", "Lorex", "Swann"];
 ---
 
-<BaseLayout
-  title="CCTV Installation & Security Cameras"
-  description="Rod's Electrical installs and services CCTV systems, access control, and structured data cabling for residential and commercial properties across Edmonton."
-  heroImage={optimizedHeroImage}
->
+<BaseLayout heroImage={optimizedHeroImage}>
   <!-- Hero -->
   <section
     id="cctv-hero"
@@ -185,7 +181,7 @@ const brands = ["Leviton", "Lorex", "Swann"];
           >
             <img
               src={optimizedHeroImage.src}
-              alt="CCTV and security camera installation for an Edmonton property"
+              alt="Electrician testing an electrical connection with meter probes"
               width={optimizedHeroImage.attributes.width}
               height={optimizedHeroImage.attributes.height}
               class="absolute inset-0 h-full w-full object-cover object-[60%_24%] sm:object-[62%_20%] lg:object-[62%_center]"

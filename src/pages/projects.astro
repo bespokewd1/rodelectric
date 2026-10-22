@@ -9,11 +9,11 @@ import Gallery from "@/components/Gallery/Gallery.astro";
 import CTA from "@/components/CTA/CTASimple.astro";
 
 // Images
-import landingImage from "@/assets/images/landing.jpg";
+import landingImage from "@/assets/images/gallery/installation/installation2.jpg";
 const optimizedImage = await getImage({ src: landingImage, format: "webp" });
 ---
 
-<BaseLayout title="Projects" description="Meta description for the page" heroImage={optimizedImage}>
+<BaseLayout heroImage={optimizedImage}>
 	<Banner title="All projects" image={optimizedImage} />
 	<Gallery />
 	<CTA />

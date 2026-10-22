@@ -1,0 +1,121 @@
+---
+import { SITE } from "@/data/client";
+import { getOgCards } from "@/lib/seo";
+
+export function getStaticPaths() {
+  return import.meta.env.PROD ? [] : [{ params: { preview: "og" } }];
+}
+
+const cards = await getOgCards();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Social card preview | {SITE.title}</title>
+  </head>
+  <body>
+    <header>
+      <p>LOCAL PREVIEW</p>
+      <h1>Rod's Electrical social cards</h1>
+      <p>
+        Eight static PNGs at 1200 × 630 pixels. Open a card to inspect it at
+        full size.
+      </p>
+    </header>
+    <main>
+      {
+        cards.map((card) => (
+          <article>
+            <h2>{card.key === "global" ? "Global fallback" : card.key}</h2>
+            <a href={card.image.src} target="_blank" rel="noopener">
+              <img
+                src={card.image.src}
+                alt={card.image.alt}
+                width={card.image.width}
+                height={card.image.height}
+                loading="lazy"
+              />
+            </a>
+            <p>
+              {card.key === "global" ? (
+                "Used for other routes"
+              ) : (
+                <a href={card.route}>{card.route}</a>
+              )}
+            </p>
+            <p class="filename">{card.image.src}</p>
+          </article>
+        ))
+      }
+    </main>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: Roboto;
+    src: url("/assets/fonts/roboto-v29-latin-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Roboto;
+    src: url("/assets/fonts/roboto-v29-latin-700.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+  }
+  :global(body) {
+    margin: 0;
+    padding: 32px;
+    background: #f9f3e8;
+    color: #00284f;
+    font-family: Roboto, sans-serif;
+  }
+  header {
+    max-width: 1500px;
+    margin: 0 auto 32px;
+  }
+  header > p:first-child {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+  }
+  h1 {
+    margin: 12px 0;
+    font-size: clamp(28px, 4vw, 42px);
+  }
+  main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+    gap: 28px;
+    max-width: 1500px;
+    margin: auto;
+  }
+  article {
+    min-width: 0;
+  }
+  h2 {
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  a {
+    color: #00284f;
+  }
+  a:focus-visible {
+    outline: 3px solid #00284f;
+    outline-offset: 4px;
+  }
+  .filename {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+</style>

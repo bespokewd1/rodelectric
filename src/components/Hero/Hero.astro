@@ -54,26 +54,25 @@ const supportItems = [
           </p>
           <h1
             id="hero-title"
-            class="text-primary text-hero-title m-0 text-balance uppercase"
+            class="home-hero-title text-primary m-0 text-balance uppercase"
           >
-            Electrical Repair &amp; Installation
+            Licensed Electricians in Edmonton for Homes &amp; Businesses
           </h1>
 
           <p
             class="mt-6 max-w-2xl text-[1rem] leading-8 text-slate-600 sm:text-[1.08rem]"
           >
-            Rod&apos;s Electrical provides safe residential and commercial
-            electrical service across Edmonton, from troubleshooting and
-            lighting installs to panel upgrades, inspections, and emergency
-            calls.
+            From electrical repairs and troubleshooting to panel upgrades and
+            lighting installations, Rod's Electrical provides reliable service
+            for Edmonton homes and businesses.
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
             <CtaPillButton
               href="/contact/"
-              label="Request Free Quote"
+              label="Get a Free Quote"
               icon="tabler:arrow-right"
-              ariaLabel="Request a free quote from Rod's Electrical"
+              ariaLabel="Get a free quote from Rod's Electrical"
               width="14rem"
             />
 
@@ -110,21 +109,21 @@ const supportItems = [
       >
         <div
           class:list={[
-            "relative min-h-72 overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5",
-            "sm:min-h-96 md:min-h-120 lg:h-full lg:min-h-full lg:rounded-none lg:shadow-none lg:ring-0",
+            "home-hero-photo relative overflow-hidden rounded-4xl shadow-[0_32px_80px_rgba(111,84,42,0.18)] ring-1 ring-black/5",
+            "lg:rounded-none lg:shadow-none lg:ring-0",
           ]}
         >
           <img
             src={image.src}
-            alt="Rod's Electrical providing professional electrician services in Edmonton"
+            alt="Electrician working indoors with safety glasses and gloves"
             width={image.attributes.width}
             height={image.attributes.height}
-            class="absolute inset-0 h-full w-full object-cover object-[60%_24%] sm:object-[62%_20%] lg:object-[62%_center]"
+            class="absolute inset-0 h-full w-full object-cover object-[50%_25%]"
             loading="eager"
             fetchpriority="high"
           />
           <div
-            class="absolute inset-0 bg-[linear-gradient(180deg,rgba(249,243,232,0)_0%,rgba(249,243,232,0.10)_54%,rgba(249,243,232,0.42)_100%)] lg:bg-[linear-gradient(90deg,#f9f3e8_0%,rgba(249,243,232,0.94)_18%,rgba(249,243,232,0.56)_36%,rgba(249,243,232,0)_54%)]"
+            class="absolute inset-0 bg-[linear-gradient(180deg,rgba(249,243,232,0)_60%,rgba(249,243,232,0.18)_100%)] lg:bg-[linear-gradient(90deg,rgba(249,243,232,0.38)_0%,rgba(249,243,232,0.12)_20%,rgba(249,243,232,0)_38%)]"
             aria-hidden="true"
           >
           </div>
@@ -151,3 +150,24 @@ const supportItems = [
     </div>
   </div>
 </section>
+
+<style>
+  .home-hero-title {
+    max-width: 22ch;
+    font-size: clamp(1.8rem, 4.6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+  }
+
+  .home-hero-photo {
+    height: clamp(28rem, 76vw, 42rem);
+  }
+
+  @media (min-width: 64rem) {
+    .home-hero-photo {
+      height: 100%;
+      min-height: 100%;
+    }
+  }
+</style>

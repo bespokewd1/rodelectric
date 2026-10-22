@@ -325,7 +325,7 @@ import { serviceHubItems } from "@/data/services";
       };
 
       // ---- Autoplay ----
-      let autoplayTimer: ReturnType<typeof window.setInterval> | null = null;
+      let autoplayTimer: number | null = null;
       let inView = false;
       let isHovering = false;
       let isFocused = false;
