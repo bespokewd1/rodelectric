@@ -1,6 +1,7 @@
 ---
 import CtaPillButton from "@/components/CTA/CtaPillButton.astro";
 import { BUSINESS } from "@/data/client";
+import { WEB3FORMS_ACCESS_KEY } from "@/data/web3forms";
 import {
   QUOTE_REQUEST_FORM_NAME,
   QUOTE_REQUEST_SERVICE_OPTIONS,
@@ -34,24 +35,17 @@ import {
 
     <form
       name={QUOTE_REQUEST_FORM_NAME}
+      action="https://api.web3forms.com/submit"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
       data-process-quote-form
       data-phone-formatted={BUSINESS.phoneFormatted}
       class="mt-8"
     >
-      <input type="hidden" name="form-name" value={QUOTE_REQUEST_FORM_NAME} />
-      <div class="sr-only" aria-hidden="true">
-        <label for="process-quote-bot-field">Do not fill this out</label>
-        <input
-          id="process-quote-bot-field"
-          name="bot-field"
-          type="text"
-          tabindex="-1"
-          autocomplete="off"
-        />
-      </div>
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="subject" value="Rod's Electrical - Quote Request" />
+      <input type="hidden" name="from_name" value="Rod's Electrical Website" />
+      <!-- Basic honeypot only. Web3Forms recommends CAPTCHA for stronger protection. -->
+      <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" aria-hidden="true" />
 
       <div class="grid gap-5">
         <label class="process-quote-form__field" for="process-quote-full-name">
@@ -61,7 +55,7 @@ import {
           </span>
           <input
             id="process-quote-full-name"
-            name="full-name"
+            name="name"
             type="text"
             autocomplete="name"
             placeholder="John Smith"
@@ -80,7 +74,7 @@ import {
           </span>
           <input
             id="process-quote-phone-number"
-            name="phone-number"
+            name="phone"
             type="tel"
             autocomplete="tel"
             placeholder="(587) 399-3722"
@@ -99,7 +93,7 @@ import {
           </span>
           <input
             id="process-quote-email-address"
-            name="email-address"
+            name="email"
             type="email"
             autocomplete="email"
             placeholder="john@example.com"
@@ -141,7 +135,7 @@ import {
           </span>
           <textarea
             id="process-quote-project-details"
-            name="project-details"
+            name="message"
             placeholder="Tell us about your electrical needs..."
             required
             class="process-quote-form__control process-quote-form__control--textarea"
@@ -188,10 +182,6 @@ import {
 </div>
 
 <script is:inline>
-  function encodeProcessQuoteForm(data) {
-    return new URLSearchParams(data).toString();
-  }
-
   function bindProcessQuoteForm(form) {
     if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") {
       return;
@@ -218,6 +208,7 @@ import {
     const submitButtonText =
       submitButton.querySelector("[data-cta-pill-text]") || submitButton;
     const phoneFormatted = form.dataset.phoneFormatted || "(587) 399-3722";
+    let submitting = false;
 
     const clearStatus = () => {
       status.hidden = true;
@@ -247,25 +238,36 @@ import {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (!form.reportValidity()) {
+      if (submitting || !form.reportValidity()) {
         return;
       }
 
       clearStatus();
+      submitting = true;
+      form.setAttribute("aria-busy", "true");
       submitButton.disabled = true;
       submitButtonText.textContent = "Sending...";
 
       try {
         const formData = new FormData(form);
-        const response = await fetch(window.location.pathname, {
+        if (!String(formData.get("access_key") || "").trim()) {
+          throw new Error("Quote form access key is missing");
+        }
+        if (formData.get("botcheck")) {
+          throw new Error("Quote form spam check failed");
+        }
+
+        const response = await fetch(form.action, {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
-          body: encodeProcessQuoteForm(formData),
+          body: JSON.stringify(Object.fromEntries(formData)),
         });
+        const result = await response.json();
 
-        if (!response.ok) {
+        if (!response.ok || result.success !== true) {
           throw new Error(`Quote request failed with ${response.status}`);
         }
 
@@ -283,6 +285,8 @@ import {
           `Something went wrong while sending your request. Please try again, or call ${phoneFormatted}.`,
         );
       } finally {
+        submitting = false;
+        form.removeAttribute("aria-busy");
         submitButton.disabled = false;
         submitButtonText.textContent = defaultLabel;
       }
